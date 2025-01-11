@@ -39,7 +39,7 @@
       "name": "IIIT Hyderabad",
       "position": "Undergraduate Researcher",
       "url": "",
-      "startDate": "2024-01-01",
+      "startDate": "2023-08-01",
       "endDate": null,
       "summary": "Currently working on my master's thesis advised by Professor Manish Shrivastava. Also working with Professor Ponnurangam Kumaraguru on building more interpretable models. In the past, I've worked with professor Karthik Vaidyanathan on obtaining descriptions of code snippets.",
       "highlights": []
@@ -207,7 +207,7 @@
       "summary": "Implemented a novel technique for recognizing product attributes from images by fine-tuning Florence-2-base using negative sampling. Team placed 14th in the Amazon ML challenge out of 70000+ participants.",
       "highlights": [],
       "startDate": "2024-09-01",
-      "endDate": null,
+      "endDate": "2024-09-01",
       "url": "",
       "techStack": "PyTorch, HuggingFace"
     },
@@ -215,8 +215,8 @@
       "name": "Exploring Answer Sentence Selection",
       "summary": "Implemented methods for selecting the best answer sentence among possible candidates using Neural Networks and Transformers.",
       "highlights": [],
-      "startDate": "2023-11-01",
-      "endDate": null,
+      "startDate": "2023-08-01",
+      "endDate": "2023-11-01",
       "url": "",
       "techStack": "Python, PyTorch"
     },
@@ -224,8 +224,8 @@
       "name": "Nanopass Compiler",
       "summary": "Designed a nanopass compiler from scratch in racket, for racket. The compiler could handle variables, loops, tuples and functions.",
       "highlights": [],
-      "startDate": "2024-05-01",
-      "endDate": null,
+      "startDate": "2024-02-01",
+      "endDate": "2024-05-01",
       "url": "",
       "techStack": "Racket"
     },
@@ -233,8 +233,8 @@
       "name": "Network File System",
       "summary": "Built a Network File System prototype allowing basic storage facilities along with concurrent client connections and multiple storage servers.",
       "highlights": [],
-      "startDate": "2023-11-01",
-      "endDate": null,
+      "startDate": "2024-08-01",
+      "endDate": "2023-11-01",
       "url": "",
       "techStack": "C"
     }
