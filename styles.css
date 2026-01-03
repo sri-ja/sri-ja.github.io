@@ -446,9 +446,9 @@ section {
 
 .pub-venue {
     font-family: var(--font-sans);
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--color-secondary);
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: var(--spacing-xs);
 }
 
@@ -682,10 +682,10 @@ footer {
 
 .paper-venue {
     font-family: var(--font-sans);
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--color-secondary);
     margin-bottom: var(--spacing-xs);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .paper-award {
@@ -828,7 +828,7 @@ footer {
     font-size: 1.1rem;
     color: var(--color-secondary);
     margin-bottom: 0.25rem;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .cv-role,
@@ -888,9 +888,9 @@ footer {
 
 .cv-pub-venue {
     font-family: var(--font-sans);
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--color-secondary);
-    font-style: italic;
+    font-weight: 600;
 }
 
 .cv-subsection {
