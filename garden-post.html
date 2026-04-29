@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garden Post</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fbfcf8;
+      --ink: #18231b;
+      --muted: #687568;
+      --line: rgba(24,35,27,0.12);
+      --leaf: #6b9b68;
+      --petal: #f2c7d2;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 8%, rgba(255,255,255,0.98) 0, rgba(255,255,255,0) 18%),
+        radial-gradient(circle at 92% 16%, rgba(223,239,243,0.7) 0, rgba(223,239,243,0) 18%),
+        linear-gradient(180deg, #fcfdfb 0%, var(--bg) 100%);
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 28px 80px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 34px;
+      color: var(--muted);
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+
+    .topbar a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(24,35,27,0.16);
+    }
+
+    .topbar a:hover { border-bottom-color: rgba(24,35,27,0.44); }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .bud {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 42%, #fff9ea 0 22%, rgba(255,249,234,0) 23%),
+        radial-gradient(circle at 50% 50%, var(--petal) 0 68%, #deb1bf 69% 100%);
+      flex: 0 0 auto;
+      box-shadow: 0 0 0 3px rgba(107,155,104,0.14);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-bottom: 12px;
+    }
+
+    .pill {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .pill + .pill::before {
+      content: " / ";
+      color: rgba(24,35,27,0.34);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: clamp(30px, 4.4vw, 46px);
+      font-weight: 500;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      max-width: 780px;
+    }
+
+    .dek {
+      max-width: 760px;
+      margin: 0;
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    article {
+      max-width: 860px;
+    }
+
+    article p {
+      margin: 0 0 16px;
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .empty {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.72);
+      color: var(--muted);
+    }
+
+    .signoff {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .more {
+      margin-top: 36px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      max-width: 860px;
+    }
+
+    .more-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .more-card:hover { color: var(--leaf); }
+
+    .more-card .label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .more-card .title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 860px) {
+      .wrap { padding: 22px 20px 68px; }
+      article p { font-size: 15.5px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a href="garden.html">← back to garden</a>
+      <a href="notebook.html">open notebook</a>
+    </div>
+
+    <div class="page">
+      <main>
+        <section class="hero">
+          <div class="hero-mark">
+            <div class="bud" aria-hidden="true"></div>
+            <span id="heroMark">Bloom</span>
+          </div>
+          <div class="meta">
+            <span class="pill">Garden of Thoughts</span>
+            <span class="pill" id="metaKind">Bloom</span>
+            <span class="pill" id="metaWhen">Soon</span>
+          </div>
+          <h1 id="title">Untitled bloom</h1>
+          <p class="dek" id="dek">A note from the garden.</p>
+        </section>
+
+        <article id="article"></article>
+
+        <section class="more">
+          <a class="more-card" href="garden.html">
+            <div>
+              <div class="label">Back to the garden</div>
+              <div class="title">Return to the pond of thoughts.</div>
+            </div>
+            <div class="bud" aria-hidden="true"></div>
+          </a>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/garden-posts.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("slug");
+    const post = window.getGardenPostBySlug ? window.getGardenPostBySlug(slug || "") : null;
+    const stageInfo = (window.GARDEN_STAGE_INFO && post) ? window.GARDEN_STAGE_INFO[post.stage] : null;
+
+    if (post) {
+      document.title = post.title + " | Garden of Thoughts";
+      document.getElementById("heroMark").textContent = post.heroLabel || (stageInfo && stageInfo.label) || "Post";
+      document.getElementById("metaKind").textContent = (stageInfo && stageInfo.label) || "Post";
+      document.getElementById("metaWhen").textContent = post.when || "Soon";
+      document.getElementById("title").textContent = post.title;
+      document.getElementById("dek").textContent = (post.content && post.content.dek) || post.summary || "A note from the garden.";
+
+      const article = document.getElementById("article");
+      const paragraphs = (post.content && post.content.paragraphs) || [];
+      article.innerHTML = paragraphs.map((paragraph) => "<p>" + paragraph + "</p>").join("");
+      if (post.content && post.content.signoff) {
+        const signoff = document.createElement("p");
+        signoff.className = "signoff";
+        signoff.textContent = post.content.signoff;
+        article.appendChild(signoff);
+      }
+    } else {
+      document.title = "Post not found | Garden of Thoughts";
+      document.getElementById("heroMark").textContent = "Missing bloom";
+      document.getElementById("metaKind").textContent = "Missing post";
+      document.getElementById("metaWhen").textContent = "Check slug";
+      document.getElementById("title").textContent = "This bloom does not exist yet";
+      document.getElementById("dek").textContent = "The slug in the URL did not match anything in assets/garden-posts.js.";
+      document.getElementById("article").innerHTML = '<div class="empty">Add a post object with this slug in <code>assets/garden-posts.js</code>, or return to the garden and open an existing bloom.</div>';
+    }
+  </script>
+</body>
+</html>
