@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Garden Post</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="assets/favicon-garden.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -138,6 +138,86 @@
       line-height: 1.85;
     }
 
+    article h2,
+    article h3,
+    article h4 {
+      margin: 30px 0 12px;
+      font-family: "Source Serif 4", Georgia, serif;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    article h2 { font-size: 30px; }
+    article h3 { font-size: 24px; }
+    article h4 { font-size: 20px; }
+
+    article ul,
+    article ol {
+      margin: 0 0 20px 20px;
+      padding: 0 0 0 16px;
+    }
+
+    article li {
+      margin: 0 0 8px;
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    article a {
+      color: var(--leaf);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(107, 155, 104, 0.28);
+    }
+
+    article a:hover {
+      border-bottom-color: rgba(107, 155, 104, 0.62);
+    }
+
+    article code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.9em;
+      padding: 0.12em 0.38em;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--line);
+    }
+
+    article pre {
+      margin: 0 0 22px;
+      padding: 16px 18px;
+      overflow-x: auto;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    article pre code {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    article blockquote {
+      margin: 0 0 22px;
+      padding: 2px 0 2px 18px;
+      border-left: 3px solid rgba(107, 155, 104, 0.38);
+      color: #526152;
+    }
+
+    article blockquote p:last-child {
+      margin-bottom: 0;
+    }
+
+    article hr {
+      margin: 28px 0;
+      border: 0;
+      border-top: 1px solid var(--line);
+    }
+
     .empty {
       padding: 18px;
       border: 1px solid var(--line);
@@ -231,37 +311,159 @@
 
   <script src="assets/garden-posts.js"></script>
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const slug = params.get("slug");
-    const post = window.getGardenPostBySlug ? window.getGardenPostBySlug(slug || "") : null;
-    const stageInfo = (window.GARDEN_STAGE_INFO && post) ? window.GARDEN_STAGE_INFO[post.stage] : null;
-
-    if (post) {
-      document.title = post.title + " | Garden of Thoughts";
-      document.getElementById("heroMark").textContent = post.heroLabel || (stageInfo && stageInfo.label) || "Post";
-      document.getElementById("metaKind").textContent = (stageInfo && stageInfo.label) || "Post";
-      document.getElementById("metaWhen").textContent = post.when || "Soon";
-      document.getElementById("title").textContent = post.title;
-      document.getElementById("dek").textContent = (post.content && post.content.dek) || post.summary || "A note from the garden.";
-
-      const article = document.getElementById("article");
-      const paragraphs = (post.content && post.content.paragraphs) || [];
-      article.innerHTML = paragraphs.map((paragraph) => "<p>" + paragraph + "</p>").join("");
-      if (post.content && post.content.signoff) {
-        const signoff = document.createElement("p");
-        signoff.className = "signoff";
-        signoff.textContent = post.content.signoff;
-        article.appendChild(signoff);
-      }
-    } else {
-      document.title = "Post not found | Garden of Thoughts";
-      document.getElementById("heroMark").textContent = "Missing bloom";
-      document.getElementById("metaKind").textContent = "Missing post";
-      document.getElementById("metaWhen").textContent = "Check slug";
-      document.getElementById("title").textContent = "This bloom does not exist yet";
-      document.getElementById("dek").textContent = "The slug in the URL did not match anything in assets/garden-posts.js.";
-      document.getElementById("article").innerHTML = '<div class="empty">Add a post object with this slug in <code>assets/garden-posts.js</code>, or return to the garden and open an existing bloom.</div>';
+    function escapeHTML(text) {
+      return String(text).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[char]));
     }
+
+    function renderInlineMarkdown(text) {
+      let html = escapeHTML(text);
+      html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+      html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      html = html.replace(/__([^_]+)__/g, "<strong>$1</strong>");
+      html = html.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+      html = html.replace(/_([^_]+)_/g, "<em>$1</em>");
+      html = html.replace(/~~([^~]+)~~/g, "<del>$1</del>");
+      return html;
+    }
+
+    function markdownToHTML(markdown) {
+      const lines = String(markdown || "").replace(/\r/g, "").split("\n");
+      const blocks = [];
+      let i = 0;
+
+      while (i < lines.length) {
+        const line = lines[i];
+
+        if (!line.trim()) {
+          i += 1;
+          continue;
+        }
+
+        const fence = line.match(/^```([\w-]+)?\s*$/);
+        if (fence) {
+          const code = [];
+          i += 1;
+          while (i < lines.length && !/^```\s*$/.test(lines[i])) {
+            code.push(lines[i]);
+            i += 1;
+          }
+          if (i < lines.length) i += 1;
+          const lang = fence[1] ? ` class="language-${escapeHTML(fence[1])}"` : "";
+          blocks.push(`<pre><code${lang}>${escapeHTML(code.join("\n"))}</code></pre>`);
+          continue;
+        }
+
+        const heading = line.match(/^(#{1,6})\s+(.+)$/);
+        if (heading) {
+          const level = Math.min(4, heading[1].length);
+          blocks.push(`<h${level}>${renderInlineMarkdown(heading[2])}</h${level}>`);
+          i += 1;
+          continue;
+        }
+
+        if (/^(-{3,}|\*{3,}|_{3,})\s*$/.test(line.trim())) {
+          blocks.push("<hr />");
+          i += 1;
+          continue;
+        }
+
+        if (/^>\s?/.test(line)) {
+          const quoteLines = [];
+          while (i < lines.length && /^>\s?/.test(lines[i])) {
+            quoteLines.push(lines[i].replace(/^>\s?/, ""));
+            i += 1;
+          }
+          const quoteHTML = quoteLines
+            .join("\n")
+            .split(/\n\s*\n/)
+            .map((part) => `<p>${renderInlineMarkdown(part.replace(/\n/g, " ").trim())}</p>`)
+            .join("");
+          blocks.push(`<blockquote>${quoteHTML}</blockquote>`);
+          continue;
+        }
+
+        if (/^[-*+]\s+/.test(line)) {
+          const items = [];
+          while (i < lines.length && /^[-*+]\s+/.test(lines[i])) {
+            items.push(lines[i].replace(/^[-*+]\s+/, ""));
+            i += 1;
+          }
+          blocks.push(`<ul>${items.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</ul>`);
+          continue;
+        }
+
+        if (/^\d+\.\s+/.test(line)) {
+          const items = [];
+          while (i < lines.length && /^\d+\.\s+/.test(lines[i])) {
+            items.push(lines[i].replace(/^\d+\.\s+/, ""));
+            i += 1;
+          }
+          blocks.push(`<ol>${items.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</ol>`);
+          continue;
+        }
+
+        const paragraph = [];
+        while (
+          i < lines.length &&
+          lines[i].trim() &&
+          !/^```/.test(lines[i]) &&
+          !/^(#{1,6})\s+/.test(lines[i]) &&
+          !/^>\s?/.test(lines[i]) &&
+          !/^[-*+]\s+/.test(lines[i]) &&
+          !/^\d+\.\s+/.test(lines[i]) &&
+          !/^(-{3,}|\*{3,}|_{3,})\s*$/.test(lines[i].trim())
+        ) {
+          paragraph.push(lines[i].trim());
+          i += 1;
+        }
+        blocks.push(`<p>${renderInlineMarkdown(paragraph.join(" "))}</p>`);
+      }
+
+      return blocks.join("");
+    }
+
+    (async () => {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get("slug");
+      const post = window.getGardenPostBySlug ? await window.getGardenPostBySlug(slug || "") : null;
+      const stageInfo = (window.GARDEN_STAGE_INFO && post) ? window.GARDEN_STAGE_INFO[post.stage] : null;
+
+      if (post) {
+        document.title = post.title + " | Garden of Thoughts";
+        document.getElementById("heroMark").textContent = post.heroLabel || (stageInfo && stageInfo.label) || "Post";
+        document.getElementById("metaKind").textContent = (stageInfo && stageInfo.label) || "Post";
+        document.getElementById("metaWhen").textContent = post.when || "Soon";
+        document.getElementById("title").textContent = post.title;
+        document.getElementById("dek").textContent = (post.content && post.content.dek) || post.summary || "A note from the garden.";
+
+        const article = document.getElementById("article");
+        const raw = (post.content && post.content.raw) || "";
+        article.innerHTML = markdownToHTML(raw);
+        if (post.content && post.content.signoff) {
+          const signoff = document.createElement("p");
+          signoff.className = "signoff";
+          signoff.textContent = post.content.signoff;
+          article.appendChild(signoff);
+        }
+      } else {
+        document.title = "Post not found | Garden of Thoughts";
+        document.getElementById("heroMark").textContent = "Missing bloom";
+        document.getElementById("metaKind").textContent = "Missing post";
+        document.getElementById("metaWhen").textContent = "Check slug";
+        document.getElementById("title").textContent = "This bloom does not exist yet";
+        document.getElementById("dek").textContent = "The slug in the URL did not match anything in content/garden/posts.";
+        document.getElementById("article").innerHTML = '<div class="empty">Add a markdown file in <code>content/garden/posts/</code>, or return to the garden and open an existing bloom.</div>';
+      }
+    })().catch(() => {
+      document.getElementById("article").innerHTML = '<div class="empty">Could not load the garden post content.</div>';
+    });
   </script>
 </body>
 </html>

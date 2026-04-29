@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>srija.ipynb — JupyterLab</title>
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="assets/favicon-notebook.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -1043,6 +1043,9 @@
 
 <script src="assets/garden-posts.js"></script>
 <script>
+const GARDEN_PREVIEW_PROMISE = window.getNotebookGardenPreview
+  ? window.getNotebookGardenPreview(3).catch(() => [])
+  : Promise.resolve([]);
 // ==========================================================
 // "srija" API — renders outputs
 // ==========================================================
@@ -1215,7 +1218,7 @@ const DATA = {
       ]
     },
   ],
-  garden: (window.getNotebookGardenPreview && window.getNotebookGardenPreview(3)) || [
+  garden: [
     { title: "Introduction", date: "Apr 2026", kind: "flower-amber", href: "garden-post.html?slug=introduction", desc: "Welcome to my blooms, thoughts, and little garden of thoughts." },
   ],
 };
@@ -2275,6 +2278,9 @@ document.addEventListener('visibilitychange', () => {
 
 // boot
 const restoredNotebook = loadNotebookState();
+GARDEN_PREVIEW_PROMISE.then((preview) => {
+  if (preview && preview.length) DATA.garden = preview;
+}).catch(() => {});
 if (restoredNotebook) {
   CELLS = restoredNotebook.cells;
   EXEC_COUNTER = restoredNotebook.execCounter;
@@ -2285,11 +2291,15 @@ if (restoredNotebook) {
     window.scrollTo({ top: restoredNotebook.scrollY, behavior: 'auto' });
   });
 } else {
-  KERNEL_IMPORTED = true;
-  buildInitial();
-  renderAll();
-  // auto-run every code cell once so info is visible immediately
   (async () => {
+    KERNEL_IMPORTED = true;
+    try {
+      const preview = await GARDEN_PREVIEW_PROMISE;
+      if (preview && preview.length) DATA.garden = preview;
+    } catch (_) {}
+    buildInitial();
+    renderAll();
+    // auto-run every code cell once so info is visible immediately
     for (let i = 0; i < CELLS.length; i++) {
       if (CELLS[i].type === 'code') {
         await runCell(i, false);

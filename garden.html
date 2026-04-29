@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Garden of Thoughts</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="assets/favicon-garden.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet" />
@@ -783,21 +783,9 @@
 
   <script src="assets/garden-posts.js"></script>
   <script>
-    const SETTINGS = window.GARDEN_SETTINGS || {};
+    let SETTINGS = window.GARDEN_SETTINGS || {};
     const STAGE_INFO = window.GARDEN_STAGE_INFO || {};
-    const POSTS = (window.getGardenPosts ? window.getGardenPosts() : []).map((post, index) => ({
-      ...post,
-      pond: {
-        x: 48,
-        y: 56,
-        size: 60,
-        rot: -10,
-        drift: 7.2,
-        delay: 0.3,
-        ...post.pond
-      },
-      _index: index
-    }));
+    let POSTS = [];
 
     const pond = document.getElementById("pond");
     const catalogLongPosts = document.getElementById("catalog-long-posts");
@@ -809,10 +797,7 @@
       columns: document.getElementById("view-columns")
     };
 
-    document.getElementById("hero-title").textContent = SETTINGS.introTitle || "Garden of Thoughts";
-    document.getElementById("hero-copy").textContent = SETTINGS.introText || "";
-
-    let selectedSlug = POSTS.find((post) => post.pond.latest)?.slug || (POSTS[0] && POSTS[0].slug) || "";
+    let selectedSlug = "";
 
     const REEDS = [
       { side: "left", left: "8%", stems: [[0, 18, -10], [10, 26, -3], [19, 30, 5], [30, 24, 10], [39, 18, 14]] },
@@ -1121,7 +1106,7 @@
       if (!POSTS.length) {
         const empty = document.createElement("div");
         empty.className = "empty-pond";
-        empty.textContent = "No blooms yet. Add a post in assets/garden-posts.js and it will show up here automatically.";
+        empty.textContent = "No blooms yet. Add a markdown file in content/garden/posts/.";
         pond.appendChild(empty);
         return;
       }
@@ -1164,9 +1149,23 @@
       });
     });
 
-    renderPond();
-    renderCatalog();
-    selectPost(selectedSlug);
+    (async () => {
+      const content = window.loadGardenContent
+        ? await window.loadGardenContent()
+        : { settings: SETTINGS, posts: [] };
+      SETTINGS = content.settings || SETTINGS;
+      POSTS = content.posts || [];
+      document.getElementById("hero-title").textContent = SETTINGS.introTitle || "Garden of Thoughts";
+      document.getElementById("hero-copy").textContent = SETTINGS.introText || "";
+      selectedSlug = POSTS.find((post) => post.pond.latest)?.slug || (POSTS[0] && POSTS[0].slug) || "";
+      renderPond();
+      renderCatalog();
+      selectPost(selectedSlug);
+    })().catch(() => {
+      document.getElementById("hero-copy").textContent = "Could not load the garden content.";
+      renderPond();
+      renderCatalog();
+    });
   </script>
 </body>
 </html>
