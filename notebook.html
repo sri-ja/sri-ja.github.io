@@ -197,6 +197,15 @@
   }
   .sidebar .idcard .name { font-weight: 600; font-size: 13.5px; margin-bottom: 2px; }
   .sidebar .idcard .role { color: var(--muted); font-size: 11.5px; margin-bottom: 8px; }
+  .sidebar .idcard .role a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+  .sidebar .idcard .role a:hover {
+    color: var(--selected);
+    border-bottom-color: var(--selected);
+  }
   .sidebar .idcard .links { display: flex; flex-wrap: wrap; gap: 4px; }
   .sidebar .idcard .links a {
     font-size: 11px; padding: 2px 7px;
@@ -338,15 +347,19 @@
     font-size: 20px; font-weight: 600;
     margin: 10px 0 4px;
   }
-  .md-body .hl-mats {
-    color: var(--selected);
-    font-weight: 600;
-  }
   .md-body .sub {
     color: var(--muted);
     font-size: 17px;
     line-height: 1.5;
     margin-bottom: 12px;
+  }
+  .md-body .sub a {
+    color: var(--selected);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .md-body .sub a:hover {
+    text-decoration: underline;
   }
   .md-body .id-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin: 14px 0 8px; }
   .md-body .avatar {
@@ -1019,7 +1032,7 @@
   <aside class="sidebar">
     <div class="idcard">
       <div class="name">Srija Mukhopadhyay</div>
-      <div class="role">Incoming MATS @ Anthropic</div>
+      <div class="role">Incoming <a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>/<a href="https://www.matsprogram.org/" target="_blank" rel="noopener">MATS</a> Fellow</div>
       <div class="links">
         <a href="mailto:srijamukherjee113@gmail.com">email</a>
         <a href="https://github.com/sri-ja" target="_blank" rel="noopener">github</a>
@@ -1061,11 +1074,10 @@
 <!-- Help popover -->
 <div class="help show" id="help">
   <div class="x" id="help-x">✕</div>
-  <strong>Hi! this is an actual notebook.</strong><br/>
+  <strong>Type <code>srija.help()</code> in a new cell</strong><br/>
   <kbd>Shift</kbd>+<kbd>Enter</kbd> run &amp; advance<br/>
   <kbd>⌘</kbd>/<kbd>Ctrl</kbd>+<kbd>Enter</kbd> run &amp; stay<br/>
   <kbd>↑</kbd> / <kbd>↓</kbd> move between cells<br/>
-  type <code>srija.help()</code> in a new cell
 </div>
 
 <script src="assets/garden-posts.js"></script>
@@ -1077,42 +1089,37 @@ const GARDEN_PREVIEW_PROMISE = window.getNotebookGardenPreview
 // "srija" API — renders outputs
 // ==========================================================
 const DATA = {
-  bio: "Hi, I'm Srija. I am currently wrapping up my master's thesis at IIIT Hyderabad. I am also a part of the Spring 2026 cohort of the <a href=\"https://sparai.org/\" target=\"_blank\" rel=\"noopener\">SPAR fellowship</a>, where I am working on evaluating the safety implications of episodic memory and understanding how localized fine-tuning affects generalization.\n\nIn the past, I have worked on building robust evaluations for multimodal systems and using them to surface concrete failure modes. I have also interned at Google across three consecutive summers. You can find some of my work <a href=\"https://scholar.google.com/citations?user=lcyAeBcAAAAJ\" target=\"_blank\" rel=\"noopener\">here</a>.\n\nI have been lucky to collaborate with people at ASU, UPenn, and Adobe Research, and to work with mentors including Prof. Dan Roth, Prof. Manish Shrivastava, Prof. Ponnurangam Kumaraguru, Dr. Aparna Garimella, and Prof. Vivek Gupta. Feel free to reach out. I am always happy to chat about research, safety, or anything else, including collaborations and opportunities.",
+  bio: "Hi, I'm Srija. I am currently wrapping up my Master's thesis at IIIT Hyderabad. I am also a part of the Spring 2026 cohort of the <a href=\"https://sparai.org/\" target=\"_blank\" rel=\"noopener\">SPAR fellowship</a>, where I am working on evaluating the safety implications of episodic memory and understanding how localized fine-tuning affects generalization.\n\nIn the past, I have worked on building robust evaluations for multimodal systems and using them to surface concrete failure modes. I have also interned at Google across three consecutive summers. You can find some of my work <a href=\"https://scholar.google.com/citations?user=lcyAeBcAAAAJ\" target=\"_blank\" rel=\"noopener\">here</a>.\n\nI have been lucky to collaborate with people at UPenn, ASU, Adobe Research and IBM Research, and to work with mentors including Prof. Dan Roth, Prof. Manish Shrivastava, Prof. Ponnurangam Kumaraguru, Dr. Aparna Garimella, and Prof. Vivek Gupta.\n\nI love talking so please feel free to reach out. Happy to chat about research, safety, or anything else!",
   interests: [
     {
       key: "agentic_safety",
-      why: "Safety gets more interesting when agents become persistent, stateful, and harder to supervise.",
-      current: "Thinking about episodic memory and what richer internal state changes about behavior."
+      why: "safety gets more interesting when agents become persistent, start collaborating and are expected to work over extended trajectories.",
+      current: "understanding the safety implications of episodic memory."
     },
     {
       key: "long_horizon_agents",
-      why: "Many failures only appear over longer trajectories rather than short benchmark tasks.",
-      current: "Studying long-horizon behavior, memory, and generalization under shift."
-    },
-    {
-      key: "multi_agent_systems",
-      why: "Coordination and communication make multi-agent settings a useful stress test for reliability.",
-      current: "Thinking about interaction, coordination, and how to evaluate these systems well."
+      why: "a huge requisite for reliable autonomous systems are systems that can run reliably and unsupervised over long horizons.",
+      current: "studying if agents implicitly plan and reason about long-term goals while making decisions."
     },
     {
       key: "evals_and_benchmarks",
-      why: "Good evals should do more than rank models; they should reveal failure modes clearly.",
-      current: "Building benchmarks that say something useful about safety and generalization."
+      why: "good evals are often the most reliable indicators of failure modes of models.",
+      current: "building benchmarks which study if agents respect the privacy boundaries of humans."
     },
   ],
   papers: [
-    { id: 0, year: 2025, title: "MAPWise: Evaluating Vision-Language Models for Advanced Map Queries",
+    { id: 0, year: 2026, title: "PrivacyBench: A Conversational Benchmark for Evaluating Privacy in Personalized AI",
+      authors: "S. Mukhopadhyay, S. Reddy, S. Muthukumar, J. An, P. Kumaraguru",
+      venue: "IJCNN (WCCI) 2026", award: "Nominated · Best Paper",
+      url: "https://www.arxiv.org/abs/2512.24848", linkLabel: "Paper", tags: ["evaluations", "ai-safety", "multi-agent"], selected: true },
+    { id: 1, year: 2025, title: "MAPWise: Evaluating Vision-Language Models for Advanced Map Queries",
       authors: "S. Mukhopadhyay, A. Rajgaria, P. Khatiwada, M. Shrivastava, D. Roth, V. Gupta",
       venue: "NAACL 2025 (Oral)", award: "Nominated · Outstanding Paper",
       url: "https://map-wise.github.io", linkLabel: "Website", tags: ["evaluations", "multimodality", "long-context"], selected: true },
-    { id: 1, year: 2024, title: "Unraveling the Truth: Do VLMs really Understand Charts?",
+    { id: 2, year: 2024, title: "Unraveling the Truth: Do VLMs really Understand Charts?",
       authors: "S. Mukhopadhyay*, A. Qidwai*, A. Garimella, P. Ramu, V. Gupta, D. Roth",
       venue: "EMNLP 2024", award: "",
       url: "https://robustcqa.github.io/", linkLabel: "Website", tags: ["evaluations", "multimodality"], selected: true },
-    { id: 2, year: 2025, title: "PrivacyBench: A Conversational Benchmark for Evaluating Privacy in Personalized AI",
-      authors: "S. Mukhopadhyay, S. Reddy, S. Muthukumar, J. An, P. Kumaraguru",
-      venue: "Preprint", award: "",
-      url: "https://www.arxiv.org/abs/2512.24848", linkLabel: "Paper", tags: ["evaluations", "ai-safety", "multi-agent"], selected: true },
     { id: 3, year: 2025, title: "InterChart: Benchmarking Visual Reasoning Across Decomposed Charts",
       authors: "A. Iyengar*, S. Mukhopadhyay*, A. Qidwai*, S. Singh, D. Roth, V. Gupta",
       venue: "AACL 2025", award: "",
@@ -1134,15 +1141,15 @@ const DATA = {
       summary: "Working on the safety implications of episodic memory and localized fine-tuning."
     },
     {
-      when: "Aug 2025–Present",
+      when: "Aug 2025-April 2026",
       role: "Machine Learning Research Intern",
       org: "Enterpret",
       summary: "Working on taxonomy retrieval and LLM/RAG-based feedback understanding systems."
     },
     {
       when: "2025–Present",
-      role: "MS Thesis / Precog",
-      org: "IIIT Hyderabad · Manish Shrivastava, Ponnurangam Kumaraguru",
+      role: "MS Thesis / Student Researcher",
+      org: "IIIT Hyderabad · Precog · Manish Shrivastava, Ponnurangam Kumaraguru",
       summary: "Working across long-context behavior, privacy in personalized agents, and safety-oriented evaluation."
     },
     {
@@ -1280,7 +1287,7 @@ function renderInterests() {
   const wrap = document.createElement('div');
   const note = document.createElement('p');
   note.className = 'interest-note';
-  note.textContent = 'A few themes I keep coming back to.';
+  note.textContent = 'Few of the things I have been interested in recently.';
   wrap.appendChild(note);
 
   const dict = document.createElement('div');
@@ -1872,7 +1879,7 @@ function buildInitial() {
   CELLS = [
     { ...makeCell({ type: 'md', sticky: true, content: `
       <h1>Srija Mukhopadhyay</h1>
-      <div class="sub"><em>Incoming <span class="hl-mats">MATS</span> Fellow @ Anthropic Megastream</em></div>
+      <div class="sub"><em>Incoming <a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>/<a href="https://www.matsprogram.org/" target="_blank" rel="noopener">MATS</a> Fellow</em></div>
       <div class="id-row">
         <div class="meta">
           <div class="aff"><strong>Current interests</strong>: agentic safety, long-horizon agents, and evals + benchmarks.</div>
@@ -1886,7 +1893,7 @@ function buildInitial() {
           </div>
         </div>
       </div>
-      <p>This website is a live notebook version of my research profile. You can run cells, explore papers, ask questions, and add your own cells as you go. Start with <code>srija.help()</code> to see the main commands and how to navigate the notebook.</p>
+      <p>Hello and welcome! Feel free to explore around or use <code>srija.help()</code> to see all the fun things you can do.</p>
     `}), editable: false },
     makeCell({ type: 'code', content: 'import srija\nsrija.about()' }),
     { ...makeCell({ type: 'md', content: `## Research interests` }), editable: false },
