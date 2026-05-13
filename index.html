@@ -5,15 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>srija.ipynb — JupyterLab</title>
 <link rel="icon" href="assets/favicon-notebook.svg" type="image/svg+xml" />
+<script src="assets/theme.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
+    color-scheme: light;
     --bg: #f5f5f5;
     --chrome: #fafafa;
     --chrome-border: #dcdcdc;
     --paper: #ffffff;
+    --panel: #ffffff;
+    --panel-soft: #fafafa;
+    --hover: #eeeeee;
     --ink: #212121;
     --muted: #616161;
     --faint: #9e9e9e;
@@ -21,6 +26,7 @@
     --rule-strong: #bdbdbd;
     --selected: #2196f3;
     --selected-soft: rgba(33, 150, 243, 0.08);
+    --link: #2196f3;
     --code-bg: #f7f7f7;
     --in: #307fc1;
     --out: #d14;
@@ -37,6 +43,37 @@
     --num: #986801;
     --com: #a0a1a7;
     --op:  #383a42;
+  }
+  html[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #101316;
+    --chrome: #171a1f;
+    --chrome-border: #2b3037;
+    --paper: #15181d;
+    --panel: #1b1f25;
+    --panel-soft: #20252c;
+    --hover: #252b33;
+    --ink: #e8e4dc;
+    --muted: #aaa49b;
+    --faint: #737b84;
+    --rule: #303640;
+    --rule-strong: #4a535e;
+    --selected: #7fb5f6;
+    --selected-soft: rgba(127, 181, 246, 0.14);
+    --link: #8fc0ff;
+    --code-bg: #1d2228;
+    --in: #8ab4f8;
+    --out: #f08aa3;
+    --mark-bg: rgba(127, 181, 246, 0.14);
+    --accent: #f2b76b;
+    --ok: #72c87b;
+    --warn: #ffb55f;
+    --kw: #d7a3ff;
+    --fn: #77d8c8;
+    --str: #9ad88f;
+    --num: #e3c06f;
+    --com: #7e8791;
+    --op: #d8d3ca;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; height: 100%; }
@@ -78,6 +115,46 @@
   }
   .menubar .menu:hover { background: #eeeeee; color: #111; }
   .menubar .spacer { flex: 1; }
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 22px;
+    margin-right: 8px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .theme-toggle:hover {
+    background: var(--hover);
+    border-color: var(--chrome-border);
+    color: var(--ink);
+  }
+  .theme-toggle .theme-icon {
+    position: relative;
+    display: block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    box-shadow: inset -4px -2px 0 currentColor;
+  }
+  .theme-toggle[data-theme-state="dark"] .theme-icon {
+    width: 10px;
+    height: 10px;
+    background: currentColor;
+    box-shadow:
+      0 -7px 0 -4px currentColor,
+      0 7px 0 -4px currentColor,
+      7px 0 0 -4px currentColor,
+      -7px 0 0 -4px currentColor,
+      5px 5px 0 -4px currentColor,
+      -5px 5px 0 -4px currentColor,
+      5px -5px 0 -4px currentColor,
+      -5px -5px 0 -4px currentColor;
+  }
   .menubar .kernel {
     display: flex; align-items: center; gap: 6px;
     padding: 0 10px; color: var(--muted); font-size: 11.5px;
@@ -340,7 +417,7 @@
   .md-body h1 {
     font-family: var(--sans);
     font-size: 30px; font-weight: 700;
-    margin: 6px 0 4px; letter-spacing: -0.01em;
+    margin: 6px 0 4px; letter-spacing: 0;
   }
   .md-body h2 {
     font-family: var(--sans);
@@ -994,6 +1071,65 @@
   .help .x { position: absolute; top: 4px; right: 8px; cursor: pointer; opacity: 0.6; }
   .help .x:hover { opacity: 1; }
 
+  html[data-theme="dark"] .menubar .app,
+  html[data-theme="dark"] .tab,
+  html[data-theme="dark"] .sidebar .toc-item,
+  html[data-theme="dark"] .sidebar .idcard .links a,
+  html[data-theme="dark"] .statusbar .mode {
+    color: var(--ink);
+  }
+  html[data-theme="dark"] .menubar .menu {
+    color: var(--muted);
+  }
+  html[data-theme="dark"] .menubar .menu:hover,
+  html[data-theme="dark"] .toolbar .btn:hover,
+  html[data-theme="dark"] .sidebar .toc-item:hover,
+  html[data-theme="dark"] table.df tbody tr:hover,
+  html[data-theme="dark"] .agent-box .suggestions button:hover,
+  html[data-theme="dark"] .agent-box .detail-toggle:hover,
+  html[data-theme="dark"] .add-menu button:hover {
+    background: var(--hover);
+    color: var(--ink);
+  }
+  html[data-theme="dark"] .toolbar .celltype,
+  html[data-theme="dark"] table.df,
+  html[data-theme="dark"] .interest-dict,
+  html[data-theme="dark"] .paper-list,
+  html[data-theme="dark"] .experience-list,
+  html[data-theme="dark"] .garden-preview-card,
+  html[data-theme="dark"] .plot-figure,
+  html[data-theme="dark"] .agent-box,
+  html[data-theme="dark"] .flower,
+  html[data-theme="dark"] .add-menu,
+  html[data-theme="dark"] .insert-rail button,
+  html[data-theme="dark"] .insert-rail.last button {
+    background: var(--panel);
+  }
+  html[data-theme="dark"] .sidebar .idcard,
+  html[data-theme="dark"] table.df thead th,
+  html[data-theme="dark"] table.df .pill,
+  html[data-theme="dark"] .garden-preview-card .kind,
+  html[data-theme="dark"] .agent-box .tool,
+  html[data-theme="dark"] .agent-box .suggestions button,
+  html[data-theme="dark"] .agent-box .detail-toggle,
+  html[data-theme="dark"] .statusbar .mode,
+  html[data-theme="dark"] .toolbar .hint kbd {
+    background: var(--panel-soft);
+  }
+  html[data-theme="dark"] .sidebar .idcard .links a {
+    background: var(--paper);
+  }
+  html[data-theme="dark"] .garden-preview-card:hover {
+    background: rgba(127, 181, 246, 0.08);
+    border-color: rgba(127, 181, 246, 0.35);
+  }
+  html[data-theme="dark"] table.df .pill {
+    color: var(--ink);
+  }
+  html[data-theme="dark"] .add-menu {
+    box-shadow: 0 12px 28px rgba(0,0,0,0.42);
+  }
+
   /* Responsive */
   @media (max-width: 900px) {
     .page { grid-template-columns: 1fr; }
@@ -1018,6 +1154,9 @@
   <a class="menu" href="https://github.com/sri-ja" target="_blank" rel="noopener">GitHub</a>
   <a class="menu" href="mailto:srijamukherjee113@gmail.com">Email</a>
   <div class="spacer"></div>
+  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
   <div class="kernel" id="kernel"><span class="kdot"></span> <span id="kernel-label">srija_kernel · idle</span></div>
 </div>
 
@@ -1428,24 +1567,24 @@ function flowerSVG(kind) {
 
   if (normalized === 'seed') {
     return `<svg viewBox="0 0 40 40" aria-hidden="true">
-      <path d="M23 8 C31 16 28 30 18 34 C10 25 13 13 23 8 Z" fill="#dfbd92"/>
-      <path d="M20 14 C18 20 18 27 20 32" fill="none" stroke="rgba(128,82,43,0.28)" stroke-width="1.1" stroke-linecap="round"/>
+      <path d="M23 8 C31 16 28 30 18 34 C10 25 13 13 23 8 Z" fill="var(--accent)"/>
+      <path d="M20 14 C18 20 18 27 20 32" fill="none" stroke="currentColor" stroke-opacity="0.28" stroke-width="1.1" stroke-linecap="round"/>
     </svg>`;
   }
   if (normalized === 'leaf') {
     return `<svg viewBox="0 0 40 40" aria-hidden="true">
-      <path d="M25 6 C33 14 31 28 19 35 C9 26 10 13 25 6 Z" fill="#cfe3c5"/>
-      <path d="M19 34 C19 24 22 15 26 8" fill="none" stroke="rgba(79,122,82,0.34)" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M25 6 C33 14 31 28 19 35 C9 26 10 13 25 6 Z" fill="var(--ok)"/>
+      <path d="M19 34 C19 24 22 15 26 8" fill="none" stroke="currentColor" stroke-opacity="0.34" stroke-width="1.2" stroke-linecap="round"/>
     </svg>`;
   }
   const colors = kind === 'bloom-rare'
-    ? ['#d9b8df', '#fff1da', '#d9b8df']
-    : ['#f4c8d3', '#fff1da', '#f4c8d3'];
+    ? ['#d9b8df', 'var(--paper)', '#d9b8df']
+    : ['#f4c8d3', 'var(--paper)', '#f4c8d3'];
   return `<svg viewBox="0 0 40 40" aria-hidden="true">
-    <path d="M21 23 C25 21 30 24 32 30 C26 32 22 29 20 24 Z" fill="#cfe3c5"/>
+    <path d="M21 23 C25 21 30 24 32 30 C26 32 22 29 20 24 Z" fill="var(--ok)"/>
     <g transform="translate(20,20)">
       ${[0,45,90,135,180,225,270,315].map(a => `<path d="M0 0 C-4 -5 -4 -11 0 -15 C4 -11 4 -5 0 0 Z" fill="${colors[0]}" transform="rotate(${a})"/>`).join('')}
-      <circle r="4.4" fill="#e3b74a"/>
+      <circle r="4.4" fill="var(--warn)"/>
     </g>
   </svg>`;
 }
@@ -1501,7 +1640,7 @@ function renderGarden() {
 // ----- Contact -----
 function renderContact() {
   const wrap = document.createElement('div');
-  wrap.style.cssText = 'background:#fff; border:1px solid var(--rule); border-radius:4px; padding:12px 16px; font-family:var(--sans); font-size:13.5px; line-height:1.7;';
+  wrap.style.cssText = 'background:var(--panel); border:1px solid var(--rule); border-radius:4px; padding:12px 16px; font-family:var(--sans); font-size:13.5px; line-height:1.7;';
   wrap.innerHTML = `
     <div style="font-weight:600; margin-bottom:4px;">Srija Mukhopadhyay</div>
     <div style="color:var(--muted); font-size:12.5px; margin-bottom:8px;">IIIT Hyderabad · Gachibowli, Hyderabad 500032, India</div>

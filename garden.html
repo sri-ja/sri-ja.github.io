@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Garden of Thoughts</title>
   <link rel="icon" href="assets/favicon-garden.svg" type="image/svg+xml" />
+  <script src="assets/theme.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
   <style>
     :root {
+      color-scheme: light;
       --bg: #fbfaf6;
       --paper: #fffdf8;
       --ink: #25231f;
@@ -27,6 +29,23 @@
       --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --serif: "Source Serif 4", Georgia, serif;
     }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #111613;
+      --paper: #171b16;
+      --ink: #ebe5dc;
+      --muted: #aaa093;
+      --soft: #746b61;
+      --line: rgba(235, 229, 220, 0.14);
+      --line-strong: rgba(235, 229, 220, 0.24);
+      --leaf: #95bf8d;
+      --leaf-soft: #5f7f61;
+      --flower: #d58da3;
+      --flower-soft: #815260;
+      --seed: #c99a68;
+      --seed-soft: #a4754b;
+      --sun: #e7c461;
+    }
 
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -40,6 +59,12 @@
         var(--bg);
       font-family: var(--sans);
       -webkit-font-smoothing: antialiased;
+    }
+    html[data-theme="dark"] body {
+      background:
+        linear-gradient(180deg, rgba(23, 27, 22, 0.82), rgba(23, 27, 22, 0) 260px),
+        repeating-linear-gradient(90deg, rgba(235, 229, 220, 0.035) 0 1px, transparent 1px 64px),
+        var(--bg);
     }
 
     a {
@@ -69,8 +94,47 @@
 
     .topbar nav {
       display: flex;
+      align-items: center;
       gap: 14px;
       flex-wrap: wrap;
+    }
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .theme-toggle:hover {
+      border-color: var(--line-strong);
+      color: var(--ink);
+    }
+    .theme-toggle .theme-icon {
+      position: relative;
+      display: block;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      box-shadow: inset -4px -2px 0 currentColor;
+    }
+    .theme-toggle[data-theme-state="dark"] .theme-icon {
+      width: 10px;
+      height: 10px;
+      background: currentColor;
+      box-shadow:
+        0 -7px 0 -4px currentColor,
+        0 7px 0 -4px currentColor,
+        7px 0 0 -4px currentColor,
+        -7px 0 0 -4px currentColor,
+        5px 5px 0 -4px currentColor,
+        -5px 5px 0 -4px currentColor,
+        5px -5px 0 -4px currentColor,
+        -5px -5px 0 -4px currentColor;
     }
 
     .hero {
@@ -263,6 +327,9 @@
       text-decoration-thickness: 1px;
       text-underline-offset: 4px;
     }
+    html[data-theme="dark"] .entry:hover .entry-title {
+      color: var(--ink);
+    }
 
     .when {
       color: var(--muted);
@@ -324,6 +391,9 @@
       background: radial-gradient(circle, var(--bg) 0 66%, rgba(251, 250, 246, 0) 68%);
       flex: 0 0 auto;
     }
+    html[data-theme="dark"] .mark {
+      background: radial-gradient(circle, var(--bg) 0 66%, rgba(17, 22, 19, 0) 68%);
+    }
 
     .mark.flower::before {
       content: "";
@@ -333,7 +403,7 @@
       width: 10px;
       height: 7px;
       border-radius: 8px 1px 8px 1px;
-      background: #cfe3c5;
+      background: var(--leaf-soft);
       transform: rotate(-20deg);
       z-index: 0;
     }
@@ -347,7 +417,7 @@
       margin-left: -4px;
       margin-top: -13px;
       border-radius: 70% 70% 52% 52%;
-      background: #f4c8d3;
+      background: var(--flower-soft);
       transform-origin: 50% 13px;
       z-index: 1;
     }
@@ -380,7 +450,7 @@
       width: 14px;
       height: 20px;
       border-radius: 15px 2px 15px 3px;
-      background: #cfe3c5;
+      background: var(--leaf-soft);
       transform: rotate(34deg);
     }
 
@@ -479,6 +549,9 @@
       <a href="index.html">back to notebook</a>
       <nav aria-label="Garden links">
         <a href="garden-post.html?slug=introduction" id="latest-link">latest flower</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode">
+          <span class="theme-icon" aria-hidden="true"></span>
+        </button>
       </nav>
     </header>
 
