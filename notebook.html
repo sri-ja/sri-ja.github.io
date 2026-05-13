@@ -1588,11 +1588,11 @@ const AGENT_RESPONSES = [
     tools: ["srija.questions()"],
     suggestions: ["what are you working on right now?", "are you looking for a job?", "what did you do at Google?"] },
   { prompts: ["who are you?", "tell me about yourself"], text:
-    "I'm a Dual Degree (B.Tech + MS) student at IIIT Hyderabad. I work on multi-agent systems, long-context reasoning, and reliable evaluations, and I've also interned at Google across three consecutive summers.",
+    "I'm an incoming Anthropic/MATS Fellow. Apart from that, I am wrapping up my Dual Degree (B.Tech + MS) student at IIIT Hyderabad. I am interested in AI safety, long-context reasoning, evaluations and reinforcement learning. I've also interned at Google across three consecutive summers.",
     tools: ["srija.about()"],
     suggestions: ["what do you work on?", "tell me about your experience", "what are you working on right now?"] },
   { prompts: ["what do you work on?"], text:
-    "Right now I mostly think about multi-agent systems, long-context reasoning, and reliable evaluations, with broader interest in AI safety and security.",
+    "Right now I mostly think about multi-agent systems, long-context reasoning, and reliable evaluations, with broader interest in AI safety and security. A recent interest of mine is reinforcement learning and I am currently spend a lot of my time learning about it.",
     tools: ["srija.interests()", "srija.papers(selected=True)"],
     suggestions: ["what are your research interests?", "what are you working on right now?", "tell me about your papers"] },
   { prompts: ["what are you working on right now?", "what are you working on now?"], text:
@@ -1620,19 +1620,19 @@ const AGENT_RESPONSES = [
     tools: ["srija.papers(selected=False)", "srija.experience(detailed=True)"],
     suggestions: ["tell me about your papers", "what are your research interests?", "what did you do at Google?"] },
   { prompts: ["tell me about your experience", "where have you worked?"], text:
-    "My recent work spans SPAR Research, LTRC, Precog, Enterpret, Google, and multimodal research collaborations with UPenn, ASU, and Adobe Research.",
+    "My recent work spans SPAR Research, LTRC, Precog, Enterpret, Google, and multimodal research collaborations with UPenn, ASU, Adobe Research, and IBM Research.",
     tools: ["srija.experience(detailed=False)"],
     suggestions: ["what are you doing at SPAR?", "what did you do at Enterpret?", "what did you do at Google?"] },
   { prompts: ["what are you doing at spar?", "tell me about spar", "what is your spar work?"], text:
-    "At SPAR, I'm working on two safety projects: implications of episodic memory in agents, and how localized finetuning affects generalization.",
+    "At SPAR, I'm working on two safety projects: implications of episodic memory on agentic safety, and how localized finetuning affects generalization.",
     tools: ["srija.experience(detailed=True)", "srija.interests()"],
     suggestions: ["what are your views on ai safety?", "what are your research interests?", "what is your thesis about?"] },
   { prompts: ["what is your thesis about?", "tell me about your thesis", "what is your masters thesis about?"], text:
-    "My master's thesis work sits in the Machine Translation and Natural Language Processing Lab at IIIT Hyderabad, with threads around model compression, LLM identification, modular memory, and agent behavior under impossible goals.",
+    "My master's thesis work is largely about building reliable evaluations for multimodal systems and moving away from aggregate metrics. I overview my work on charts, maps and planning in my thesis. More soon!",
     tools: ["srija.experience(detailed=True)", "srija.interests()"],
     suggestions: ["what are you doing at SPAR?", "what do you work on?", "tell me about your papers"] },
   { prompts: ["what did you do at enterpret?", "tell me about enterpret", "what was your enterpret work?"], text:
-    "At Enterpret, I worked on turning customer data into actionable insights: semantic caching, agent evaluations, retrieval recall and cost improvements, and better names for taxonomy nodes.",
+    "At Enterpret, I worked on turning customer data into actionable insights across a range of applications: semantic caching, agent evaluations, retrieval recall and cost improvements, and better names for taxonomy nodes.",
     tools: ["srija.experience(detailed=True)"],
     suggestions: ["tell me about your experience", "what did you do at Google?", "what do you work on?"] },
   { prompts: ["what did you do at google?", "tell me about google", "what was your google work?"], text:
@@ -1640,7 +1640,7 @@ const AGENT_RESPONSES = [
     tools: ["srija.experience(detailed=True)"],
     suggestions: ["tell me about your experience", "what did you do at Enterpret?", "how can i contact you?"] },
   { prompts: ["what are your research interests?", "what are you interested in?"], text:
-    "The short version is: multi-agent systems, long-horizon behavior, and evaluation. I keep coming back to questions about failure, reliability, and safety.",
+    "The short version is: multi-agent systems, long-horizon behavior, and evaluation. I keep coming back to questions about safety, reliability, and robustness.",
     tools: ["srija.interests()"],
     suggestions: ["what do you work on?", "what are your views on ai safety?", "tell me about your papers"] },
   { prompts: ["how can i contact you?", "how do i reach you?"], text:
@@ -1648,7 +1648,7 @@ const AGENT_RESPONSES = [
     tools: ["srija.contact()"],
     suggestions: ["who are you?", "what will you do?", "tell me about your garden"] },
   { prompts: ["tell me about your garden", "what is your garden?", "show me your blogs", "show me your blog", "tell me about your blogs"], text:
-    "The blog lives as a garden of thoughts, but the actual index is a simple growing branch. Flowers are longer posts, leaves are notes, and seeds are fragments.",
+    "I am hoping to maintain a blog where I share my thoughts and ideas about various topics. I like calling that blog my garden where I give life to my ideas.",
     tools: ["srija.blogs()"],
     suggestions: ["who are you?", "what do you work on?", "how can i contact you?"] },
   { prompts: ["show me everything", "give me the full version", "show me the full version"], text:
