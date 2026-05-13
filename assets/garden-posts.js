@@ -1,9 +1,9 @@
 window.GARDEN_STAGE_INFO = {
-  rare: { label: "Long post", group: "longPosts", visual: "flower", notebookKind: "bloom-rare" },
-  bloom: { label: "Long post", group: "longPosts", visual: "flower", notebookKind: "bloom" },
-  pad: { label: "Note", group: "notes", visual: "pad", notebookKind: "pad" },
-  young: { label: "Scattered thought", group: "scatteredThoughts", visual: "pad", notebookKind: "pad-small" },
-  draft: { label: "Scattered thought", group: "scatteredThoughts", visual: "seed", notebookKind: "seed" }
+  rare: { label: "Long post", group: "longPosts", visual: "flower", notebookKind: "flower" },
+  bloom: { label: "Long post", group: "longPosts", visual: "flower", notebookKind: "flower" },
+  pad: { label: "Note", group: "notes", visual: "leaf", notebookKind: "leaf" },
+  young: { label: "Fragment", group: "scatteredThoughts", visual: "seed", notebookKind: "seed" },
+  draft: { label: "Draft", group: "scatteredThoughts", visual: "seed", notebookKind: "seed" }
 };
 
 window.GARDEN_KIND_INFO = {
@@ -14,8 +14,8 @@ window.GARDEN_KIND_INFO = {
 
 window.GARDEN_SETTINGS = {
   title: "Garden of Thoughts",
-  introTitle: "A pond that fills slowly.",
-  introText: "Each item in the pond is a piece of writing. Seeds are unfinished drafts, lily pads are notes, and flowers are longer posts that feel more complete."
+  introTitle: "A growing branch for essays, notes, and unfinished ideas.",
+  introText: "Flowers are longer posts, leaves are notes, and seeds are fragments that are still taking shape."
 };
 
 const AUTO_POND_SLOTS = {
@@ -123,7 +123,9 @@ function inferStage(post, kind) {
 
 function pondVisual(stage) {
   const info = window.GARDEN_STAGE_INFO[stage] || window.GARDEN_STAGE_INFO.pad;
-  return info.visual || "pad";
+  if (info.visual === "flower") return "flower";
+  if (info.visual === "seed") return "seed";
+  return "pad";
 }
 
 function autoPondFor(stage, slotIndex) {
@@ -206,13 +208,37 @@ function listMarkdownFilesFromDirectoryIndex(html) {
   return Array.from(new Set(files)).sort((a, b) => a.localeCompare(b));
 }
 
+async function listGardenMarkdownFiles() {
+  try {
+    const list = await fetchText("content/garden/posts.txt");
+    const files = list
+      .split(/\r?\n/)
+      .map((line) => line.replace(/#.*/, "").trim())
+      .filter(Boolean);
+    if (files.length) return files;
+  } catch (_) {}
+
+  try {
+    const manifest = await fetchJSON("content/garden/posts.json");
+    const entries = Array.isArray(manifest) ? manifest : (manifest.posts || []);
+    const files = entries
+      .map((entry) => typeof entry === "string" ? entry : entry.file)
+      .filter(Boolean);
+    if (files.length) return files;
+  } catch (_) {}
+
+  // Local Python servers expose a directory listing, which keeps authoring easy
+  // before the manifest has been updated. GitHub Pages uses posts.txt above.
+  const directoryHTML = await fetchText("content/garden/posts/");
+  return listMarkdownFilesFromDirectoryIndex(directoryHTML);
+}
+
 window.loadGardenContent = async function loadGardenContent() {
   if (gardenContentPromise) return gardenContentPromise;
 
   gardenContentPromise = (async () => {
     const settings = { ...window.GARDEN_SETTINGS };
-    const directoryHTML = await fetchText("content/garden/posts/");
-    const files = listMarkdownFilesFromDirectoryIndex(directoryHTML);
+    const files = await listGardenMarkdownFiles();
     const counts = { flower: 0, pad: 0, seed: 0 };
     const rawPosts = await Promise.all(files.map(async (file, index) => {
       const text = await fetchText("content/garden/posts/" + file);
@@ -256,6 +282,7 @@ window.getNotebookGardenPreview = async function getNotebookGardenPreview(limit)
         title: post.title,
         date: post.when,
         kind: stageInfo.notebookKind,
+        type: stageInfo.label,
         href: "garden-post.html?slug=" + encodeURIComponent(post.slug),
         desc: post.summary
       };

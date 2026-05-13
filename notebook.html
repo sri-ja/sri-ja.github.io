@@ -600,35 +600,58 @@
 
   .garden-preview {
     display: grid;
-    gap: 12px;
+    gap: 10px;
   }
   .garden-preview-list {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
+    gap: 8px;
   }
   .garden-preview-card {
-    background: #fff;
+    display: block;
+    min-height: 112px;
+    padding: 10px 11px 11px;
     border: 1px solid var(--rule);
-    border-radius: 14px;
-    padding: 14px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    min-height: 102px;
+    border-top: 3px solid rgba(33, 150, 243, 0.28);
+    border-radius: 6px 6px 4px 4px;
+    background: #fff;
   }
   a.garden-preview-card {
     text-decoration: none;
     color: inherit;
   }
   a.garden-preview-card:hover {
+    background: rgba(33, 150, 243, 0.035);
     border-color: rgba(33, 150, 243, 0.28);
-    box-shadow: 0 6px 18px rgba(33, 150, 243, 0.08);
+  }
+  .garden-preview-card .tab-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .garden-preview-card .tab-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
   }
   .garden-preview-card .mini-flower {
-    width: 44px;
-    height: 44px;
+    width: 20px;
+    height: 20px;
     flex: 0 0 auto;
+  }
+  .garden-preview-card .kind {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 1px 6px;
+    background: #fafafa;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
   .garden-preview-card .meta {
     min-width: 0;
@@ -637,7 +660,8 @@
     font-family: var(--mono);
     font-size: 11px;
     color: var(--muted);
-    margin-bottom: 4px;
+    margin: 0;
+    white-space: nowrap;
   }
   .garden-preview-card .title {
     font-family: var(--sans);
@@ -653,13 +677,15 @@
     line-height: 1.55;
     color: var(--muted);
     margin: 0;
+    max-height: 3.1em;
+    overflow: hidden;
   }
   .garden-preview-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 2px 2px 0;
+    padding: 0 2px;
   }
   .garden-preview-footer .seedling {
     font-family: var(--sans);
@@ -944,6 +970,8 @@
     .md-body h1 { font-size: 26px; }
     .about-card { grid-template-columns: 1fr; }
     .about-card .avatar-large { width: 96px; height: 96px; }
+    .garden-preview-list { grid-template-columns: 1fr; }
+    .garden-preview-card { min-height: 0; }
   }
 </style>
 </head>
@@ -1218,7 +1246,7 @@ const DATA = {
     },
   ],
   garden: [
-    { title: "Introduction", date: "Apr 2026", kind: "flower-amber", href: "garden-post.html?slug=introduction", desc: "Welcome to my blooms, thoughts, and little garden of thoughts." },
+    { title: "Introduction", date: "Apr 2026", kind: "flower", type: "Long post", href: "garden-post.html?slug=introduction", desc: "The first flower on the writing branch." },
   ],
 };
 
@@ -1339,49 +1367,32 @@ function renderExperience(detailed) {
 
 // ----- Garden -----
 function flowerSVG(kind) {
-  if (kind === 'seed') {
+  const normalized = (
+    kind === 'seed' || kind === 'draft'
+  ) ? 'seed' : (
+    kind === 'leaf' || kind === 'pad' || kind === 'pad-small'
+  ) ? 'leaf' : 'flower';
+
+  if (normalized === 'seed') {
     return `<svg viewBox="0 0 40 40" aria-hidden="true">
-      <g transform="translate(20 21)">
-        <circle cx="-5" cy="2" r="3" fill="#9c7a58"/>
-        <circle cx="0" cy="-2" r="3.2" fill="#b08968"/>
-        <circle cx="5" cy="2" r="3" fill="#8f6b4a"/>
-      </g>
+      <path d="M23 8 C31 16 28 30 18 34 C10 25 13 13 23 8 Z" fill="#dfbd92"/>
+      <path d="M20 14 C18 20 18 27 20 32" fill="none" stroke="rgba(128,82,43,0.28)" stroke-width="1.1" stroke-linecap="round"/>
     </svg>`;
   }
-  if (kind === 'pad' || kind === 'pad-small') {
-    const fill = kind === 'pad-small'
-      ? ['#d9efac', '#86a962', '#5a7f49']
-      : ['#b9df8d', '#6d9f58', '#3f6a3f'];
+  if (normalized === 'leaf') {
     return `<svg viewBox="0 0 40 40" aria-hidden="true">
-      <defs>
-        <radialGradient id="padGrad-${kind}" cx="34%" cy="28%" r="75%">
-          <stop offset="0%" stop-color="${fill[0]}"/>
-          <stop offset="52%" stop-color="${fill[1]}"/>
-          <stop offset="100%" stop-color="${fill[2]}"/>
-        </radialGradient>
-      </defs>
-      <path d="M21 7 C27 7 33 10 36 16 C39 22 38 29 33 34 C28 38 20 39 13 36 C7 33 4 27 5 20 C7 12 13 7 21 7 Z" fill="url(#padGrad-${kind})" stroke="rgba(47,88,43,0.28)" stroke-width="1"/>
-      <path d="M6 20 C12 20 17 22 22 25 C17 27 12 31 9 35 C6 31 5 26 6 20 Z" fill="#82ab68"/>
-      <path d="M22 25 C21 20 20 15 21 10" stroke="rgba(241,255,219,0.65)" stroke-width="1" stroke-linecap="round"/>
-      <path d="M22 25 C27 20 31 18 35 19" stroke="rgba(241,255,219,0.5)" stroke-width="0.9" stroke-linecap="round"/>
+      <path d="M25 6 C33 14 31 28 19 35 C9 26 10 13 25 6 Z" fill="#cfe3c5"/>
+      <path d="M19 34 C19 24 22 15 26 8" fill="none" stroke="rgba(79,122,82,0.34)" stroke-width="1.2" stroke-linecap="round"/>
     </svg>`;
   }
   const colors = kind === 'bloom-rare'
-    ? ['#d7b4de', '#f2e3f6']
-    : ['#efc4d0', '#fff1da'];
-  return `<svg viewBox="0 0 40 40">
-    <defs>
-      <radialGradient id="padGrad-${kind}" cx="34%" cy="28%" r="75%">
-        <stop offset="0%" stop-color="#c9e9a4"/>
-        <stop offset="52%" stop-color="#74a45c"/>
-        <stop offset="100%" stop-color="#3a643a"/>
-      </radialGradient>
-    </defs>
-    <path d="M21 9 C27 8 33 11 36 17 C38 23 37 29 33 33 C28 37 21 38 14 35 C8 32 5 27 6 20 C8 13 14 9 21 9 Z" fill="url(#padGrad-${kind})" stroke="rgba(47,88,43,0.28)" stroke-width="1"/>
-    <path d="M7 20 C12 20 17 22 22 25 C17 27 13 31 10 35 C7 31 6 26 7 20 Z" fill="#7faa66"/>
-    <g transform="translate(22,19)">
-      ${[0,60,120,180,240,300].map(a => `<ellipse cx="0" cy="-6" rx="3.5" ry="6" fill="${colors[0]}" transform="rotate(${a})" opacity="0.92"/>`).join('')}
-      <circle r="3" fill="${colors[1]}" stroke="${colors[0]}" stroke-width="1"/>
+    ? ['#d9b8df', '#fff1da', '#d9b8df']
+    : ['#f4c8d3', '#fff1da', '#f4c8d3'];
+  return `<svg viewBox="0 0 40 40" aria-hidden="true">
+    <path d="M21 23 C25 21 30 24 32 30 C26 32 22 29 20 24 Z" fill="#cfe3c5"/>
+    <g transform="translate(20,20)">
+      ${[0,45,90,135,180,225,270,315].map(a => `<path d="M0 0 C-4 -5 -4 -11 0 -15 C4 -11 4 -5 0 0 Z" fill="${colors[0]}" transform="rotate(${a})"/>`).join('')}
+      <circle r="4.4" fill="#e3b74a"/>
     </g>
   </svg>`;
 }
@@ -1389,12 +1400,12 @@ function renderGarden() {
   const wrap = document.createElement('div');
   const head = document.createElement('div');
   head.className = 'plot-head';
-  head.textContent = '<Recent blooms>  garden preview';
+  head.textContent = '<Garden of thoughts>  writing preview';
   wrap.appendChild(head);
 
   const note = document.createElement('p');
   note.className = 'paper-list-note';
-  note.textContent = 'A small detour into blog posts, notes, and things still taking shape.';
+  note.textContent = 'Recent writing from the garden. The full page keeps the branch view.';
   wrap.appendChild(note);
 
   const preview = document.createElement('div');
@@ -1407,9 +1418,14 @@ function renderGarden() {
     el.className = 'garden-preview-card';
     el.href = g.href || 'garden.html';
     el.innerHTML = `
-      ${flowerSVG(g.kind).replace('<svg ', '<svg class="mini-flower" ')}
+      <div class="tab-head">
+        <div class="tab-mark">
+          ${flowerSVG(g.kind).replace('<svg ', '<svg class="mini-flower" ')}
+          <div class="date">${escapeHTML(g.date)}</div>
+        </div>
+        <div class="kind">${escapeHTML(g.type || 'Post')}</div>
+      </div>
       <div class="meta">
-        <div class="date">${escapeHTML(g.date)}</div>
         <p class="title">${escapeHTML(g.title)}</p>
         <p class="desc">${escapeHTML(g.desc || 'garden post')}</p>
       </div>
@@ -1421,8 +1437,8 @@ function renderGarden() {
   const footer = document.createElement('div');
   footer.className = 'garden-preview-footer';
   footer.innerHTML = `
-    <span class="seedling">${DATA.garden.length} bloom${DATA.garden.length === 1 ? '' : 's'} in the garden</span>
-    <a class="garden-preview-link" href="garden.html">open full garden →</a>
+    <span class="seedling">${DATA.garden.length} piece${DATA.garden.length === 1 ? '' : 's'} in the garden</span>
+    <a class="garden-preview-link" href="garden.html">open garden &rarr;</a>
   `;
   preview.appendChild(footer);
   wrap.appendChild(preview);
@@ -1465,13 +1481,13 @@ function renderHelp() {
   detailed=True / False              &nbsp;→ switch between concise and expanded experience
 
 <span style="color:var(--kw)">Writing + blog</span>
-  srija.blogs()                      &nbsp;→ open the garden preview
+  srija.blogs()                      &nbsp;→ open the garden branch preview
   srija.garden()                     &nbsp;→ same as <span style="color:var(--fn)">srija.blogs()</span>
 
 <span style="color:var(--kw)">Ask mode</span>
   srija.questions()                  &nbsp;→ example prompts
   srija.ask(<span style="color:var(--str)">"who are you?"</span>)           &nbsp;→ notebook Q&amp;A
-  srija.ask(<span style="color:var(--str)">"show me your blogs"</span>)     &nbsp;→ jump to the garden
+  srija.ask(<span style="color:var(--str)">"show me your blogs"</span>)     &nbsp;→ open the writing branch
 
 <span style="color:var(--kw)">Notebook actions</span>
   Shift+Enter                        &nbsp;→ run selected cell
@@ -1548,7 +1564,7 @@ const AGENT_RESPONSES = [
     tools: ["srija.contact()"],
     suggestions: ["who are you?", "what will you do?", "tell me about your garden"] },
   { prompts: ["tell me about your garden", "what is your garden?", "show me your blogs", "show me your blog", "tell me about your blogs"], text:
-    "The blog lives as a garden of thoughts. Each post shows up as a bloom, and I want it to feel a little more alive than a normal archive page.",
+    "The blog lives as a garden of thoughts, but the actual index is a simple growing branch. Flowers are longer posts, leaves are notes, and seeds are fragments.",
     tools: ["srija.blogs()"],
     suggestions: ["who are you?", "what do you work on?", "how can i contact you?"] },
 ];
@@ -1879,7 +1895,7 @@ function buildInitial() {
     makeCell({ type: 'code', content: '# set selected=False to see all publications\nsrija.papers(selected=True)' }),
     { ...makeCell({ type: 'md', content: `## Experience` }), editable: false },
     makeCell({ type: 'code', content: '# set detailed=True for the full version\nsrija.experience(detailed=False)' }),
-    { ...makeCell({ type: 'md', content: `## Garden of thoughts\n\nThis is where blog posts, notes, and half-formed ideas can live as a small garden.` }), editable: false },
+    { ...makeCell({ type: 'md', content: `## Garden of thoughts\n\nThis is where blog posts, notes, and half-formed ideas live on a small writing branch.` }), editable: false },
     makeCell({ type: 'code', content: 'srija.blogs()' }),
     { ...makeCell({ type: 'md', content: `## Ask the notebook\n\nThis is a small fun Q&A section. For more personal questions, feel free to reach out.` }), editable: false },
     makeCell({ type: 'code', content: 'srija.ask("who are you?")' }),

@@ -1,15 +1,16 @@
 # Adding a garden post
 
 1. Create a new markdown file in `content/garden/posts/`.
-2. Write a small frontmatter block at the top.
-3. Refresh the garden. The post is discovered automatically.
+2. Copy the frontmatter from `content/garden/post-template.md`.
+3. Add the filename to `content/garden/posts.txt` where you want it to appear.
+4. Refresh the garden.
 
 ```md
 ---
 title: My new post
 kind: note
 when: May 2026
-summary: One-line description for the garden and notebook preview.
+summary: One-line description for the branch and notebook preview.
 status: published
 ---
 
@@ -32,8 +33,6 @@ Second paragraph.
 - `dek`
 - `signoff`
 - `latest: true`
-- `pad`: `classic`, `young`, `deep`, or `round`
-- `flower`: currently decorative, only used for flowered posts
 
 The post body supports markdown, including:
 
@@ -44,4 +43,23 @@ The post body supports markdown, including:
 - blockquotes
 - inline code and fenced code blocks
 
-There is no post manifest anymore. If a `.md` file exists in `content/garden/posts/`, the garden will load it automatically.
+## Post List
+
+`content/garden/posts.txt` controls which posts appear and in what order. Put
+the newest post first.
+
+```txt
+# Newest first. Add one markdown filename per line.
+my-new-post.md
+introduction.md
+```
+
+The branch uses the post kind for its symbol:
+
+- `longPost`: flower
+- `note`: leaf
+- `scatteredThought`: seed
+
+While previewing locally, the garden can also discover markdown files from the
+directory listing. For the deployed site, keep `posts.txt` updated so GitHub
+Pages can load the posts reliably.

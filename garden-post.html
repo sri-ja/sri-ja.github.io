@@ -15,7 +15,10 @@
       --muted: #687568;
       --line: rgba(24,35,27,0.12);
       --leaf: #6b9b68;
-      --petal: #f2c7d2;
+      --leaf-soft: #cfe3c5;
+      --petal: #f4c8d3;
+      --seed-soft: #dfbd92;
+      --sun: #e3b74a;
     }
 
     * { box-sizing: border-box; }
@@ -77,15 +80,107 @@
       text-transform: uppercase;
     }
 
-    .bud {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 50% 42%, #fff9ea 0 22%, rgba(255,249,234,0) 23%),
-        radial-gradient(circle at 50% 50%, var(--petal) 0 68%, #deb1bf 69% 100%);
+    .post-mark {
+      position: relative;
+      display: inline-block;
+      width: 28px;
+      height: 28px;
       flex: 0 0 auto;
-      box-shadow: 0 0 0 3px rgba(107,155,104,0.14);
+    }
+
+    .post-mark.flower::before {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 17px;
+      width: 10px;
+      height: 7px;
+      border-radius: 8px 1px 8px 1px;
+      background: var(--leaf-soft);
+      transform: rotate(-20deg);
+      z-index: 0;
+    }
+
+    .post-mark.flower .petal {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 8px;
+      height: 13px;
+      margin-left: -4px;
+      margin-top: -13px;
+      border-radius: 70% 70% 52% 52%;
+      background: var(--petal);
+      transform-origin: 50% 13px;
+      z-index: 1;
+    }
+
+    .post-mark.flower .p1 { transform: rotate(0deg); }
+    .post-mark.flower .p2 { transform: rotate(45deg); }
+    .post-mark.flower .p3 { transform: rotate(90deg); }
+    .post-mark.flower .p4 { transform: rotate(135deg); }
+    .post-mark.flower .p5 { transform: rotate(180deg); }
+    .post-mark.flower .p6 { transform: rotate(225deg); }
+    .post-mark.flower .p7 { transform: rotate(270deg); }
+    .post-mark.flower .p8 { transform: rotate(315deg); }
+
+    .post-mark.flower i {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--sun);
+      z-index: 2;
+    }
+
+    .post-mark.leaf::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 3px;
+      width: 14px;
+      height: 20px;
+      border-radius: 15px 2px 15px 3px;
+      background: var(--leaf-soft);
+      transform: rotate(34deg);
+    }
+
+    .post-mark.leaf::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 7px;
+      width: 1px;
+      height: 13px;
+      border-radius: 999px;
+      background: rgba(107, 155, 104, 0.3);
+      transform: rotate(34deg);
+    }
+
+    .post-mark.seed::before {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 7px;
+      width: 11px;
+      height: 14px;
+      border-radius: 72% 46% 70% 46%;
+      background: var(--seed-soft);
+      transform: rotate(-24deg);
+    }
+
+    .post-mark.seed::after {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 10px;
+      width: 1px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(128, 82, 43, 0.26);
+      transform: rotate(-24deg);
     }
 
     .meta {
@@ -282,15 +377,15 @@
       <main>
         <section class="hero">
           <div class="hero-mark">
-            <div class="bud" aria-hidden="true"></div>
-            <span id="heroMark">Bloom</span>
+            <div class="post-mark flower" id="postMark" aria-hidden="true"><span class="petal p1"></span><span class="petal p2"></span><span class="petal p3"></span><span class="petal p4"></span><span class="petal p5"></span><span class="petal p6"></span><span class="petal p7"></span><span class="petal p8"></span><i></i></div>
+            <span id="heroMark">Flower</span>
           </div>
           <div class="meta">
             <span class="pill">Garden of Thoughts</span>
-            <span class="pill" id="metaKind">Bloom</span>
+            <span class="pill" id="metaKind">Long post</span>
             <span class="pill" id="metaWhen">Soon</span>
           </div>
-          <h1 id="title">Untitled bloom</h1>
+          <h1 id="title">Untitled post</h1>
           <p class="dek" id="dek">A note from the garden.</p>
         </section>
 
@@ -300,9 +395,9 @@
           <a class="more-card" href="garden.html">
             <div>
               <div class="label">Back to the garden</div>
-              <div class="title">Return to the pond of thoughts.</div>
+              <div class="title">Return to the branch of thoughts.</div>
             </div>
-            <div class="bud" aria-hidden="true"></div>
+            <div class="post-mark flower" aria-hidden="true"><span class="petal p1"></span><span class="petal p2"></span><span class="petal p3"></span><span class="petal p4"></span><span class="petal p5"></span><span class="petal p6"></span><span class="petal p7"></span><span class="petal p8"></span><i></i></div>
           </a>
         </section>
       </main>
@@ -429,6 +524,16 @@
       return blocks.join("");
     }
 
+    function visualForStage(stageInfo) {
+      const visual = stageInfo && stageInfo.visual;
+      if (visual === "flower" || visual === "leaf" || visual === "seed") return visual;
+      return "flower";
+    }
+
+    function flowerMarkHTML() {
+      return '<span class="petal p1"></span><span class="petal p2"></span><span class="petal p3"></span><span class="petal p4"></span><span class="petal p5"></span><span class="petal p6"></span><span class="petal p7"></span><span class="petal p8"></span><i></i>';
+    }
+
     (async () => {
       const params = new URLSearchParams(window.location.search);
       const slug = params.get("slug");
@@ -436,8 +541,12 @@
       const stageInfo = (window.GARDEN_STAGE_INFO && post) ? window.GARDEN_STAGE_INFO[post.stage] : null;
 
       if (post) {
+        const visual = visualForStage(stageInfo);
+        const visualLabels = { flower: "Flower", leaf: "Leaf", seed: "Seed" };
         document.title = post.title + " | Garden of Thoughts";
-        document.getElementById("heroMark").textContent = post.heroLabel || (stageInfo && stageInfo.label) || "Post";
+        document.getElementById("postMark").className = "post-mark " + visual;
+        document.getElementById("postMark").innerHTML = visual === "flower" ? flowerMarkHTML() : "";
+        document.getElementById("heroMark").textContent = visualLabels[visual] || "Post";
         document.getElementById("metaKind").textContent = (stageInfo && stageInfo.label) || "Post";
         document.getElementById("metaWhen").textContent = post.when || "Soon";
         document.getElementById("title").textContent = post.title;
@@ -454,12 +563,12 @@
         }
       } else {
         document.title = "Post not found | Garden of Thoughts";
-        document.getElementById("heroMark").textContent = "Missing bloom";
+        document.getElementById("heroMark").textContent = "Missing post";
         document.getElementById("metaKind").textContent = "Missing post";
         document.getElementById("metaWhen").textContent = "Check slug";
-        document.getElementById("title").textContent = "This bloom does not exist yet";
+        document.getElementById("title").textContent = "This post does not exist yet";
         document.getElementById("dek").textContent = "The slug in the URL did not match anything in content/garden/posts.";
-        document.getElementById("article").innerHTML = '<div class="empty">Add a markdown file in <code>content/garden/posts/</code>, or return to the garden and open an existing bloom.</div>';
+        document.getElementById("article").innerHTML = '<div class="empty">Add a markdown file in <code>content/garden/posts/</code>, or return to the garden and open an existing post.</div>';
       }
     })().catch(() => {
       document.getElementById("article").innerHTML = '<div class="empty">Could not load the garden post content.</div>';
