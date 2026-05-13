@@ -982,7 +982,7 @@
   </div>
   <div class="spacer"></div>
   <div class="hint">
-    <kbd>Shift</kbd>+<kbd>Enter</kbd> run &amp; advance · <kbd>⌘</kbd>/<kbd>Ctrl</kbd>+<kbd>Enter</kbd> run &amp; stay · double-click md cells to edit · try <code style="font-family:var(--mono)">srija.help()</code>
+    <kbd>Shift</kbd>+<kbd>Enter</kbd> run &amp; advance · <kbd>⌘</kbd>/<kbd>Ctrl</kbd>+<kbd>Enter</kbd> run &amp; stay · try <code style="font-family:var(--mono)">srija.help()</code>
   </div>
 </div>
 
@@ -1037,7 +1037,6 @@
   <kbd>Shift</kbd>+<kbd>Enter</kbd> run &amp; advance<br/>
   <kbd>⌘</kbd>/<kbd>Ctrl</kbd>+<kbd>Enter</kbd> run &amp; stay<br/>
   <kbd>↑</kbd> / <kbd>↓</kbd> move between cells<br/>
-  double-click a markdown cell to edit it<br/>
   type <code>srija.help()</code> in a new cell
 </div>
 
@@ -1452,19 +1451,35 @@ function renderHelp() {
   wrap.className = 'out-text';
   wrap.innerHTML = `<span style="color:var(--muted)">srija</span> — a personal kernel.
 
-<span style="color:var(--kw)">Available functions:</span>
-  srija.about()                 &nbsp;→ bio
-  srija.interests()             &nbsp;→ research interest object
-  srija.papers(selected=True)   &nbsp;→ selected publications
-  srija.papers(selected=False)  &nbsp;→ all publications
-  srija.experience(detailed=False) &nbsp;→ concise experience
-  srija.experience(detailed=True)  &nbsp;→ full experience
-  srija.garden() / srija.blogs() &nbsp;→ garden of thoughts
-  srija.contact()               &nbsp;→ contact card
-  srija.questions()             &nbsp;→ questions the agent can answer
-  srija.ask(<span style="color:var(--str)">"..."</span>)              &nbsp;→ ask the notebook
+<span style="color:var(--kw)">Profile + research</span>
+  srija.about()                      &nbsp;→ bio
+  srija.interests()                  &nbsp;→ research themes
+  srija.papers(selected=True)        &nbsp;→ selected publications
+  srija.papers(selected=False)       &nbsp;→ full publication list
+  srija.experience(detailed=False)   &nbsp;→ concise experience
+  srija.experience(detailed=True)    &nbsp;→ fuller experience
+  srija.contact()                    &nbsp;→ contact card
 
-<span style="color:var(--muted)">Tip: edit any cell's code and press Shift+Enter.</span>`;
+<span style="color:var(--muted)">Useful toggles</span>
+  selected=True / False              &nbsp;→ switch between highlighted and full paper list
+  detailed=True / False              &nbsp;→ switch between concise and expanded experience
+
+<span style="color:var(--kw)">Writing + blog</span>
+  srija.blogs()                      &nbsp;→ open the garden preview
+  srija.garden()                     &nbsp;→ same as <span style="color:var(--fn)">srija.blogs()</span>
+
+<span style="color:var(--kw)">Ask mode</span>
+  srija.questions()                  &nbsp;→ example prompts
+  srija.ask(<span style="color:var(--str)">"who are you?"</span>)           &nbsp;→ notebook Q&amp;A
+  srija.ask(<span style="color:var(--str)">"show me your blogs"</span>)     &nbsp;→ jump to the garden
+
+<span style="color:var(--kw)">Notebook actions</span>
+  Shift+Enter                        &nbsp;→ run selected cell
+  Cmd/Ctrl+Enter                     &nbsp;→ run and stay
+  ↑ / ↓                              &nbsp;→ move between cells
+  + buttons / toolbar                &nbsp;→ insert code or markdown cells
+
+<span style="color:var(--muted)">If you restart the kernel, run</span> <span style="color:var(--fn)">import srija</span> <span style="color:var(--muted)">again first.</span>`;
   return wrap;
 }
 
@@ -2224,7 +2239,7 @@ document.getElementById('tb-add').onclick = (e) => {
 };
 document.getElementById('tb-delete').onclick = () => deleteCell(SELECTED);
 document.getElementById('help-x').onclick = () => document.getElementById('help').classList.remove('show');
-setTimeout(() => document.getElementById('help').classList.remove('show'), 9000);
+setTimeout(() => document.getElementById('help').classList.remove('show'), 5000);
 
 document.getElementById('add-menu').addEventListener('click', (e) => {
   const btn = e.target.closest('button[data-kind]');
