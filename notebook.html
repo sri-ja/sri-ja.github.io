@@ -610,6 +610,26 @@
     font-size: 13.5px;
     line-height: 1.6;
   }
+  .experience-entry .bullets li.pub {
+    list-style: none;
+    margin-left: -18px;
+    padding: 8px 10px;
+    border: 1px solid rgba(180,83,9,0.18);
+    border-radius: 6px;
+    background: rgba(180,83,9,0.06);
+  }
+  .experience-entry .pub-label {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: rgba(180,83,9,0.12);
+    color: var(--accent);
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
 
   .garden-preview {
     display: grid;
@@ -1135,120 +1155,140 @@ const DATA = {
   ],
   experienceConcise: [
     {
-      when: "Spring 2026",
-      role: "SPAR Fellow",
-      org: "SPAR",
-      summary: "Working on the safety implications of episodic memory and localized fine-tuning."
+      when: "Feb 2026-Present",
+      role: "Research Fellow",
+      org: "SPAR Research · Berkeley, CA",
+      summary: "Working on agent safety projects around episodic memory and localized finetuning."
     },
     {
-      when: "Aug 2025-April 2026",
-      role: "Machine Learning Research Intern",
+      when: "Aug 2025-Apr 2026",
+      role: "Machine Learning Intern",
       org: "Enterpret",
-      summary: "Working on taxonomy retrieval and LLM/RAG-based feedback understanding systems."
+      summary: "Built semantic caching, retrieval evaluations, and taxonomy systems for customer intelligence."
     },
     {
-      when: "2025–Present",
-      role: "MS Thesis / Student Researcher",
-      org: "IIIT Hyderabad · Precog · Manish Shrivastava, Ponnurangam Kumaraguru",
-      summary: "Working across long-context behavior, privacy in personalized agents, and safety-oriented evaluation."
+      when: "May 2023-Present",
+      role: "Student Researcher",
+      org: "IIIT Hyderabad · LTRC + Precog",
+      summary: "Research across language model memory/compression, personalized-agent privacy, federated learning, and agent evaluation."
     },
     {
-      when: "Jan 2024–Aug 2025",
-      role: "Research Collaborator",
-      org: "UPenn / ASU / Adobe Research · Dan Roth, Vivek Gupta, Aparna Garimella",
-      summary: "Worked on multimodal robustness, visual reasoning, and benchmark design across charts and maps."
+      when: "Jan 2024-Apr 2025",
+      role: "Student Researcher",
+      org: "University of Pennsylvania / Arizona State University",
+      summary: "Developed multimodal reasoning benchmarks for charts, maps, and product descriptions."
     },
     {
-      when: "May 2023–Aug 2025",
+      when: "May 2023-Aug 2025",
       role: "Software Engineering Intern (×3)",
       org: "Google",
-      summary: "Interned at Google across three consecutive summers in software engineering roles."
+      summary: "Shipped systems across Cloud Storage metering, Android PDF, and Cloud Orion visualization."
     }
   ],
   experience: [
     {
-      when: "Spring 2026",
-      role: "SPAR Fellow",
-      org: "SPAR",
-      summary: "Working on the safety implications of episodic memory and localized fine-tuning.",
+      when: "Feb 2026-Present",
+      role: "Research Fellow",
+      org: "SPAR Research · Berkeley, CA · Remote",
+      summary: "Working on two safety projects around agent memory and finetuning-driven generalization.",
       bullets: [
-        "Part of the Spring 2026 SPAR fellowship cohort.",
-        "Current focus is on how episodic memory and localized fine-tuning affect safety and generalization."
+        "Studying the safety implications of episodic memory in agents with Chad DeChant.",
+        "Investigating how localized finetuning affects generalization with Niels Warncke."
       ]
     },
     {
-      when: "Aug 2025–Present",
-      role: "Machine Learning Research Intern",
-      org: "Enterpret",
-      summary: "Working on taxonomy retrieval and LLM/RAG-based feedback understanding systems.",
+      when: "May 2023-Present",
+      role: "Student Researcher",
+      org: "Language Technologies Research Centre, IIIT Hyderabad · Prof. Manish Shrivastava",
+      summary: "MS thesis research across language model compression, model identity, memory, and agent evaluation.",
       bullets: [
-        "Improving taxonomy retrieval to extract actionable insights from large-scale customer feedback.",
-        "Using LLMs and retrieval-augmented systems to improve the granularity and semantic accuracy of feedback classification."
+        "Explored pruning and compression of language models, including earlier work on lateral model compression.",
+        "Studied whether LLMs can be identified from their outputs and how memory in LLMs can be made more modular.",
+        "Evaluating agent behavior when models are tasked with impossible goals, in collaboration with IBM Research."
       ]
     },
     {
-      when: "Jan 2025–Present",
-      role: "Researcher",
-      org: "Precog, IIIT Hyderabad · Prof. Ponnurangam Kumaraguru",
-      summary: "Working on privacy, fairness, and efficient learning in applied ML settings.",
+      when: "Jan 2025-May 2026",
+      role: "Student Researcher",
+      org: "Precog-at-IIITH · Prof. Ponnurangam Kumaraguru",
+      summary: "Worked on privacy norms for personalized AI agents and fairer, more efficient federated learning.",
       bullets: [
-        "Evaluating privacy risks in personalized agents and secret leakage in assistant-like systems.",
-        "Investigating fairness constraints in federated learning setups with heterogeneous clients.",
-        "Exploring efficient training for resource-constrained settings, including binarized neural networks."
+        "Collaborated with Prof. Jisun An on a benchmark for understanding privacy norms in personalized AI agents.",
+        "Collaborated with Prof. Saurav Prakash on making federated learning more fair and efficient.",
+        { type: "publication", text: "PrivacyBench: A Conversational Benchmark for Evaluating Privacy in Personalized AI (IJCNN 2026)." }
       ]
     },
     {
-      when: "Aug 2023–Present",
-      role: "Researcher / MS Thesis",
-      org: "LTRC, IIIT Hyderabad · Prof. Manish Shrivastava",
-      summary: "MS thesis work across long-context behavior, non-autoregressive generation, and the limits of effective context utilization.",
+      when: "Aug 2025-Apr 2026",
+      role: "Machine Learning Intern",
+      org: "Enterpret · Remote",
+      summary: "Built systems that turn customer feedback into cheaper, sharper, more actionable product intelligence.",
       bullets: [
-        "Studying long-context models and diagnosing the causes of performance degradation as context grows.",
-        "Exploring non-autoregressive frameworks, including diffusion-style approaches, for language generation.",
-        "Earlier work included lateral model compression and comparative analysis of large language models."
+        "Built an end-to-end semantic cache pipeline to reduce repeated retrieval costs for similar queries and contexts.",
+        "Built evaluations for Wisdom, the in-house agent, to surface capability limits and guide fixes.",
+        "Improved recall while helping reduce retrieval pipeline costs.",
+        "Built a pipeline for assigning more contextually relevant names to taxonomy nodes."
       ]
     },
     {
-      when: "May 2025–Jun 2025",
-      role: "Whitebox AI Safety Fellow",
-      org: "Whitebox AI Safety Fellowship · Kyle Reynoso",
-      summary: "Worked on mechanistic interpretability for emergent misalignment in language models.",
+      when: "May 2025-Aug 2025",
+      role: "Software Engineering Intern",
+      org: "Google · Cloud Orion",
+      summary: "Built interfaces for network topology and fault-timeline debugging in Google Cloud.",
       bullets: [
-        "Studied emergent misalignment in large language models using cross-encoders and interpretability tools.",
-        "Recognized as a Top 3 project in the cohort."
+        "Designed interfaces to visualize network topologies and fault timelines.",
+        "Focused on improving debugger productivity for Cloud Orion workflows.",
+        "Received a full-time return offer."
       ]
     },
     {
-      when: "Jan 2024–Aug 2025",
-      role: "Research Collaborator",
-      org: "UPenn / ASU / Adobe Research · Dan Roth, Vivek Gupta, Aparna Garimella",
-      summary: "Worked on multimodal robustness, visual reasoning, and benchmark design across charts and maps.",
+      when: "Aug 2024-Apr 2025",
+      role: "Student Researcher",
+      org: "Arizona State University · Prof. Vivek Gupta, Prof. Ross Maciejewski",
+      summary: "Continued work on evaluating and improving multimodal reasoning over maps, charts, and products.",
       bullets: [
-        "Investigated robustness and consistency of vision-language models on charts, graphs, and geospatial maps.",
-        "Benchmarked multimodal reasoning across decomposed charts and map-based QA settings.",
-        "This collaboration produced work including MAPWise, MapIQ, InterChart, PRAISE, and RobustCQA."
+        "Worked on benchmarks and analyses for multimodal model reasoning capabilities.",
+        { type: "publication", text: "MapIQ (COLM 2025), InterChart (AACL IJCNLP 2025), and PRAISE (ACL Demo 2025)." }
       ]
     },
     {
-      when: "May 2023–Aug 2025",
-      role: "Software Engineering Intern (×3)",
-      org: "Google",
-      summary: "Interned at Google across three consecutive summers in software engineering roles.",
+      when: "May 2024-Aug 2024",
+      role: "Software Engineering Intern",
+      org: "Google · Android PDF",
+      summary: "Built the core pipeline for image selection inside PDF documents on Android.",
       bullets: [
-        "2023: STEP Intern on Google Cloud Storage Metering, building integrity checks for a high-throughput cloud usage pipeline.",
-        "2024: SWE Intern on Android PDF, designing and implementing the core image selection pipeline for the viewer.",
-        "2025: SWE Intern on GCS Orion, building a topology visualization tool for debugging network issues across 100,000+ nodes.",
-        "Received return offers after the 2023 and 2024 internships, and a PPO after the 2025 internship."
+        "Designed and implemented an end-to-end pipeline for selecting images within PDF documents.",
+        "Received a return internship offer for Summer 2025."
       ]
     },
     {
-      when: "Jan 2024–May 2024",
-      role: "Research Assistant",
-      org: "SERC, IIIT Hyderabad · Prof. Karthik Vaidhyanathan",
-      summary: "Worked on automated code summarization and structure-aware modeling.",
+      when: "Jan 2024-Aug 2024",
+      role: "Student Researcher",
+      org: "University of Pennsylvania · Prof. Dan Roth, Dr. Vivek Gupta",
+      summary: "Analyzed robustness and question-answering capabilities of multimodal language models.",
       bullets: [
-        "Investigated code summarization on the APPS dataset.",
-        "Explored the use of AST structure to improve semantic accuracy in generated summaries."
+        "Collaborated with Dr. Aparna Garimella and Pritika Ramu from Adobe Research.",
+        { type: "publication", text: "Unraveling the Truth: Do VLMs really Understand Charts? (EMNLP 2024) and MAPWise (NAACL 2025)." }
+      ]
+    },
+    {
+      when: "Jan 2024-Apr 2024",
+      role: "Undergraduate Researcher",
+      org: "Software Engineering Research Center, IIIT Hyderabad · Prof. Karthik Vaidhyanathan",
+      summary: "Worked on efficient and effective generation of code descriptions and summaries.",
+      bullets: [
+        "Investigated methods for generating natural-language code descriptions and summaries.",
+        "Explored structure-aware approaches for improving summary quality."
+      ]
+    },
+    {
+      when: "May 2023-Aug 2023",
+      role: "STEP Intern",
+      org: "Google · GCS Metering",
+      summary: "Built data validation and integrity checks for the Google Cloud Storage metering pipeline.",
+      bullets: [
+        "Implemented an end-to-end validation step for billing data computed by the metering pipeline.",
+        "Received a return offer to intern again."
       ]
     },
   ],
@@ -1353,6 +1393,12 @@ function renderExperience(detailed) {
   const items = detailed ? DATA.experience : DATA.experienceConcise;
   const list = document.createElement('div');
   list.className = 'experience-list';
+  const renderBullet = (bullet) => {
+    if (bullet && typeof bullet === 'object' && bullet.type === 'publication') {
+      return `<li class="pub"><span class="pub-label">Publication</span>${escapeHTML(bullet.text)}</li>`;
+    }
+    return `<li>${escapeHTML(String(bullet))}</li>`;
+  };
   list.innerHTML = items.map((e) => `
     <div class="experience-entry">
       <div class="when">${escapeHTML(e.when)}</div>
@@ -1362,7 +1408,7 @@ function renderExperience(detailed) {
         <p class="summary">${escapeHTML(e.summary || '')}</p>
         ${detailed && e.bullets ? `
           <ul class="bullets">
-            ${e.bullets.map((b) => `<li>${escapeHTML(b)}</li>`).join('')}
+            ${e.bullets.map(renderBullet).join('')}
           </ul>
         ` : ''}
       </div>
@@ -1515,13 +1561,20 @@ function renderQuestions() {
   • "what do you work on?"
   • "what are you working on right now?"
   • "what will you do?"
+  • "are you looking for a job?"
   • "what are your views on ai safety?"
   • "tell me about your papers"
+  • "what multimodal work have you done?"
   • "tell me about your experience"
+  • "what are you doing at SPAR?"
+  • "what is your thesis about?"
+  • "what did you do at Enterpret?"
+  • "what did you do at Google?"
   • "what are your research interests?"
   • "how can i contact you?"
   • "tell me about your garden"
   • "show me your blogs"
+  • "show me everything"
 
 <span style="color:var(--muted)">If you want something more specific or personal, ask me yourself:</span>
   <a href="mailto:srijamukherjee113@gmail.com">email</a> · <a href="https://twitter.com/srijatwt" target="_blank" rel="noopener">twitter</a>`;
@@ -1531,9 +1584,9 @@ function renderQuestions() {
 // ----- Agent (streaming) -----
 const AGENT_RESPONSES = [
   { prompts: ["what can i ask?", "what can you answer?", "questions"], text:
-    "A good way to use this cell is to ask for one concrete thing: who I am, what I work on, what I'm doing right now, experience, papers, contact, AI safety, or the garden.",
+    "A good way to use this cell is to ask for one concrete thing: current projects, experience, SPAR, Google, Enterpret, thesis work, AI safety, opportunities, contact, or the writing branch.",
     tools: ["srija.questions()"],
-    suggestions: ["who are you?", "what are you working on right now?", "what are your views on ai safety?"] },
+    suggestions: ["what are you working on right now?", "are you looking for a job?", "what did you do at Google?"] },
   { prompts: ["who are you?", "tell me about yourself"], text:
     "I'm a Dual Degree (B.Tech + MS) student at IIIT Hyderabad. I work on multi-agent systems, long-context reasoning, and reliable evaluations, and I've also interned at Google across three consecutive summers.",
     tools: ["srija.about()"],
@@ -1549,7 +1602,11 @@ const AGENT_RESPONSES = [
   { prompts: ["what will you do?", "what do you want to do next?"], text:
     "I want to keep doing research on agents, evaluation, and safety, ideally in places where I can work on both rigorous understanding and useful systems.",
     tools: ["srija.interests()", "srija.contact()"],
-    suggestions: ["what are you working on right now?", "what are your views on ai safety?", "how can i contact you?"] },
+    suggestions: ["are you looking for a job?", "what are your views on ai safety?", "how can i contact you?"] },
+  { prompts: ["are you looking for a job?", "are you looking for work?", "are you open to opportunities?", "are you looking for opportunities?", "are you job hunting?"], text:
+    "I'm going to start the Anthropic/MATS fellowship soon, so I don't know exactly what comes after that yet. I would still love to hear about exciting opportunities, especially around agents, safety, evaluation, research, or building useful systems.",
+    tools: ["srija.contact()"],
+    suggestions: ["how can i contact you?", "what will you do?", "who are you?"] },
   { prompts: ["what are your views on ai safety?", "what do you think about ai safety?"], text:
     "I think AI safety gets most interesting when it becomes concrete: what agents remember, how they generalize, where they fail, and whether our evaluations actually reveal those failures.",
     tools: ["srija.interests()"],
@@ -1557,11 +1614,31 @@ const AGENT_RESPONSES = [
   { prompts: ["tell me about your papers"], text:
     "A good place to start is my selected papers. They cover multimodal evaluation, privacy in personalized systems, and broader questions around reliable benchmarking.",
     tools: ["srija.papers(selected=True)"],
-    suggestions: ["what do you work on?", "what are your views on ai safety?", "tell me about your experience"] },
+    suggestions: ["what multimodal work have you done?", "what are your research interests?", "how can i contact you?"] },
+  { prompts: ["what multimodal work have you done?", "tell me about your multimodal work", "what is your mllm work?"], text:
+    "My multimodal work has mostly focused on whether models can really reason over charts, maps, and visual questions. That thread runs through UPenn, ASU, and collaborations with Adobe Research.",
+    tools: ["srija.papers(selected=False)", "srija.experience(detailed=True)"],
+    suggestions: ["tell me about your papers", "what are your research interests?", "what did you do at Google?"] },
   { prompts: ["tell me about your experience", "where have you worked?"], text:
-    "My recent work spans SPAR, Enterpret, Adobe Research, UPenn, Precog, and my master's thesis at IIIT Hyderabad. I've also interned at Google across three consecutive summers.",
+    "My recent work spans SPAR Research, LTRC, Precog, Enterpret, Google, and multimodal research collaborations with UPenn, ASU, and Adobe Research.",
     tools: ["srija.experience(detailed=False)"],
-    suggestions: ["who are you?", "what are you working on right now?", "how can i contact you?"] },
+    suggestions: ["what are you doing at SPAR?", "what did you do at Enterpret?", "what did you do at Google?"] },
+  { prompts: ["what are you doing at spar?", "tell me about spar", "what is your spar work?"], text:
+    "At SPAR, I'm working on two safety projects: implications of episodic memory in agents, and how localized finetuning affects generalization.",
+    tools: ["srija.experience(detailed=True)", "srija.interests()"],
+    suggestions: ["what are your views on ai safety?", "what are your research interests?", "what is your thesis about?"] },
+  { prompts: ["what is your thesis about?", "tell me about your thesis", "what is your masters thesis about?"], text:
+    "My master's thesis work sits in the Machine Translation and Natural Language Processing Lab at IIIT Hyderabad, with threads around model compression, LLM identification, modular memory, and agent behavior under impossible goals.",
+    tools: ["srija.experience(detailed=True)", "srija.interests()"],
+    suggestions: ["what are you doing at SPAR?", "what do you work on?", "tell me about your papers"] },
+  { prompts: ["what did you do at enterpret?", "tell me about enterpret", "what was your enterpret work?"], text:
+    "At Enterpret, I worked on turning customer data into actionable insights: semantic caching, agent evaluations, retrieval recall and cost improvements, and better names for taxonomy nodes.",
+    tools: ["srija.experience(detailed=True)"],
+    suggestions: ["tell me about your experience", "what did you do at Google?", "what do you work on?"] },
+  { prompts: ["what did you do at google?", "tell me about google", "what was your google work?"], text:
+    "I interned at Google across three summers: GCS Metering, Android PDF, and Cloud Orion. The work ranged from billing validation to PDF image selection to network topology and fault timeline interfaces.",
+    tools: ["srija.experience(detailed=True)"],
+    suggestions: ["tell me about your experience", "what did you do at Enterpret?", "how can i contact you?"] },
   { prompts: ["what are your research interests?", "what are you interested in?"], text:
     "The short version is: multi-agent systems, long-horizon behavior, and evaluation. I keep coming back to questions about failure, reliability, and safety.",
     tools: ["srija.interests()"],
@@ -1574,9 +1651,21 @@ const AGENT_RESPONSES = [
     "The blog lives as a garden of thoughts, but the actual index is a simple growing branch. Flowers are longer posts, leaves are notes, and seeds are fragments.",
     tools: ["srija.blogs()"],
     suggestions: ["who are you?", "what do you work on?", "how can i contact you?"] },
+  { prompts: ["show me everything", "give me the full version", "show me the full version"], text:
+    "Here is the fuller version: background, current interests, selected papers, detailed experience, the writing branch, and ways to reach me.",
+    tools: ["srija.about()", "srija.interests()", "srija.papers(selected=True)", "srija.experience(detailed=True)", "srija.blogs()", "srija.contact()"],
+    suggestions: ["are you looking for a job?", "what are you doing at SPAR?", "how can i contact you?"] },
 ];
 function normalizeAgentPrompt(prompt) {
-  return prompt.toLowerCase().trim().replace(/\s+/g, ' ');
+  return prompt
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/&/g, ' and ')
+    .replace(/['’]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+    .replace(/\s+/g, ' ');
 }
 function promptToAskCode(prompt) {
   return `srija.ask("${prompt.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}")`;
@@ -1593,11 +1682,13 @@ function setAskPromptAndRun(idx, prompt) {
 }
 function agentAnswer(prompt) {
   const p = normalizeAgentPrompt(prompt);
-  for (const r of AGENT_RESPONSES) if (r.prompts.includes(p)) return r;
+  for (const r of AGENT_RESPONSES) {
+    if (r.prompts.some((candidate) => normalizeAgentPrompt(candidate) === p)) return r;
+  }
   return {
-    text: "I only support a small set of notebook-style prompts right now. Try `srija.questions()` to see them, or maybe you should ask me yourself?",
-    tools: ["router.match(prompt) → fallback", "srija.questions()"],
-    suggestions: ["who are you?", "what do you work on?", "tell me about your papers"],
+    text: "I don't have an answer for that in the notebook yet. Feel free to ask me over email or Twitter DMs.",
+    tools: ["srija.questions()", "srija.contact()"],
+    suggestions: ["who are you?", "are you looking for a job?", "how can i contact you?"],
     links: [
       { href: "mailto:srijamukherjee113@gmail.com", label: "email" },
       { href: "https://twitter.com/srijatwt", label: "twitter", external: true }
