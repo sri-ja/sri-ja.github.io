@@ -1,6 +1,6 @@
 ---
 title: Introduction
-kind: longPost
+kind: note
 when: Apr 2026
 summary: Welcome to my blog!
 latest: true
