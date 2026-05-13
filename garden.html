@@ -486,7 +486,7 @@
       <div>
         <p class="kicker">Garden of Thoughts</p>
         <h1 id="hero-title">A growing branch for essays, notes, and unfinished ideas.</h1>
-        <p class="deck" id="hero-copy">Flowers are longer posts, leaves are notes, and seeds are fragments that are still taking shape.</p>
+        <p class="deck" id="hero-copy">Flowers are longer posts, leaves are notes, and seeds are ideas that are still taking shape.</p>
       </div>
       <div class="stats" aria-label="Writing counts">
         <div class="stat"><strong id="count-total">0</strong>pieces</div>
@@ -508,7 +508,6 @@
     <section class="layout">
       <aside class="aside">
         <h2>Root</h2>
-        <p>This is the writing branch: public notes, blog posts, and thoughts that are allowed to grow in the open.</p>
 
         <div class="legend" aria-label="Symbol legend">
           <div class="legend-item"><span class="mark flower"><span class="petal p1"></span><span class="petal p2"></span><span class="petal p3"></span><span class="petal p4"></span><span class="petal p5"></span><span class="petal p6"></span><span class="petal p7"></span><span class="petal p8"></span><i></i></span><span>Flower: longer post</span></div>
@@ -635,7 +634,7 @@
       document.getElementById("hero-title").textContent =
         SETTINGS.introTitle || "A growing branch for essays, notes, and unfinished ideas.";
       document.getElementById("hero-copy").textContent =
-        SETTINGS.introText || "Flowers are longer posts, leaves are notes, and seeds are fragments that are still taking shape.";
+        SETTINGS.introText || "Flowers are longer posts, leaves are notes, and seeds are ideas that are still taking shape.";
 
       const latest = POSTS.find((post) => post.pond && post.pond.latest) || POSTS[0];
       if (latest) {
