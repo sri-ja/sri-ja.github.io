@@ -333,6 +333,9 @@
   }
   .cell .prompt.in  { color: var(--in); }
   .cell .prompt.out { color: var(--out); }
+  .cell-mobile-actions {
+    display: none;
+  }
 
   /* Code area */
   .cell .code-wrap {
@@ -381,6 +384,7 @@
     font-size: 13.5px;
     line-height: 1.55;
     color: var(--ink);
+    overflow-x: auto;
   }
 
   /* Markdown cell */
@@ -1141,6 +1145,257 @@
     .about-card .avatar-large { width: 96px; height: 96px; }
     .garden-preview-list { grid-template-columns: 1fr; }
     .garden-preview-card { min-height: 0; }
+  }
+
+  @media (max-width: 640px) {
+    html,
+    body {
+      height: auto;
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+    body {
+      font-size: 13px;
+    }
+    .menubar {
+      height: 38px;
+      padding: 0 8px;
+      gap: 4px;
+    }
+    .menubar .app {
+      margin-right: 4px;
+      min-width: 0;
+    }
+    .menubar .menu {
+      display: none;
+    }
+    .theme-toggle {
+      width: 32px;
+      height: 30px;
+      margin-right: 4px;
+      flex: 0 0 auto;
+    }
+    .menubar .kernel {
+      padding: 0 7px;
+      border-left: 0;
+      font-size: 0;
+      flex: 0 0 auto;
+    }
+    .menubar .kernel #kernel-label {
+      display: none;
+    }
+    .tabbar {
+      height: 30px;
+      padding-left: 6px;
+      overflow: hidden;
+    }
+    .tab {
+      max-width: calc(100vw - 12px);
+      min-width: 0;
+      padding: 0 10px;
+    }
+    .toolbar {
+      height: 40px;
+      padding: 0 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      gap: 6px;
+    }
+    .toolbar .btn {
+      width: 34px;
+      height: 30px;
+      flex: 0 0 auto;
+      border: 1px solid var(--chrome-border);
+      background: var(--panel);
+    }
+    .toolbar .sep,
+    .toolbar .celltype,
+    .toolbar .hint {
+      display: none;
+    }
+    .page {
+      display: block;
+      height: auto;
+      min-height: calc(100vh - 108px);
+    }
+    .nb {
+      min-height: calc(100vh - 108px);
+      overflow: visible;
+      padding: 12px 10px 44px;
+    }
+    .nb-inner {
+      max-width: none;
+      width: 100%;
+    }
+    .cell {
+      margin: 10px 0 14px;
+      border-left-width: 2px;
+      border-radius: 6px;
+      padding: 0;
+    }
+    .cell .row,
+    .cell.md .row {
+      display: block;
+    }
+    .cell .prompt {
+      display: none;
+    }
+    .cell-mobile-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 2px 0 6px;
+    }
+    .cell-mobile-actions .cell-kind {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--faint);
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .cell-run {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 74px;
+      height: 32px;
+      border: 1px solid var(--rule-strong);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--selected);
+      font-family: var(--sans);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .cell-run:disabled {
+      color: var(--muted);
+      cursor: wait;
+      opacity: 0.78;
+    }
+    .cell .code-wrap {
+      min-height: 44px;
+      padding: 10px 11px;
+      font-size: 12.5px;
+      line-height: 1.6;
+      white-space: pre;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 6px;
+    }
+    .cell .out-row {
+      display: block;
+      margin-left: 0;
+      width: auto;
+      margin-top: 8px;
+    }
+    .cell .out-wrap {
+      padding: 3px 0 0;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .cell.md .md-body {
+      padding: 0;
+      font-size: 13.5px;
+      line-height: 1.65;
+    }
+    .cell.md .md-edit {
+      font-size: 12.5px;
+      border-radius: 6px;
+    }
+    .md-body h1 {
+      font-size: 25px;
+      line-height: 1.16;
+    }
+    .md-body h2 {
+      font-size: 18px;
+      line-height: 1.25;
+    }
+    .md-body .sub {
+      font-size: 15px;
+    }
+    .md-body .id-row {
+      display: block;
+      margin: 10px 0 6px;
+    }
+    .md-body .id-row .links-inline,
+    .md-body .id-row .aff {
+      font-size: 13px;
+    }
+    .interest-dict .row,
+    .paper-item,
+    .experience-entry {
+      grid-template-columns: 1fr;
+      gap: 6px;
+      padding: 12px;
+    }
+    .interest-dict .field {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+    .experience-entry .bullets li.pub {
+      margin-left: -18px;
+    }
+    table.df {
+      min-width: 620px;
+    }
+    .agent-box {
+      padding: 10px;
+      font-size: 13px;
+    }
+    .md-body,
+    .out-text,
+    .agent-box,
+    .about-card .about-copy,
+    .paper-item,
+    .experience-entry,
+    .interest-dict {
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+    .out-text a,
+    .agent-box a,
+    .md-body a {
+      overflow-wrap: anywhere;
+    }
+    .agent-box .suggestions button {
+      min-height: 32px;
+      touch-action: manipulation;
+    }
+    .plot-figure {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .insert-rail {
+      height: 18px;
+      margin: 0;
+    }
+    .insert-rail button {
+      left: 0;
+      width: 28px;
+      height: 28px;
+      opacity: 1;
+      background: var(--panel);
+      touch-action: manipulation;
+    }
+    .insert-rail.last::before {
+      left: 38px;
+    }
+    .add-menu {
+      position: fixed;
+      left: 10px !important;
+      right: 10px;
+      width: auto;
+      max-width: none;
+    }
+    .statusbar,
+    .help {
+      display: none;
+    }
   }
 </style>
 </head>
@@ -2222,7 +2477,11 @@ function renderCell(c, idx) {
     <div class="row">
       <div class="prompt in">${inLabel}</div>
       <div>
-        <div class="code-wrap" contenteditable="true" spellcheck="false"></div>
+        <div class="cell-mobile-actions">
+          <span class="cell-kind">Code</span>
+          <button class="cell-run" type="button">Run</button>
+        </div>
+        <div class="code-wrap" contenteditable="true" spellcheck="false" autocapitalize="none" autocomplete="off" autocorrect="off"></div>
         <div class="out-row">
           <div class="prompt out">${c.executed ? 'Out[' + c.executed + ']:' : ''}</div>
           <div class="out-wrap"></div>
@@ -2232,7 +2491,15 @@ function renderCell(c, idx) {
 
   const codeEl = el.querySelector('.code-wrap');
   const outWrap = el.querySelector('.out-wrap');
+  const runBtn = el.querySelector('.cell-run');
   codeEl.innerHTML = highlight(c.content);
+  runBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    c.content = readCodeEditorText(codeEl);
+    codeEl.blur();
+    triggerCell(idx, false);
+  });
   codeEl.addEventListener('input', () => {
     c.content = readCodeEditorText(codeEl);
     scheduleNotebookSave();
@@ -2276,8 +2543,13 @@ async function runCell(idx, advance) {
   const out       = el.querySelector('.out-wrap');
   const outPrompt = el.querySelector('.prompt.out');
   const inPrompt  = el.querySelector('.prompt.in');
+  const runBtn    = el.querySelector('.cell-run');
 
   el.classList.add('running');
+  if (runBtn) {
+    runBtn.disabled = true;
+    runBtn.textContent = 'Running';
+  }
   setKernelBusy(true);
   inPrompt.textContent = 'In [*]:';
   out.replaceChildren();                           // hard reset, atomic
@@ -2289,7 +2561,14 @@ async function runCell(idx, advance) {
     if (isCurrent()) out.appendChild(renderText('Error: ' + (e && e.message ? e.message : String(e))));
   }
 
-  if (!isCurrent()) { c._running = false; return; }
+  if (!isCurrent()) {
+    if (runBtn) {
+      runBtn.disabled = false;
+      runBtn.textContent = 'Run';
+    }
+    c._running = false;
+    return;
+  }
 
   EXEC_COUNTER += 1;
   c.executed = EXEC_COUNTER;
@@ -2297,6 +2576,10 @@ async function runCell(idx, advance) {
   outPrompt.textContent = `Out[${c.executed}]:`;
   c.outputHTML = out.innerHTML;
   el.classList.remove('running');
+  if (runBtn) {
+    runBtn.disabled = false;
+    runBtn.textContent = 'Run';
+  }
   setKernelBusy(false);
   c._running = false;
   scheduleNotebookSave();
