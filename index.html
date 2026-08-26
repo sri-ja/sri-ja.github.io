@@ -1446,7 +1446,7 @@
   <aside class="sidebar">
     <div class="idcard">
       <div class="name">Srija Mukhopadhyay</div>
-      <div class="role">Incoming <a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>/<a href="https://www.matsprogram.org/" target="_blank" rel="noopener">MATS</a> Fellow</div>
+      <div class="role"><a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>/<a href="https://www.matsprogram.org/" target="_blank" rel="noopener">MATS</a> Fellow</div>
       <div class="links">
         <a href="mailto:srijamukherjee113@gmail.com">email</a>
         <a href="https://github.com/sri-ja" target="_blank" rel="noopener">github</a>
@@ -1503,25 +1503,29 @@ const GARDEN_PREVIEW_PROMISE = window.getNotebookGardenPreview
 // "srija" API — renders outputs
 // ==========================================================
 const DATA = {
-  bio: "Hi, I'm Srija. I am currently wrapping up my Master's thesis at IIIT Hyderabad. I am also a part of the Spring 2026 cohort of the <a href=\"https://sparai.org/\" target=\"_blank\" rel=\"noopener\">SPAR fellowship</a>, where I am working on evaluating the safety implications of episodic memory and understanding how localized fine-tuning affects generalization.\n\nIn the past, I have worked on building robust evaluations for multimodal systems and using them to surface concrete failure modes. I have also interned at Google across three consecutive summers. You can find some of my work <a href=\"https://scholar.google.com/citations?user=lcyAeBcAAAAJ\" target=\"_blank\" rel=\"noopener\">here</a>.\n\nI have been lucky to collaborate with people at UPenn, ASU, Adobe Research and IBM Research, and to work with mentors including Prof. Dan Roth, Prof. Manish Shrivastava, Prof. Ponnurangam Kumaraguru, Dr. Aparna Garimella, and Prof. Vivek Gupta.\n\nI love talking so please feel free to reach out. Happy to chat about research, safety, or anything else!",
+  bio: "Hi, I'm Srija. I am currently an <a href=\"https://www.anthropic.com/\" target=\"_blank\" rel=\"noopener\">Anthropic</a>/<a href=\"https://www.matsprogram.org/\" target=\"_blank\" rel=\"noopener\">MATS</a> Fellow, where I study overoptimization and reward hacking in reinforcement learning with LLM judges. I am trying to understand when a policy learns the actual task, and when it learns to exploit the judge instead.\n\nBefore this, I finished my dual degree (B.Tech + MS by Research) at IIIT Hyderabad, where my thesis was about evaluating the reliability of multimodal reasoning over charts, grids, and maps. I have also worked on agent safety through the <a href=\"https://sparai.org/\" target=\"_blank\" rel=\"noopener\">SPAR fellowship</a> and interned at Google across three consecutive summers. You can find some of my work <a href=\"https://scholar.google.com/citations?user=lcyAeBcAAAAJ\" target=\"_blank\" rel=\"noopener\">here</a>.\n\nI have been lucky to collaborate with people at UPenn, ASU, Adobe Research and IBM Research, and to work with mentors including Prof. Dan Roth, Prof. Manish Shrivastava, Prof. Ponnurangam Kumaraguru, Dr. Aparna Garimella, and Prof. Vivek Gupta.\n\nI love talking so please feel free to reach out. Happy to chat about research, safety, or anything else!",
   interests: [
     {
-      key: "agentic_safety",
-      why: "safety gets more interesting when agents become persistent, start collaborating and are expected to work over extended trajectories.",
-      current: "understanding the safety implications of episodic memory."
+      key: "reward_hacking",
+      why: "when the reward comes from a judge model, the policy can learn to fool the judge instead of learning the task, and I want to understand when and why that happens.",
+      current: "studying hacks that fool many different judges at once, and what that means for using held-out judges as a safety check."
     },
     {
-      key: "long_horizon_agents",
-      why: "a huge requisite for reliable autonomous systems are systems that can run reliably and unsupervised over long horizons.",
-      current: "studying if agents implicitly plan and reason about long-term goals while making decisions."
+      key: "scalable_oversight",
+      why: "as models get stronger, we need reliable ways to check work that is too hard or too slow for humans to verify themselves.",
+      current: "measuring how judge capability and what the judge can see change what a policy can get away with."
     },
     {
       key: "evals_and_benchmarks",
       why: "good evals are often the most reliable indicators of failure modes of models.",
-      current: "building benchmarks which study if agents respect the privacy boundaries of humans."
+      current: "building RL environments, from chess and Go to creative writing, where models naturally learn to hack their judges."
     },
   ],
   papers: [
+    { id: 6, year: 2026, title: "RUBICON: Do Language Models Know When They've Crossed the Point of No Return?",
+      authors: "S. Mukhopadhyay*, A. Qidwai*, J. Sen, M. Shrivastava",
+      venue: "EMNLP 2026", award: "",
+      url: "", linkLabel: "Preprint soon", tags: ["evaluations", "ai-safety", "agents"], selected: true },
     { id: 0, year: 2026, title: "PrivacyBench: A Conversational Benchmark for Evaluating Privacy in Personalized AI",
       authors: "S. Mukhopadhyay, S. Reddy, S. Muthukumar, J. An, P. Kumaraguru",
       venue: "IJCNN (WCCI) 2026", award: "Nominated · Best Paper",
@@ -1549,16 +1553,22 @@ const DATA = {
   ],
   experienceConcise: [
     {
-      when: "Feb 2026-Present",
+      when: "May 2026-Present",
       role: "Research Fellow",
-      org: "SPAR Research · Berkeley, CA",
-      summary: "Working on fun projects around the safety implications of episodic memory and how localized finetuning affects generalization."
+      org: "Anthropic Fellows / MATS",
+      summary: "Studying overoptimization and reward hacking in RL with LLM judges, and building environments where policies naturally learn to exploit their judges."
     },
     {
-      when: "May 2023-Present",
+      when: "Feb 2026-May 2026",
+      role: "Research Fellow",
+      org: "SPAR Research · Berkeley, CA",
+      summary: "Worked on the safety implications of episodic memory in agents and on how localized finetuning affects generalization."
+    },
+    {
+      when: "Aug 2023-June 2026",
       role: "Student Researcher",
       org: "IIIT Hyderabad · LTRC + Precog",
-      summary: "Research across language model memory/compression, personalized-agent privacy, federated learning, and multimodal/long-horizon evaluations."
+      summary: "MS research on the reliability of multimodal reasoning, plus work on personalized-agent privacy and federated learning."
     },
     {
       when: "Aug 2025-Apr 2026",
@@ -1567,10 +1577,10 @@ const DATA = {
       summary: "Built semantic caching, evaluations and improvements for the in-house agent, and helped improve the retrieval and taxonomy naming systems."
     },
     {
-      when: "Jan 2024-Apr 2025",
+      when: "Jan 2024-Aug 2025",
       role: "Student Researcher",
       org: "University of Pennsylvania / Arizona State University",
-      summary: "Developed multimodal reasoning benchmarks to understand the reliability and robustnesss of models for charts and maps."
+      summary: "Developed multimodal reasoning benchmarks to understand the reliability and robustness of models for charts and maps."
     },
     {
       when: "May 2023-Aug 2025",
@@ -1581,24 +1591,37 @@ const DATA = {
   ],
   experience: [
     {
-      when: "Feb 2026-Present",
+      when: "May 2026-Present",
       role: "Research Fellow",
-      org: "SPAR Research · Berkeley, CA · Remote",
-      summary: "Working on two safety projects around agent memory and finetuning-driven generalization.",
+      org: "Anthropic Fellows / MATS · Rowan Wang, Christine Ye (Anthropic)",
+      summary: "Studying the science of overoptimization and reward hacking in LLM-judged reinforcement learning, to understand when policies learn to exploit the judge instead of learning the actual task.",
       bullets: [
-        "Studying the safety implications of episodic memory in agents with Chad DeChant.",
-        "Investigating how localized finetuning affects generalization with Niels Warncke."
+        "Found evidence of universal overoptimization, where a policy learns hacks that fool many different judges at once.",
+        "Designed around 50 verifiable and non-verifiable RL environments, including chess, Go, SQL generation, and creative writing, to find where models naturally learn to hack their judges.",
+        "Isolated causes of reward hacking using judge-capability ladders and judge-visibility ablations.",
+        "Built Litmus, a transcript viewer and hypothesis checker for monitoring how model behavior changes over the course of a large RL run."
       ]
     },
     {
-      when: "May 2023-Present",
+      when: "Feb 2026-May 2026",
+      role: "Research Fellow",
+      org: "SPAR Research · Berkeley, CA · Remote",
+      summary: "Worked on two safety projects around agent memory and finetuning-driven generalization.",
+      bullets: [
+        "Studied the safety implications of episodic memory in agents with Chad DeChant.",
+        "Investigated how localized finetuning affects generalization with Niels Warncke."
+      ]
+    },
+    {
+      when: "Aug 2023-June 2026",
       role: "Student Researcher",
       org: "Language Technologies Research Centre, IIIT Hyderabad · Prof. Manish Shrivastava",
-      summary: "MS thesis research across language model compression, model identity, memory, and agent evaluation.",
+      summary: "MS thesis research on the reliability and robustness of multimodal reasoning.",
       bullets: [
-        "Explored pruning and compression of language models, including earlier work on lateral model compression.",
-        "Studied whether LLMs can be identified from their outputs and how memory in LLMs can be made more modular.",
-        "Evaluating agent behavior when models are tasked with impossible goals, in collaboration with IBM Research."
+        "Studied robustness in multimodal models to understand the gaps in their understanding and perception, and what causes robustness to break.",
+        "Created a benchmark that places models in impossible situations, where no valid answer exists, to elicit whether they stay honest or fabricate an answer, in collaboration with IBM Research.",
+        "Studied phase changes during pre-training and fine-tuning, approaching developmental interpretability through a behavioral lens.",
+        "MS thesis: When Models Miss the Plot: Evaluating Reliability in Multimodal Reasoning over Charts, Grids and Maps."
       ]
     },
     {
@@ -1633,6 +1656,16 @@ const DATA = {
         "Designed interfaces to visualize network topologies and fault timelines.",
         "Focused on improving debugger productivity for Cloud Orion workflows.",
         "Received a full-time return offer."
+      ]
+    },
+    {
+      when: "May 2025-June 2025",
+      role: "AI Safety Fellow",
+      org: "Whitebox AI Safety Fellowship · Kyle Reynoso (SASH)",
+      summary: "Interpretability research on where misalignment emerges inside language models.",
+      bullets: [
+        "Used model diffing with crosscoders to localize the emergence of misalignment in LLMs.",
+        "Project was ranked Top 3 in the cohort."
       ]
     },
     {
@@ -1767,7 +1800,9 @@ function renderPapers(selectedOnly) {
         <p class="title">${escapeHTML(p.title)}</p>
         <p class="authors">${escapeHTML(p.authors)}</p>
         <p class="venue">${escapeHTML(p.venue)}${p.award ? ` <span class="award">${escapeHTML(p.award)}</span>` : ''}</p>
-        <div class="links"><a href="${p.url}" target="_blank" rel="noopener">${escapeHTML(p.linkLabel || 'Link')}</a></div>
+        <div class="links">${p.url
+          ? `<a href="${p.url}" target="_blank" rel="noopener">${escapeHTML(p.linkLabel || 'Link')}</a>`
+          : `<span style="color:var(--muted)">${escapeHTML(p.linkLabel || 'Coming soon')}</span>`}</div>
       </div>
     </div>
   `).join('');
@@ -1898,7 +1933,7 @@ function renderContact() {
   wrap.style.cssText = 'background:var(--panel); border:1px solid var(--rule); border-radius:4px; padding:12px 16px; font-family:var(--sans); font-size:13.5px; line-height:1.7;';
   wrap.innerHTML = `
     <div style="font-weight:600; margin-bottom:4px;">Srija Mukhopadhyay</div>
-    <div style="color:var(--muted); font-size:12.5px; margin-bottom:8px;">IIIT Hyderabad · Gachibowli, Hyderabad 500032, India</div>
+    <div style="color:var(--muted); font-size:12.5px; margin-bottom:8px;">Anthropic Fellows / MATS · Berkeley, CA</div>
     <div>📧 <a href="mailto:srijamukherjee113@gmail.com">srijamukherjee113@gmail.com</a></div>
     <div>🐙 <a href="https://github.com/sri-ja" target="_blank" rel="noopener">github.com/sri-ja</a></div>
     <div>🎓 <a href="https://scholar.google.com/citations?user=lcyAeBcAAAAJ" target="_blank" rel="noopener">Google Scholar</a></div>
@@ -1960,7 +1995,8 @@ function renderQuestions() {
   • "tell me about your papers"
   • "what multimodal work have you done?"
   • "tell me about your experience"
-  • "what are you doing at SPAR?"
+  • "what are you doing at MATS?"
+  • "what did you do at SPAR?"
   • "what is your thesis about?"
   • "what did you do at Enterpret?"
   • "what did you do at Google?"
@@ -1982,29 +2018,29 @@ const AGENT_RESPONSES = [
     tools: ["srija.questions()"],
     suggestions: ["what are you working on right now?", "are you looking for a job?", "what did you do at Google?"] },
   { prompts: ["who are you?", "tell me about yourself"], text:
-    "I'm an incoming Anthropic/MATS Fellow. Apart from that, I am wrapping up my Dual Degree (B.Tech + MS) student at IIIT Hyderabad. I am interested in AI safety, long-context reasoning, evaluations and reinforcement learning. I've also interned at Google across three consecutive summers.",
+    "I'm an Anthropic/MATS Fellow working on overoptimization and reward hacking in reinforcement learning with LLM judges. Before this, I finished my Dual Degree (B.Tech + MS) at IIIT Hyderabad. I am interested in AI safety, evaluations and reinforcement learning, and I've also interned at Google across three consecutive summers.",
     tools: ["srija.about()"],
     suggestions: ["what do you work on?", "tell me about your experience", "what are you working on right now?"] },
   { prompts: ["what do you work on?"], text:
-    "Right now I mostly think about multi-agent systems, long-context reasoning, and reliable evaluations, with broader interest in AI safety and security. A recent interest of mine is reinforcement learning and I am currently spend a lot of my time learning about it.",
+    "Right now I mostly think about reward hacking and overoptimization: when a model is trained against an LLM judge, does it learn the task, or does it learn to fool the judge? I care a lot about evaluations and reinforcement learning, with broader interest in AI safety and security.",
     tools: ["srija.interests()", "srija.papers(selected=True)"],
     suggestions: ["what are your research interests?", "what are you working on right now?", "tell me about your papers"] },
   { prompts: ["what are you working on right now?", "what are you working on now?"], text:
-    "Right now I'm wrapping up my master's thesis at IIIT Hyderabad and working through the SPAR fellowship on questions around episodic memory, safety, and generalization.",
+    "Right now I'm in the middle of the Anthropic/MATS fellowship, studying when RL policies learn to exploit their judges. A lot of my time goes into building RL environments, from chess and Go to creative writing, and watching where the hacks appear.",
     tools: ["srija.about()", "srija.interests()"],
-    suggestions: ["what do you work on?", "what are your views on ai safety?", "tell me about your experience"] },
+    suggestions: ["what are you doing at MATS?", "what are your views on ai safety?", "tell me about your experience"] },
   { prompts: ["what will you do?", "what do you want to do next?"], text:
     "I want to keep doing research on agents, evaluation, and safety, ideally in places where I can work on both rigorous understanding and useful systems.",
     tools: ["srija.interests()", "srija.contact()"],
     suggestions: ["are you looking for a job?", "what are your views on ai safety?", "how can i contact you?"] },
   { prompts: ["are you looking for a job?", "are you looking for work?", "are you open to opportunities?", "are you looking for opportunities?", "are you job hunting?"], text:
-    "I'm going to start the Anthropic/MATS fellowship soon, so I don't know exactly what comes after that yet. I would still love to hear about exciting opportunities, especially around agents, safety, evaluation, research, or building useful systems.",
+    "I'm currently doing the Anthropic/MATS fellowship and thinking about what comes after it. I would love to hear about exciting opportunities, especially around safety, evaluations, reinforcement learning, research, or building useful systems.",
     tools: ["srija.contact()"],
     suggestions: ["how can i contact you?", "what will you do?", "who are you?"] },
   { prompts: ["what are your views on ai safety?", "what do you think about ai safety?"], text:
-    "I think AI safety gets most interesting when it becomes concrete: what agents remember, how they generalize, where they fail, and whether our evaluations actually reveal those failures.",
+    "I think AI safety gets most interesting when it becomes concrete: what agents remember, how they generalize, where they fail, and whether our evaluations actually reveal those failures. My current work on reward hacking is exactly that kind of concrete question, since the model gets rewarded for fooling the judge rather than doing the task.",
     tools: ["srija.interests()"],
-    suggestions: ["what do you work on?", "what are you working on right now?", "tell me about your papers"] },
+    suggestions: ["what do you work on?", "what are you doing at MATS?", "tell me about your papers"] },
   { prompts: ["tell me about your papers"], text:
     "A good place to start is my selected papers. They cover multimodal evaluation, privacy in personalized systems, and broader questions around reliable benchmarking.",
     tools: ["srija.papers(selected=True)"],
@@ -2014,17 +2050,21 @@ const AGENT_RESPONSES = [
     tools: ["srija.papers(selected=False)", "srija.experience(detailed=True)"],
     suggestions: ["tell me about your papers", "what are your research interests?", "what did you do at Google?"] },
   { prompts: ["tell me about your experience", "where have you worked?"], text:
-    "My recent work spans SPAR Research, LTRC, Precog, Enterpret, Google, and multimodal research collaborations with UPenn, ASU, Adobe Research, and IBM Research.",
+    "My recent work spans the Anthropic/MATS fellowship, SPAR Research, LTRC, Precog, Enterpret, Google, and multimodal research collaborations with UPenn, ASU, Adobe Research, and IBM Research.",
     tools: ["srija.experience(detailed=False)"],
-    suggestions: ["what are you doing at SPAR?", "what did you do at Enterpret?", "what did you do at Google?"] },
-  { prompts: ["what are you doing at spar?", "tell me about spar", "what is your spar work?"], text:
-    "At SPAR, I'm working on two safety projects: implications of episodic memory on agentic safety, and how localized finetuning affects generalization.",
+    suggestions: ["what are you doing at MATS?", "what did you do at Enterpret?", "what did you do at Google?"] },
+  { prompts: ["what are you doing at mats?", "what are you doing at anthropic?", "tell me about mats", "tell me about your fellowship", "what is your mats work?"], text:
+    "At the Anthropic/MATS fellowship, I'm studying overoptimization in LLM-judged RL with Rowan Wang and Christine Ye. I've built around 50 RL environments, from chess and Go to SQL and creative writing, to find where models naturally learn to hack their judges, and I've found hacks that fool many different judges at once.",
+    tools: ["srija.experience(detailed=True)", "srija.interests()"],
+    suggestions: ["what are your views on ai safety?", "what are your research interests?", "tell me about your papers"] },
+  { prompts: ["what are you doing at spar?", "tell me about spar", "what is your spar work?", "what did you do at spar?"], text:
+    "At SPAR, I worked on two safety projects: implications of episodic memory on agentic safety, and how localized finetuning affects generalization.",
     tools: ["srija.experience(detailed=True)", "srija.interests()"],
     suggestions: ["what are your views on ai safety?", "what are your research interests?", "what is your thesis about?"] },
   { prompts: ["what is your thesis about?", "tell me about your thesis", "what is your masters thesis about?"], text:
-    "My master's thesis work is largely about building reliable evaluations for multimodal systems and moving away from aggregate metrics. I overview my work on charts, maps and planning in my thesis. More soon!",
+    "My master's thesis, When Models Miss the Plot, is about evaluating the reliability of multimodal reasoning over charts, grids, and maps. It builds on my benchmark work and my interest in moving away from aggregate metrics.",
     tools: ["srija.experience(detailed=True)", "srija.interests()"],
-    suggestions: ["what are you doing at SPAR?", "what do you work on?", "tell me about your papers"] },
+    suggestions: ["what are you doing at MATS?", "what do you work on?", "tell me about your papers"] },
   { prompts: ["what did you do at enterpret?", "tell me about enterpret", "what was your enterpret work?"], text:
     "At Enterpret, I worked on turning customer data into actionable insights across a range of applications: semantic caching, agent evaluations, retrieval recall and cost improvements, and better names for taxonomy nodes.",
     tools: ["srija.experience(detailed=True)"],
@@ -2034,7 +2074,7 @@ const AGENT_RESPONSES = [
     tools: ["srija.experience(detailed=True)"],
     suggestions: ["tell me about your experience", "what did you do at Enterpret?", "how can i contact you?"] },
   { prompts: ["what are your research interests?", "what are you interested in?"], text:
-    "The short version is: multi-agent systems, long-horizon behavior, and evaluation. I keep coming back to questions about safety, reliability, and robustness.",
+    "The short version is: reward hacking, scalable oversight, and evaluation. I keep coming back to questions about safety, reliability, and robustness.",
     tools: ["srija.interests()"],
     suggestions: ["what do you work on?", "what are your views on ai safety?", "tell me about your papers"] },
   { prompts: ["how can i contact you?", "how do i reach you?"], text:
@@ -2364,10 +2404,10 @@ function buildInitial() {
   CELLS = [
     { ...makeCell({ type: 'md', sticky: true, content: `
       <h1>Srija Mukhopadhyay</h1>
-      <div class="sub"><em>Incoming <a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>/<a href="https://www.matsprogram.org/" target="_blank" rel="noopener">MATS</a> Fellow</em></div>
+      <div class="sub"><em><a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>/<a href="https://www.matsprogram.org/" target="_blank" rel="noopener">MATS</a> Fellow</em></div>
       <div class="id-row">
         <div class="meta">
-          <div class="aff"><strong>Current interests</strong>: agentic safety, long-horizon agents, and evals + benchmarks.</div>
+          <div class="aff"><strong>Current interests</strong>: reward hacking + overoptimization, RL with LLM judges, and evals + benchmarks.</div>
           <div class="links-inline"><strong>Quick links</strong>:
             <a href="https://twitter.com/srijatwt" target="_blank" rel="noopener">twitter</a><span class="sep">·</span>
             <a href="mailto:srijamukherjee113@gmail.com">email</a><span class="sep">·</span>
