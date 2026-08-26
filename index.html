@@ -1503,17 +1503,17 @@ const GARDEN_PREVIEW_PROMISE = window.getNotebookGardenPreview
 // "srija" API — renders outputs
 // ==========================================================
 const DATA = {
-  bio: "Hi, I'm Srija. I am currently an <a href=\"https://www.anthropic.com/\" target=\"_blank\" rel=\"noopener\">Anthropic</a>/<a href=\"https://www.matsprogram.org/\" target=\"_blank\" rel=\"noopener\">MATS</a> Fellow, where I study overoptimization and reward hacking in reinforcement learning with LLM judges. I am trying to understand when a policy learns the actual task, and when it learns to exploit the judge instead.\n\nBefore this, I finished my dual degree (B.Tech + MS by Research) at IIIT Hyderabad, where my thesis was about evaluating the reliability of multimodal reasoning over charts, grids, and maps. I have also worked on agent safety through the <a href=\"https://sparai.org/\" target=\"_blank\" rel=\"noopener\">SPAR fellowship</a> and interned at Google across three consecutive summers. You can find some of my work <a href=\"https://scholar.google.com/citations?user=lcyAeBcAAAAJ\" target=\"_blank\" rel=\"noopener\">here</a>.\n\nI have been lucky to collaborate with people at UPenn, ASU, Adobe Research and IBM Research, and to work with mentors including Prof. Dan Roth, Prof. Manish Shrivastava, Prof. Ponnurangam Kumaraguru, Dr. Aparna Garimella, and Prof. Vivek Gupta.\n\nI love talking so please feel free to reach out. Happy to chat about research, safety, or anything else!",
+  bio: "Hi, I'm Srija. I am an <a href=\"https://www.anthropic.com/\" target=\"_blank\" rel=\"noopener\">Anthropic</a>/<a href=\"https://www.matsprogram.org/\" target=\"_blank\" rel=\"noopener\">MATS</a> Fellow, where I study reward hacking in reinforcement learning with LLM judges. When a model is trained against a judge model, I want to know when it learns the task and when it just learns to fool the judge.\n\nBefore this, I finished my dual degree (B.Tech + MS by Research) at IIIT Hyderabad. My thesis was on the reliability of multimodal reasoning over charts, grids, and maps. Along the way I worked on agent safety through the <a href=\"https://sparai.org/\" target=\"_blank\" rel=\"noopener\">SPAR fellowship</a> and interned at Google across three consecutive summers. You can find some of my work <a href=\"https://scholar.google.com/citations?user=lcyAeBcAAAAJ\" target=\"_blank\" rel=\"noopener\">here</a>.\n\nI have been lucky to collaborate with people at UPenn, ASU, Adobe Research and IBM Research, and to work with mentors including Prof. Dan Roth, Prof. Manish Shrivastava, Prof. Ponnurangam Kumaraguru, Dr. Aparna Garimella, and Prof. Vivek Gupta.\n\nI love talking so please feel free to reach out. Happy to chat about research, safety, or anything else!",
   interests: [
     {
       key: "reward_hacking",
-      why: "when the reward comes from a judge model, the policy can learn to fool the judge instead of learning the task, and I want to understand when and why that happens.",
-      current: "studying hacks that fool many different judges at once, and what that means for using held-out judges as a safety check."
+      why: "when the reward comes from a judge model, a policy can score well by fooling the judge instead of doing the task.",
+      current: "finding hacks that fool many different judges at once."
     },
     {
       key: "scalable_oversight",
-      why: "as models get stronger, we need reliable ways to check work that is too hard or too slow for humans to verify themselves.",
-      current: "measuring how judge capability and what the judge can see change what a policy can get away with."
+      why: "as models get stronger, we need ways to check work that humans cannot easily verify themselves.",
+      current: "measuring how judge capability, and what the judge gets to see, change what a policy can get away with."
     },
     {
       key: "evals_and_benchmarks",
@@ -1556,7 +1556,7 @@ const DATA = {
       when: "May 2026-Present",
       role: "Research Fellow",
       org: "Anthropic Fellows / MATS",
-      summary: "Studying overoptimization and reward hacking in RL with LLM judges, and building environments where policies naturally learn to exploit their judges."
+      summary: "Studying when RL policies trained with LLM judges learn to fool the judge instead of learning the task."
     },
     {
       when: "Feb 2026-May 2026",
@@ -1574,7 +1574,7 @@ const DATA = {
       when: "Aug 2025-Apr 2026",
       role: "Machine Learning Intern",
       org: "Enterpret",
-      summary: "Built semantic caching, evaluations and improvements for the in-house agent, and helped improve the retrieval and taxonomy naming systems."
+      summary: "Built a semantic cache, evaluations for the in-house agent, and better taxonomy naming. Cut retrieval costs by up to half while improving recall."
     },
     {
       when: "Jan 2024-Aug 2025",
@@ -1594,12 +1594,12 @@ const DATA = {
       when: "May 2026-Present",
       role: "Research Fellow",
       org: "Anthropic Fellows / MATS · Rowan Wang, Christine Ye (Anthropic)",
-      summary: "Studying the science of overoptimization and reward hacking in LLM-judged reinforcement learning, to understand when policies learn to exploit the judge instead of learning the actual task.",
+      summary: "Studying when RL policies trained against LLM judges learn to exploit the judge instead of learning the task.",
       bullets: [
         "Found evidence of universal overoptimization, where a policy learns hacks that fool many different judges at once.",
-        "Designed around 50 verifiable and non-verifiable RL environments, including chess, Go, SQL generation, and creative writing, to find where models naturally learn to hack their judges.",
-        "Isolated causes of reward hacking using judge-capability ladders and judge-visibility ablations.",
-        "Built Litmus, a transcript viewer and hypothesis checker for monitoring how model behavior changes over the course of a large RL run."
+        "Designed around 50 RL environments, including chess, Go, SQL generation, and creative writing, to find where models naturally learn to hack their judges.",
+        "Isolated causes of reward hacking using judge-capability ladders and ablations over what the judge gets to see.",
+        "Built Litmus, a transcript viewer and hypothesis checker for watching how model behavior changes over a long RL run."
       ]
     },
     {
@@ -1618,9 +1618,9 @@ const DATA = {
       org: "Language Technologies Research Centre, IIIT Hyderabad · Prof. Manish Shrivastava",
       summary: "MS thesis research on the reliability and robustness of multimodal reasoning.",
       bullets: [
-        "Studied robustness in multimodal models to understand the gaps in their understanding and perception, and what causes robustness to break.",
-        "Created a benchmark that places models in impossible situations, where no valid answer exists, to elicit whether they stay honest or fabricate an answer, in collaboration with IBM Research.",
-        "Studied phase changes during pre-training and fine-tuning, approaching developmental interpretability through a behavioral lens.",
+        "Studied robustness in multimodal models, looking for where their perception and reasoning break and why.",
+        "Built a benchmark with IBM Research that puts models in impossible situations with no valid answer, to see whether they stay honest or fabricate one.",
+        "Studied phase changes during pre-training and fine-tuning through model behavior rather than internals.",
         "MS thesis: When Models Miss the Plot: Evaluating Reliability in Multimodal Reasoning over Charts, Grids and Maps."
       ]
     },
@@ -1639,12 +1639,11 @@ const DATA = {
       when: "Aug 2025-Apr 2026",
       role: "Machine Learning Intern",
       org: "Enterpret · Remote",
-      summary: "Built systems that turn customer feedback into cheaper, sharper, more actionable product intelligence.",
+      summary: "Machine learning work on retrieval, evaluations, and taxonomy for a customer feedback platform.",
       bullets: [
-        "Built an end-to-end semantic cache pipeline to reduce repeated retrieval costs for similar queries and contexts.",
+        "Built a semantic cache that cut retrieval costs by up to 50% while improving recall.",
         "Built evaluations for Wisdom, the in-house agent, to surface capability limits and guide fixes.",
-        "Improved recall while helping reduce retrieval pipeline costs.",
-        "Built a pipeline for assigning more contextually relevant names to taxonomy nodes."
+        "Built a pipeline for assigning more contextual names to taxonomy nodes."
       ]
     },
     {
@@ -2018,7 +2017,7 @@ const AGENT_RESPONSES = [
     tools: ["srija.questions()"],
     suggestions: ["what are you working on right now?", "are you looking for a job?", "what did you do at Google?"] },
   { prompts: ["who are you?", "tell me about yourself"], text:
-    "I'm an Anthropic/MATS Fellow working on overoptimization and reward hacking in reinforcement learning with LLM judges. Before this, I finished my Dual Degree (B.Tech + MS) at IIIT Hyderabad. I am interested in AI safety, evaluations and reinforcement learning, and I've also interned at Google across three consecutive summers.",
+    "I'm an Anthropic/MATS Fellow working on reward hacking in RL with LLM judges. Before this, I finished my Dual Degree (B.Tech + MS) at IIIT Hyderabad, and I interned at Google across three consecutive summers. I am interested in AI safety, evaluations, and reinforcement learning.",
     tools: ["srija.about()"],
     suggestions: ["what do you work on?", "tell me about your experience", "what are you working on right now?"] },
   { prompts: ["what do you work on?"], text:
@@ -2038,7 +2037,7 @@ const AGENT_RESPONSES = [
     tools: ["srija.contact()"],
     suggestions: ["how can i contact you?", "what will you do?", "who are you?"] },
   { prompts: ["what are your views on ai safety?", "what do you think about ai safety?"], text:
-    "I think AI safety gets most interesting when it becomes concrete: what agents remember, how they generalize, where they fail, and whether our evaluations actually reveal those failures. My current work on reward hacking is exactly that kind of concrete question, since the model gets rewarded for fooling the judge rather than doing the task.",
+    "I think AI safety gets most interesting when it becomes concrete: what agents remember, how they generalize, where they fail, and whether our evaluations actually reveal those failures. Reward hacking is a very concrete version of that, where a model gets rewarded for fooling its judge rather than doing the task.",
     tools: ["srija.interests()"],
     suggestions: ["what do you work on?", "what are you doing at MATS?", "tell me about your papers"] },
   { prompts: ["tell me about your papers"], text:
@@ -2054,7 +2053,7 @@ const AGENT_RESPONSES = [
     tools: ["srija.experience(detailed=False)"],
     suggestions: ["what are you doing at MATS?", "what did you do at Enterpret?", "what did you do at Google?"] },
   { prompts: ["what are you doing at mats?", "what are you doing at anthropic?", "tell me about mats", "tell me about your fellowship", "what is your mats work?"], text:
-    "At the Anthropic/MATS fellowship, I'm studying overoptimization in LLM-judged RL with Rowan Wang and Christine Ye. I've built around 50 RL environments, from chess and Go to SQL and creative writing, to find where models naturally learn to hack their judges, and I've found hacks that fool many different judges at once.",
+    "At the Anthropic/MATS fellowship, I'm studying reward hacking in RL with LLM judges, with Rowan Wang and Christine Ye. I've built around 50 RL environments, from chess and Go to SQL and creative writing, to see where models learn to hack their judges. My favorite finding so far is hacks that fool many different judges at once.",
     tools: ["srija.experience(detailed=True)", "srija.interests()"],
     suggestions: ["what are your views on ai safety?", "what are your research interests?", "tell me about your papers"] },
   { prompts: ["what are you doing at spar?", "tell me about spar", "what is your spar work?", "what did you do at spar?"], text:
@@ -2407,7 +2406,7 @@ function buildInitial() {
       <div class="sub"><em><a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>/<a href="https://www.matsprogram.org/" target="_blank" rel="noopener">MATS</a> Fellow</em></div>
       <div class="id-row">
         <div class="meta">
-          <div class="aff"><strong>Current interests</strong>: reward hacking + overoptimization, RL with LLM judges, and evals + benchmarks.</div>
+          <div class="aff"><strong>Current interests</strong>: reward hacking, scalable oversight, and evals + benchmarks.</div>
           <div class="links-inline"><strong>Quick links</strong>:
             <a href="https://twitter.com/srijatwt" target="_blank" rel="noopener">twitter</a><span class="sep">·</span>
             <a href="mailto:srijamukherjee113@gmail.com">email</a><span class="sep">·</span>
