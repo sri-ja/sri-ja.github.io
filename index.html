@@ -1506,14 +1506,19 @@ const DATA = {
   bio: "Hi, I'm Srija. I am an <a href=\"https://www.anthropic.com/\" target=\"_blank\" rel=\"noopener\">Anthropic</a>/<a href=\"https://www.matsprogram.org/\" target=\"_blank\" rel=\"noopener\">MATS</a> Fellow, where I study reward hacking in reinforcement learning with LLM judges. When a model is trained against a judge model, I want to know when it learns the task and when it just learns to fool the judge.\n\nBefore this, I finished my dual degree (B.Tech + MS by Research) at IIIT Hyderabad. My thesis was on the reliability of multimodal reasoning over charts, grids, and maps. Along the way I worked on agent safety through the <a href=\"https://sparai.org/\" target=\"_blank\" rel=\"noopener\">SPAR fellowship</a> and interned at Google across three consecutive summers. You can find some of my work <a href=\"https://scholar.google.com/citations?user=lcyAeBcAAAAJ\" target=\"_blank\" rel=\"noopener\">here</a>.\n\nI have been lucky to collaborate with people at UPenn, ASU, Adobe Research and IBM Research, and to work with mentors including Prof. Dan Roth, Prof. Manish Shrivastava, Prof. Ponnurangam Kumaraguru, Dr. Aparna Garimella, and Prof. Vivek Gupta.\n\nI love talking so please feel free to reach out. Happy to chat about research, safety, or anything else!",
   interests: [
     {
-      key: "reward_hacking",
-      why: "when the reward comes from a judge model, a policy can score well by fooling the judge instead of doing the task.",
-      current: "finding hacks that fool many different judges at once."
-    },
-    {
       key: "scalable_oversight",
       why: "as models get stronger, we need ways to check work that humans cannot easily verify themselves.",
       current: "measuring how judge capability, and what the judge gets to see, change what a policy can get away with."
+    },
+    {
+      key: "automated_alignment",
+      why: "alignment work needs to scale with the models, so a lot of it will have to be done by models themselves.",
+      current: "understanding when automated judges and graders can be trusted, and when they break."
+    },
+    {
+      key: "reward_hacking",
+      why: "when the reward comes from a judge model, a policy can score well by fooling the judge instead of doing the task.",
+      current: "finding hacks that fool many different judges at once."
     },
     {
       key: "evals_and_benchmarks",
@@ -2073,7 +2078,7 @@ const AGENT_RESPONSES = [
     tools: ["srija.experience(detailed=True)"],
     suggestions: ["tell me about your experience", "what did you do at Enterpret?", "how can i contact you?"] },
   { prompts: ["what are your research interests?", "what are you interested in?"], text:
-    "The short version is: reward hacking, scalable oversight, and evaluation. I keep coming back to questions about safety, reliability, and robustness.",
+    "The short version is: scalable oversight, automated alignment, reward hacking, and evals. I keep coming back to questions about safety, reliability, and robustness.",
     tools: ["srija.interests()"],
     suggestions: ["what do you work on?", "what are your views on ai safety?", "tell me about your papers"] },
   { prompts: ["how can i contact you?", "how do i reach you?"], text:
@@ -2406,7 +2411,7 @@ function buildInitial() {
       <div class="sub"><em><a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>/<a href="https://www.matsprogram.org/" target="_blank" rel="noopener">MATS</a> Fellow</em></div>
       <div class="id-row">
         <div class="meta">
-          <div class="aff"><strong>Current interests</strong>: reward hacking, scalable oversight, and evals + benchmarks.</div>
+          <div class="aff"><strong>Current interests</strong>: scalable oversight, automated alignment, reward hacking, and evals + benchmarks.</div>
           <div class="links-inline"><strong>Quick links</strong>:
             <a href="https://twitter.com/srijatwt" target="_blank" rel="noopener">twitter</a><span class="sep">·</span>
             <a href="mailto:srijamukherjee113@gmail.com">email</a><span class="sep">·</span>
