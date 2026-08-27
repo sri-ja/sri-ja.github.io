@@ -1508,22 +1508,22 @@ const DATA = {
     {
       key: "scalable_oversight",
       why: "as models get stronger, we need ways to check work that humans cannot easily verify themselves.",
-      current: "measuring how judge capability, and what the judge gets to see, change what a policy can get away with."
+      current: "understanding when LLM judges are unreliable and why, and finding gaps in their robustness."
     },
     {
       key: "automated_alignment",
-      why: "alignment work needs to scale with the models, so a lot of it will have to be done by models themselves.",
-      current: "understanding when automated judges and graders can be trusted, and when they break."
+      why: "capabilities are fairly easy to automate because they are hillclimbable, but alignment needs to keep up while also staying reliable, which is hard to ensure.",
+      current: "figuring out whether we can have AIs predict research outcomes."
     },
     {
       key: "reward_hacking",
-      why: "when the reward comes from a judge model, a policy can score well by fooling the judge instead of doing the task.",
-      current: "finding hacks that fool many different judges at once."
+      why: "LLMs might go to any extent to get rewards, which can be catastrophic (we don't want paperclip maximizers).",
+      current: "understanding how models generalize when RL training rewards their hacking behavior."
     },
     {
       key: "evals_and_benchmarks",
-      why: "good evals are often the most reliable indicators of failure modes of models.",
-      current: "building RL environments, from chess and Go to creative writing, where models naturally learn to hack their judges."
+      why: "we want trustworthy evals to keep track of progress, and automated red teaming evals to figure out how bad things can be.",
+      current: "building evals in RL environments to catch judge hacking, and automated evals for understanding the effects of long-term memory."
     },
   ],
   papers: [
