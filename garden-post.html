@@ -376,6 +376,33 @@
       line-height: 1.7;
     }
 
+    article img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+    }
+
+    article p img {
+      display: inline-block;
+      margin: 0;
+      vertical-align: middle;
+    }
+
+    article figure {
+      margin: 0 0 22px;
+    }
+
+    article figcaption {
+      margin-top: 8px;
+      text-align: center;
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
     article blockquote {
       margin: 0 0 22px;
       padding: 2px 0 2px 18px;
@@ -510,6 +537,7 @@
     function renderInlineMarkdown(text) {
       let html = escapeHTML(text);
       html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+      html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy" />');
       html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
       html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
       html = html.replace(/__([^_]+)__/g, "<strong>$1</strong>");
@@ -595,6 +623,14 @@
           continue;
         }
 
+        const image = line.trim().match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+        if (image) {
+          const caption = image[1] ? `<figcaption>${escapeHTML(image[1])}</figcaption>` : "";
+          blocks.push(`<figure><img src="${escapeHTML(image[2])}" alt="${escapeHTML(image[1])}" loading="lazy" />${caption}</figure>`);
+          i += 1;
+          continue;
+        }
+
         const paragraph = [];
         while (
           i < lines.length &&
@@ -604,6 +640,7 @@
           !/^>\s?/.test(lines[i]) &&
           !/^[-*+]\s+/.test(lines[i]) &&
           !/^\d+\.\s+/.test(lines[i]) &&
+          !/^!\[[^\]]*\]\([^)]+\)\s*$/.test(lines[i].trim()) &&
           !/^(-{3,}|\*{3,}|_{3,})\s*$/.test(lines[i].trim())
         ) {
           paragraph.push(lines[i].trim());

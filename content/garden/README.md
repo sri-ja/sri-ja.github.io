@@ -38,10 +38,24 @@ The post body supports markdown, including:
 
 - headings (`##`)
 - links (`[text](url)`)
+- images (`![caption](path)`)
 - bold / italics
 - bullet and numbered lists
 - blockquotes
 - inline code and fenced code blocks
+
+## Images
+
+Put image files in `content/garden/images/` and reference them from a post:
+
+```md
+![Optional caption](content/garden/images/my-image.png)
+```
+
+An image alone on its own line renders as a centered figure with the caption
+below it. An image inside a sentence renders inline. Screenshots, phone
+photos, and plots all work; keep files reasonably sized (under ~1 MB each)
+since GitHub Pages serves them as-is.
 
 ## Post List
 
