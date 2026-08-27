@@ -15,7 +15,7 @@ window.GARDEN_KIND_INFO = {
 window.GARDEN_SETTINGS = {
   title: "Garden of Thoughts",
   introTitle: "A growing branch for essays, notes, and unfinished ideas.",
-  introText: "Flowers are longer posts, leaves are notes, and seeds are fragments that are still taking shape."
+  introText: ""
 };
 
 const AUTO_POND_SLOTS = {
