@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post | Srija Mukhopadhyay</title>
+  <link rel="icon" href="assets/favicon-blog.svg" type="image/svg+xml" />
+  <script src="assets/theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #fffdf8;
+      --panel: #fbf8f1;
+      --card: #ffffff;
+      --ink: #25231f;
+      --body: #34312b;
+      --muted: #706b62;
+      --soft: #a39a8c;
+      --rule: #ebe5d8;
+      --eol: #c4b8a5;
+      --research: #0f9d8a;
+      --reflection: #e0457b;
+      --misc: #c27c05;
+      --kind: var(--reflection);
+      --tok-ink: #25231f;
+      --t0: #ffd6e0; --t1: #c9f2e3; --t2: #ffe6b3; --t3: #d9e4ff; --t4: #e8d9ff; --t5: #ffd9c2; --t6: #d6f5c9;
+      --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+      --serif: "Source Serif 4", Georgia, serif;
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #15140f;
+      --panel: #1c1b16;
+      --card: #24221c;
+      --ink: #ece6dc;
+      --body: #ddd6ca;
+      --muted: #aaa093;
+      --soft: #7f776b;
+      --rule: #2f2c25;
+      --eol: #5e574c;
+      --research: #2bb8a3;
+      --reflection: #ec6a95;
+      --misc: #e0a12e;
+      --tok-ink: #f4efe6;
+      --t0: #5c2f3d; --t1: #24493f; --t2: #5a4724; --t3: #2f3b5c; --t4: #43345e; --t5: #5c3d2b; --t6: #34502c;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { min-height: 100vh; background: var(--bg); color: var(--ink); font-family: var(--sans); font-variant-ligatures: none; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--kind); z-index: 10; transition: width .1s linear; }
+
+    .shell { width: min(880px, calc(100% - 32px)); margin: 0 auto; padding: 18px 0 56px; }
+
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 13px; color: var(--muted); }
+    .topbar a { border-bottom: 1px solid var(--rule); }
+    .topbar a:hover { color: var(--ink); border-bottom-color: currentColor; }
+    .topbar-actions { display: flex; align-items: center; gap: 14px; }
+    .theme-toggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border: 1px solid var(--rule); border-radius: 999px;
+      background: transparent; color: var(--muted); cursor: pointer;
+    }
+    .theme-toggle:hover { color: var(--ink); }
+    .theme-toggle .theme-icon { position: relative; display: block; width: 13px; height: 13px; border-radius: 50%; box-shadow: inset -4px -2px 0 currentColor; }
+    .theme-toggle[data-theme-state="dark"] .theme-icon {
+      width: 10px; height: 10px; background: currentColor;
+      box-shadow: 0 -7px 0 -4px currentColor, 0 7px 0 -4px currentColor, 7px 0 0 -4px currentColor, -7px 0 0 -4px currentColor,
+        5px 5px 0 -4px currentColor, -5px 5px 0 -4px currentColor, 5px -5px 0 -4px currentColor, -5px -5px 0 -4px currentColor;
+    }
+
+    /* header */
+    .hero { margin: 32px 0 22px; }
+    .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--soft); margin-bottom: 10px; }
+    .special { font-family: var(--mono); font-weight: 700; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 12px; white-space: nowrap; background: var(--kind); }
+    html[data-theme="dark"] .special { color: #15140f; }
+    h1 { margin: 0 0 8px; font-family: var(--mono); font-weight: 500; font-size: 23px; line-height: 1.6; letter-spacing: -0.01em; color: var(--tok-ink); }
+    .word { white-space: nowrap; }
+    .tok { padding: 2px 0; border-radius: 4px; background-color: transparent; transition: background-color .35s ease; }
+    .tok.on { background-color: var(--tc); }
+    .eol { color: var(--eol); }
+    .dek { margin: 0; font-family: var(--serif); font-style: italic; font-size: 15.5px; line-height: 1.5; color: var(--muted); }
+    .rule { height: 1px; background: var(--rule); margin: 0 0 24px; }
+
+    /* body */
+    article { color: var(--body); }
+    article p { margin: 0 0 14px; font-family: var(--serif); font-size: 15.5px; line-height: 1.7; }
+    article > p:first-child { font-size: 16.5px; line-height: 1.65; color: var(--ink); }
+    article h2, article h3, article h4 { margin: 30px 0 10px; font-family: var(--serif); font-weight: 600; line-height: 1.25; color: var(--ink); }
+    article h2::before, article h3::before { font-family: var(--mono); font-weight: 400; font-size: .6em; color: var(--soft); margin-right: 10px; vertical-align: .18em; }
+    article h2::before { content: "##"; }
+    article h3::before { content: "###"; }
+    article h2 { font-size: 20px; }
+    article h3 { font-size: 17.5px; }
+    article h4 { font-size: 16px; }
+    article ul, article ol { margin: 0 0 16px; padding-left: 24px; }
+    article li { margin: 0 0 6px; font-family: var(--serif); font-size: 15.5px; line-height: 1.65; }
+    article li::marker { color: var(--kind); }
+    article a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--kind); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    article a:hover { color: var(--kind); }
+    article strong { color: var(--ink); }
+    article code { font-family: var(--mono); font-size: 0.82em; padding: 0.12em 0.38em; border-radius: 5px; background: var(--panel); border: 1px solid var(--rule); }
+    article pre { margin: 0 0 18px; padding: 16px 18px; overflow-x: auto; border-radius: 10px; border: 1px solid var(--rule); background: var(--panel); }
+    article pre code { padding: 0; border: 0; background: transparent; font-size: 13px; line-height: 1.7; }
+    article img { display: block; max-width: 100%; height: auto; margin: 0 auto; border-radius: 10px; border: 1px solid var(--rule); }
+    article p img { display: inline-block; margin: 0; vertical-align: middle; }
+    article figure { margin: 22px 0; }
+    article figcaption { margin-top: 10px; text-align: center; font-family: var(--sans); font-size: 13.5px; color: var(--muted); }
+    article blockquote { margin: 20px 0; padding: 2px 0 2px 18px; border-left: 3px solid var(--kind); }
+    article blockquote p { font-style: italic; font-size: 16px; color: var(--ink); }
+    article blockquote p:last-child { margin-bottom: 0; }
+    article hr { margin: 26px auto; border: 0; text-align: center; color: var(--soft); }
+    article hr::after { content: "\00b7  \00b7  \00b7"; font-family: var(--mono); letter-spacing: .4em; }
+    .signoff { margin-top: 20px; font-family: var(--serif); font-style: italic; font-size: 15.5px; color: var(--muted); }
+    .eot { display: flex; justify-content: center; margin: 28px 0 0; }
+    .eot span { font-family: var(--mono); font-size: 12px; color: var(--soft); border: 1px dashed var(--eol); border-radius: 5px; padding: 3px 9px; }
+    .empty { padding: 18px; border: 1px solid var(--rule); border-radius: 12px; background: var(--panel); color: var(--muted); }
+
+    /* newer / older */
+    .nav:empty { display: none; }
+    .nav { margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--rule); display: grid; gap: 10px; }
+    .nav a { display: block; padding: 12px 14px; border: 1px solid var(--rule); border-radius: 10px; background: var(--panel); transition: background .15s; }
+    .nav a:hover { background: var(--card); }
+    .nav .dir { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--soft); margin-bottom: 4px; }
+    .nav .line { font-family: var(--mono); font-size: 13px; line-height: 1.9; color: var(--tok-ink); }
+    .nav .tok { background-color: var(--tc); }
+
+    @media (max-width: 640px) {
+      .hero { margin-top: 24px; }
+      h1 { font-size: 21px; }
+      .dek { font-size: 15.5px; }
+      article p, article li { font-size: 16px; }
+      article > p:first-child { font-size: 16.5px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .tok, .progress { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="shell">
+    <div class="topbar">
+      <a href="blog.html">&larr; all posts</a>
+      <div class="topbar-actions">
+        <a href="index.html">open notebook</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode">
+          <span class="theme-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <main>
+      <header class="hero">
+        <div class="meta" id="meta"></div>
+        <h1 id="title">Loading&hellip;</h1>
+        <p class="dek" id="dek"></p>
+      </header>
+      <div class="rule"></div>
+
+      <article id="article"></article>
+      <div class="eot" id="eot" hidden><span>&lt;|endoftext|&gt;</span></div>
+
+      <nav class="nav" id="nav" aria-label="More posts"></nav>
+    </main>
+  </div>
+
+  <script src="assets/blog-posts.js"></script>
+  <script>
+    function escapeHTML(text) {
+      return String(text).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    function renderInlineMarkdown(text) {
+      let html = escapeHTML(text);
+      html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+      html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy" />');
+      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+      html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      html = html.replace(/__([^_]+)__/g, "<strong>$1</strong>");
+      html = html.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+      html = html.replace(/_([^_]+)_/g, "<em>$1</em>");
+      html = html.replace(/~~([^~]+)~~/g, "<del>$1</del>");
+      return html;
+    }
+
+    function markdownToHTML(markdown) {
+      const lines = String(markdown || "").replace(/\r/g, "").split("\n");
+      const blocks = [];
+      let i = 0;
+
+      // List items may be separated by blank lines and still form one list.
+      function collectListItems(marker) {
+        const items = [];
+        while (i < lines.length) {
+          if (marker.test(lines[i])) {
+            items.push(lines[i].replace(marker, "").trim());
+            i += 1;
+            continue;
+          }
+          let next = i;
+          while (next < lines.length && !lines[next].trim()) next += 1;
+          if (next > i && next < lines.length && marker.test(lines[next])) { i = next; continue; }
+          break;
+        }
+        return items;
+      }
+
+      while (i < lines.length) {
+        const line = lines[i];
+
+        if (!line.trim()) {
+          i += 1;
+          continue;
+        }
+
+        const fence = line.match(/^```([\w-]+)?\s*$/);
+        if (fence) {
+          const code = [];
+          i += 1;
+          while (i < lines.length && !/^```\s*$/.test(lines[i])) {
+            code.push(lines[i]);
+            i += 1;
+          }
+          if (i < lines.length) i += 1;
+          const lang = fence[1] ? ` class="language-${escapeHTML(fence[1])}"` : "";
+          blocks.push(`<pre><code${lang}>${escapeHTML(code.join("\n"))}</code></pre>`);
+          continue;
+        }
+
+        const heading = line.match(/^(#{1,6})\s+(.+)$/);
+        if (heading) {
+          const level = Math.min(4, heading[1].length);
+          blocks.push(`<h${level}>${renderInlineMarkdown(heading[2])}</h${level}>`);
+          i += 1;
+          continue;
+        }
+
+        if (/^(-{3,}|\*{3,}|_{3,})\s*$/.test(line.trim())) {
+          blocks.push("<hr />");
+          i += 1;
+          continue;
+        }
+
+        if (/^>\s?/.test(line)) {
+          const quoteLines = [];
+          while (i < lines.length && /^>\s?/.test(lines[i])) {
+            quoteLines.push(lines[i].replace(/^>\s?/, ""));
+            i += 1;
+          }
+          const quoteHTML = quoteLines
+            .join("\n")
+            .split(/\n\s*\n/)
+            .map((part) => `<p>${renderInlineMarkdown(part.replace(/\n/g, " ").trim())}</p>`)
+            .join("");
+          blocks.push(`<blockquote>${quoteHTML}</blockquote>`);
+          continue;
+        }
+
+        if (/^[-*+]\s+/.test(line)) {
+          const items = collectListItems(/^[-*+]\s+/);
+          blocks.push(`<ul>${items.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</ul>`);
+          continue;
+        }
+
+        const numbered = line.match(/^(\d+)\.\s+/);
+        if (numbered) {
+          const items = collectListItems(/^\d+\.\s+/);
+          const start = Number(numbered[1]) === 1 ? "" : ` start="${Number(numbered[1])}"`;
+          blocks.push(`<ol${start}>${items.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</ol>`);
+          continue;
+        }
+
+        const image = line.trim().match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+        if (image) {
+          const caption = image[1] ? `<figcaption>${escapeHTML(image[1])}</figcaption>` : "";
+          blocks.push(`<figure><img src="${escapeHTML(image[2])}" alt="${escapeHTML(image[1])}" loading="lazy" />${caption}</figure>`);
+          i += 1;
+          continue;
+        }
+
+        const paragraph = [];
+        while (
+          i < lines.length &&
+          lines[i].trim() &&
+          !/^```/.test(lines[i]) &&
+          !/^(#{1,6})\s+/.test(lines[i]) &&
+          !/^>\s?/.test(lines[i]) &&
+          !/^[-*+]\s+/.test(lines[i]) &&
+          !/^\d+\.\s+/.test(lines[i]) &&
+          !/^!\[[^\]]*\]\([^)]+\)\s*$/.test(lines[i].trim()) &&
+          !/^(-{3,}|\*{3,}|_{3,})\s*$/.test(lines[i].trim())
+        ) {
+          paragraph.push(lines[i].trim());
+          i += 1;
+        }
+        blocks.push(`<p>${renderInlineMarkdown(paragraph.join(" "))}</p>`);
+      }
+
+      return blocks.join("");
+    }
+
+    function showMissing(message) {
+      document.title = "Post not found | Srija Mukhopadhyay";
+      document.getElementById("title").textContent = "This post does not exist yet";
+      document.getElementById("dek").textContent = "";
+      document.getElementById("article").innerHTML = `<div class="empty">${message}</div>`;
+    }
+
+    function navLink(post, dir) {
+      const title = window.tokenTitleSpan(post.title);
+      return `<a href="${window.blogPostHref(post)}"><span class="dir">${dir}</span><div class="line"><span class="special" style="--kind: var(--${post.kind})">&lt;|${post.kind}|&gt;</span> ${title.html}<span class="eol">&#8629;</span></div></a>`;
+    }
+
+    function trackProgress() {
+      const bar = document.getElementById("progress");
+      const update = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 100) + "%";
+      };
+      window.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      update();
+    }
+
+    (async () => {
+      const slug = new URLSearchParams(window.location.search).get("slug") || "";
+      const posts = await window.getBlogPosts();
+      const index = posts.findIndex((p) => p.slug === slug);
+      const post = posts[index];
+      if (!post) {
+        showMissing('No post matches this link. <a href="blog.html">See all posts</a>.');
+        return;
+      }
+
+      document.title = post.title + " | Srija Mukhopadhyay";
+      document.documentElement.style.setProperty("--kind", `var(--${post.kind})`);
+      document.getElementById("meta").innerHTML =
+        `<span class="special">&lt;|${post.kind}|&gt;</span><span>${escapeHTML(post.when)}</span><span>&middot;</span><span data-tok-slug="${post.slug}">${window.tokenLabel(window.postTokenCount(post))}</span><span>&middot;</span><span>${post.minutes} min read</span>`;
+
+      document.getElementById("title").innerHTML = window.tokenTitleSpan(post.title).html + '<span class="eol">&#8629;</span>';
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.querySelectorAll("#title .tok").forEach((el, i) => setTimeout(() => el.classList.add("on"), reduce ? 0 : 300 + i * 60));
+
+      const dek = document.getElementById("dek");
+      dek.textContent = post.content.dek;
+      dek.hidden = !post.content.dek;
+
+      const article = document.getElementById("article");
+      article.innerHTML = markdownToHTML(post.content.raw);
+      if (post.content.signoff) {
+        const signoff = document.createElement("p");
+        signoff.className = "signoff";
+        signoff.textContent = post.content.signoff;
+        article.appendChild(signoff);
+      }
+      document.getElementById("eot").hidden = false;
+
+      // posts are listed newest first
+      const newer = posts[index - 1], older = posts[index + 1];
+      document.getElementById("nav").innerHTML =
+        (newer ? navLink(newer, "newer post &rarr;") : "") +
+        (older ? navLink(older, "&larr; older post") : "");
+
+      trackProgress();
+    })().catch(() => showMissing("Could not load this post."));
+  </script>
+</body>
+</html>
