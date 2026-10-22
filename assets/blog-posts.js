@@ -49,7 +49,10 @@ window.realTokenizerReady = new Promise((resolve) => {
     script.onerror = () => resolve(false);
     document.head.appendChild(script);
   };
-  if (document.readyState === "complete") load();
+  // Pages that preload the tokenizer (the blog and post pages) start right away;
+  // others, like the notebook, wait until they have finished loading.
+  const preloaded = document.querySelector(`link[rel="preload"][href="${REAL_TOKENIZER_URL}"]`);
+  if (preloaded || document.readyState === "complete") load();
   else window.addEventListener("load", load);
 });
 
