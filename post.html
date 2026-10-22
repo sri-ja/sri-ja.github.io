@@ -199,6 +199,23 @@
       const blocks = [];
       let i = 0;
 
+      // List items may be separated by blank lines and still form one list.
+      function collectListItems(marker) {
+        const items = [];
+        while (i < lines.length) {
+          if (marker.test(lines[i])) {
+            items.push(lines[i].replace(marker, "").trim());
+            i += 1;
+            continue;
+          }
+          let next = i;
+          while (next < lines.length && !lines[next].trim()) next += 1;
+          if (next > i && next < lines.length && marker.test(lines[next])) { i = next; continue; }
+          break;
+        }
+        return items;
+      }
+
       while (i < lines.length) {
         const line = lines[i];
 
@@ -251,22 +268,16 @@
         }
 
         if (/^[-*+]\s+/.test(line)) {
-          const items = [];
-          while (i < lines.length && /^[-*+]\s+/.test(lines[i])) {
-            items.push(lines[i].replace(/^[-*+]\s+/, ""));
-            i += 1;
-          }
+          const items = collectListItems(/^[-*+]\s+/);
           blocks.push(`<ul>${items.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</ul>`);
           continue;
         }
 
-        if (/^\d+\.\s+/.test(line)) {
-          const items = [];
-          while (i < lines.length && /^\d+\.\s+/.test(lines[i])) {
-            items.push(lines[i].replace(/^\d+\.\s+/, ""));
-            i += 1;
-          }
-          blocks.push(`<ol>${items.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</ol>`);
+        const numbered = line.match(/^(\d+)\.\s+/);
+        if (numbered) {
+          const items = collectListItems(/^\d+\.\s+/);
+          const start = Number(numbered[1]) === 1 ? "" : ` start="${Number(numbered[1])}"`;
+          blocks.push(`<ol${start}>${items.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</ol>`);
           continue;
         }
 
