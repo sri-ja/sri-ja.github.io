@@ -1,8 +1,8 @@
 ---
 title: Post title
-kind: note
+kind: reflection
 when: May 2026
-summary: One-line description for the branch and notebook preview.
+summary: One-line description for the post list and notebook preview.
 status: published
 ---
 

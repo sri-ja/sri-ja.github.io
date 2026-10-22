@@ -43,6 +43,9 @@
     --num: #986801;
     --com: #a0a1a7;
     --op:  #383a42;
+    /* blog tokens */
+    --t0: #ffd6e0; --t1: #c9f2e3; --t2: #ffe6b3; --t3: #d9e4ff; --t4: #e8d9ff; --t5: #ffd9c2; --t6: #d6f5c9;
+    --k-research: #0f9d8a; --k-reflection: #e0457b; --k-misc: #c27c05; --tok-ink: #25231f;
   }
   html[data-theme="dark"] {
     color-scheme: dark;
@@ -74,6 +77,8 @@
     --num: #e3c06f;
     --com: #7e8791;
     --op: #d8d3ca;
+    --t0: #5c2f3d; --t1: #24493f; --t2: #5a4724; --t3: #2f3b5c; --t4: #43345e; --t5: #5c3d2b; --t6: #34502c;
+    --k-research: #2bb8a3; --k-reflection: #ec6a95; --k-misc: #e0a12e; --tok-ink: #f4efe6;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; height: 100%; }
@@ -292,6 +297,25 @@
     background: #fff;
   }
   .sidebar .idcard .links a:hover { border-color: var(--selected); color: var(--selected); }
+  .sidebar .idcard.reading { margin-top: -4px; }
+  .sidebar .reading .label {
+    font-size: 10.5px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .sidebar .reading .label .emoji { letter-spacing: 0; margin-right: 5px; font-size: 12px; }
+  .sidebar .reading .book { font-size: 12.5px; }
+  .sidebar .reading .book + .book { margin-top: 5px; }
+  .sidebar .reading .book a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+  .sidebar .reading .book a:hover {
+    color: var(--selected);
+    border-bottom-color: var(--selected);
+  }
 
   .nb {
     overflow-y: auto;
@@ -549,6 +573,20 @@
     color: var(--fn);
     white-space: nowrap;
   }
+  .interest-dict .chips-intro { margin-bottom: 8px; }
+  .interest-dict .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .interest-dict .chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 10px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    background: var(--panel-soft);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .interest-dict .chip.serif { font-family: Georgia, 'Times New Roman', serif; font-size: 13.5px; }
   .interest-dict .value {
     min-width: 0;
   }
@@ -712,108 +750,65 @@
     text-transform: uppercase;
   }
 
-  .garden-preview {
-    display: grid;
-    gap: 10px;
-  }
-  .garden-preview-list {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-  }
-  .garden-preview-card {
-    display: block;
-    min-height: 112px;
-    padding: 10px 11px 11px;
+  .blog-preview {
     border: 1px solid var(--rule);
-    border-top: 3px solid rgba(33, 150, 243, 0.28);
-    border-radius: 6px 6px 4px 4px;
-    background: #fff;
-  }
-  a.garden-preview-card {
-    text-decoration: none;
-    color: inherit;
-  }
-  a.garden-preview-card:hover {
-    background: rgba(33, 150, 243, 0.035);
-    border-color: rgba(33, 150, 243, 0.28);
-  }
-  .garden-preview-card .tab-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-  .garden-preview-card .tab-mark {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    min-width: 0;
-  }
-  .garden-preview-card .mini-flower {
-    width: 20px;
-    height: 20px;
-    flex: 0 0 auto;
-  }
-  .garden-preview-card .kind {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    border: 1px solid var(--rule);
-    border-radius: 999px;
-    padding: 1px 6px;
-    background: #fafafa;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .garden-preview-card .meta {
-    min-width: 0;
-  }
-  .garden-preview-card .date {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    margin: 0;
-    white-space: nowrap;
-  }
-  .garden-preview-card .title {
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.4;
-    color: var(--ink);
-    margin: 0 0 4px;
-  }
-  .garden-preview-card .desc {
-    font-family: var(--sans);
-    font-size: 12.5px;
-    line-height: 1.55;
-    color: var(--muted);
-    margin: 0;
-    max-height: 3.1em;
+    border-radius: 6px;
+    background: var(--panel);
     overflow: hidden;
+    font-variant-ligatures: none;
   }
-  .garden-preview-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 0 2px;
+  .blog-preview .blog-row {
+    display: block;
+    padding: 9px 12px;
+    border-top: 1px solid var(--rule);
+    color: var(--tok-ink);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.9;
   }
-  .garden-preview-footer .seedling {
-    font-family: var(--sans);
-    font-size: 13px;
+  .blog-preview .blog-row:first-child { border-top: none; }
+  .blog-preview .blog-row:hover { background: var(--hover); }
+  .blog-preview .kind-tok {
+    font-weight: 700;
+    font-size: 11px;
+    color: #fff;
+    padding: 1px 5px;
+    border-radius: 3px;
+    white-space: nowrap;
+    background: var(--k-reflection);
+  }
+  html[data-theme="dark"] .blog-preview .kind-tok { color: #101316; }
+  .blog-preview .kind-tok.research { background: var(--k-research); }
+  .blog-preview .kind-tok.misc { background: var(--k-misc); }
+  .blog-preview .date { font-size: 11px; color: var(--faint); margin: 0 4px 0 6px; white-space: nowrap; }
+  .blog-preview .word { white-space: nowrap; }
+  .blog-preview .tok { padding: 1px 0; border-radius: 3px; background: var(--tc); }
+  .blog-preview .eol { color: var(--faint); margin-left: 2px; }
+  .blog-preview .desc { display: block; font-family: var(--sans); font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+  .md-body .latest-post {
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 1.7;
     color: var(--muted);
   }
-  .garden-preview-link {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 600;
+  .md-body .latest-post a {
     color: var(--selected);
     text-decoration: none;
+    border: 0;
+    background: transparent;
+    padding: 0;
   }
-  .garden-preview-link:hover { text-decoration: underline; }
+  .md-body .latest-post a:hover { text-decoration: underline; }
+  .blog-preview-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .blog-preview-footer a { color: var(--link); text-decoration: none; }
+  .blog-preview-footer a:hover { text-decoration: underline; }
 
   /* Plot caption */
   .plot-head {
@@ -952,17 +947,6 @@
     margin: 0 0 10px;
   }
 
-  /* Garden */
-  .garden-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
-  .flower {
-    border: 1px solid var(--rule); border-radius: 6px;
-    padding: 10px; text-align: center; background: #fff;
-  }
-  .flower svg { width: 56px; height: 56px; }
-  .flower .title { font-size: 12px; font-weight: 500; margin-top: 4px; }
-  .flower .date  { font-size: 10.5px; color: var(--muted); font-family: var(--mono); }
-  .flower.seed .title { color: var(--muted); font-style: italic; }
-
   /* Status bar */
   .statusbar {
     position: fixed; left: 0; right: 0; bottom: 0;
@@ -1100,10 +1084,8 @@
   html[data-theme="dark"] .interest-dict,
   html[data-theme="dark"] .paper-list,
   html[data-theme="dark"] .experience-list,
-  html[data-theme="dark"] .garden-preview-card,
   html[data-theme="dark"] .plot-figure,
   html[data-theme="dark"] .agent-box,
-  html[data-theme="dark"] .flower,
   html[data-theme="dark"] .add-menu,
   html[data-theme="dark"] .insert-rail button,
   html[data-theme="dark"] .insert-rail.last button {
@@ -1112,7 +1094,6 @@
   html[data-theme="dark"] .sidebar .idcard,
   html[data-theme="dark"] table.df thead th,
   html[data-theme="dark"] table.df .pill,
-  html[data-theme="dark"] .garden-preview-card .kind,
   html[data-theme="dark"] .agent-box .tool,
   html[data-theme="dark"] .agent-box .suggestions button,
   html[data-theme="dark"] .agent-box .detail-toggle,
@@ -1122,10 +1103,6 @@
   }
   html[data-theme="dark"] .sidebar .idcard .links a {
     background: var(--paper);
-  }
-  html[data-theme="dark"] .garden-preview-card:hover {
-    background: rgba(127, 181, 246, 0.08);
-    border-color: rgba(127, 181, 246, 0.35);
   }
   html[data-theme="dark"] table.df .pill {
     color: var(--ink);
@@ -1143,8 +1120,6 @@
     .md-body h1 { font-size: 26px; }
     .about-card { grid-template-columns: 1fr; }
     .about-card .avatar-large { width: 96px; height: 96px; }
-    .garden-preview-list { grid-template-columns: 1fr; }
-    .garden-preview-card { min-height: 0; }
   }
 
   @media (max-width: 640px) {
@@ -1404,6 +1379,7 @@
 <!-- ==================== Jupyter chrome ==================== -->
 <div class="menubar">
   <div class="app"><div class="logo"></div> SrijaLabs</div>
+  <a class="menu" href="blog.html">Blog</a>
   <a class="menu" href="https://twitter.com/srijatwt" target="_blank" rel="noopener">Twitter</a>
   <a class="menu" href="https://www.linkedin.com/in/ajirs" target="_blank" rel="noopener">LinkedIn</a>
   <a class="menu" href="https://github.com/sri-ja" target="_blank" rel="noopener">GitHub</a>
@@ -1446,8 +1422,9 @@
   <aside class="sidebar">
     <div class="idcard">
       <div class="name">Srija Mukhopadhyay</div>
-      <div class="role"><a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>/<a href="https://www.matsprogram.org/" target="_blank" rel="noopener">MATS</a> Fellow</div>
+      <div class="role"><a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>/<a href="https://www.matsprogram.org/" target="_blank" rel="noopener">MATS</a> Safety Fellow</div>
       <div class="links">
+        <a href="blog.html">blog</a>
         <a href="mailto:srijamukherjee113@gmail.com">email</a>
         <a href="https://github.com/sri-ja" target="_blank" rel="noopener">github</a>
         <a href="https://twitter.com/srijatwt" target="_blank" rel="noopener">twitter</a>
@@ -1456,6 +1433,7 @@
         <a href="assets/Srija_Mukhopadhyay_CV.pdf" target="_blank" rel="noopener">cv</a>
       </div>
     </div>
+    <div id="now-boxes"></div>
     <div class="side-head">Table of Contents</div>
     <div id="toc"></div>
   </aside>
@@ -1494,36 +1472,47 @@
   <kbd>↑</kbd> / <kbd>↓</kbd> move between cells<br/>
 </div>
 
-<script src="assets/garden-posts.js"></script>
+<script src="assets/blog-posts.js"></script>
 <script>
-const GARDEN_PREVIEW_PROMISE = window.getNotebookGardenPreview
-  ? window.getNotebookGardenPreview(3).catch(() => [])
+if (window.nowBoxesHTML) document.getElementById('now-boxes').innerHTML = window.nowBoxesHTML('idcard reading');
+const BLOG_PREVIEW_PROMISE = window.getNotebookBlogPreview
+  ? window.getNotebookBlogPreview(3).catch(() => [])
   : Promise.resolve([]);
 // ==========================================================
 // "srija" API — renders outputs
 // ==========================================================
 const DATA = {
-  bio: "Hi, I'm Srija. I am currently an <a href=\"https://www.anthropic.com/\" target=\"_blank\" rel=\"noopener\">Anthropic</a>/<a href=\"https://www.matsprogram.org/\" target=\"_blank\" rel=\"noopener\">MATS</a> Fellow, advised by <a href=\"https://rowankwang.com/\" target=\"_blank\" rel=\"noopener\">Rowan Wang</a> and <a href=\"https://christine8888.github.io/index.html\" target=\"_blank\" rel=\"noopener\">Christine Ye</a>, where I am studying the science of overoptimization and reward hacking in LLM-judged reinforcement learning. More broadly, I am interested in understanding the limitations of our oversight systems in order to help mitigate them.\n\nBefore this, I was doing my Bachelor's and Master's at IIIT Hyderabad, where I did a bunch of work in model evaluations, especially multimodal evaluations, which was the main topic of my Master's thesis. I also worked as a <a href=\"https://sparai.org/\" target=\"_blank\" rel=\"noopener\">SPAR</a> mentee on two projects: understanding the safety implications of long-term (episodic) memory, and isolating the mechanism of unwanted generalization behavior in LLMs.\n\nDuring university, I also probed how long-term memory in LLMs affects user privacy, and evaluated whether LLMs stay honest when given impossible tasks, both of which led to publications! I have also interned at Google across three consecutive summers. You can find some of my work <a href=\"https://scholar.google.com/citations?user=lcyAeBcAAAAJ\" target=\"_blank\" rel=\"noopener\">here</a>.\n\nI love talking so please feel free to reach out. Happy to chat about research, safety, or anything else!",
+  bio: "Hi, I'm Srija. I am currently an <a href=\"https://www.anthropic.com/\" target=\"_blank\" rel=\"noopener\">Anthropic</a>/<a href=\"https://www.matsprogram.org/\" target=\"_blank\" rel=\"noopener\">MATS</a> Safety Fellow, advised by <a href=\"https://rowankwang.com/\" target=\"_blank\" rel=\"noopener\">Rowan Wang</a> and <a href=\"https://christine8888.github.io/index.html\" target=\"_blank\" rel=\"noopener\">Christine Ye</a>, where I am studying the science of overoptimization. I train models with LLM judges providing the rewards, and see what happens when they sometimes learn to fool the judge instead of doing the task. They can even find hacks that fool many different judges at once, which is both fascinating and a little scary. More broadly, I am interested in alignment in general and in making sure AI goes well. I love reading alignment papers and blogs, and doing weird little side projects, like making LLMs play The Traitors!\n\nBefore this, I was doing my Bachelor's and Master's at IIIT Hyderabad, where I did a bunch of work in model evaluations, especially multimodal evaluations, which was the main topic of my Master's thesis. I also worked as a <a href=\"https://sparai.org/\" target=\"_blank\" rel=\"noopener\">SPAR</a> mentee on two projects: understanding the safety implications of long-term (episodic) memory, and isolating the mechanism of unwanted generalization behavior in LLMs.\n\nDuring university, I also probed how long-term memory in LLMs affects user privacy, and evaluated whether LLMs stay honest when given impossible tasks, both of which led to publications! I have also interned at Google across three consecutive summers. You can find some of my work <a href=\"https://scholar.google.com/citations?user=lcyAeBcAAAAJ\" target=\"_blank\" rel=\"noopener\">here</a>.\n\nI love talking so please feel free to reach out. Happy to chat about research, safety, or anything else!",
   interests: [
     {
-      key: "scalable_oversight",
-      why: "as models get stronger, we need ways to check work that humans cannot easily verify themselves.",
-      current: "understanding when LLM judges are unreliable and why, and finding gaps in their robustness."
-    },
-    {
-      key: "automated_alignment",
-      why: "capabilities are fairly easy to automate because they are hillclimbable, but alignment needs to keep up while also staying reliable, which is hard to ensure.",
-      current: "figuring out whether we can have AIs predict research outcomes."
+      key: "ai_safety_and_alignment",
+      why: "models are getting more capable very fast, but alignment is much harder to automate than capabilities (see <a href=\"https://arxiv.org/abs/2605.06390\" target=\"_blank\" rel=\"noopener\">automated alignment is harder than you think</a>), and we still cannot trust models to share our goals or be truthful and faithful to us. i am broadly interested in a wide range of alignment questions, and only learning more each day."
     },
     {
       key: "reward_hacking",
-      why: "LLMs might go to any extent to get rewards, which can be catastrophic (we don't want paperclip maximizers).",
-      current: "understanding how models generalize when RL training rewards their hacking behavior."
+      why: "models are largely trained to maximize rewards at any cost, even when that is not aligned with the true goal of the task we are training them to do, which can be catastrophic (we don't want <a href=\"https://nickbostrom.com/papers/ethical-issues-in-advanced-ai/\" target=\"_blank\" rel=\"noopener\">paperclip maximizers</a>)."
+    },
+    {
+      key: "scalable_oversight",
+      why: "as models scale up to superhuman capabilities, we still need ways to keep them safe. if we cannot verify the work ourselves, we do not know when they actually end up doing something harmful."
     },
     {
       key: "evals_and_benchmarks",
-      why: "we want trustworthy evals to keep track of progress, and automated red teaming evals to figure out how bad things can be.",
-      current: "building evals in RL environments to catch judge hacking, and automated evals for understanding the effects of long-term memory."
+      why: "trustworthy evals are important to keep track of progress and to understand how fast capabilities are scaling. without good evals, we are kind of shooting in the dark. alignment evals matter even more, even though they are extremely hard to build, because they give us a good estimate of how risky model capabilities can be, and what models tend to do when given the chance."
+    },
+    {
+      key: "generalization",
+      why: "we are still uncertain about how exactly models generalize, especially with RL, and it seems plausibly important to understand that in order to create trustworthy methods. in general, i also enjoy setting up weird training regimes and seeing how models behave there."
+    },
+    {
+      key: "other_things_i_like",
+      label: "list",
+      why: "i like trying out a bunch of things. here are a few of my interests.",
+      items: [
+        "cats", "swimming", "lifting weights", "learning tennis", "air rifle shooting", "reading books",
+        "listening to music", "serif fonts", "going down rabbit holes reading people's blogs", "skincare",
+        "genetics", "maximalist indian aesthetics", "(somehow also) trying to be a minimalist"
+      ]
     },
   ],
   papers: [
@@ -1723,8 +1712,8 @@ const DATA = {
       ]
     },
   ],
-  garden: [
-    { title: "Introduction", date: "Aug 2026", kind: "flower", type: "Long post", href: "garden-post.html?slug=introduction", desc: "Welcome to my blog!" },
+  blog: [
+    { title: "Introduction", date: "Oct 2026", kind: "reflection", type: "Reflection", href: "post.html?slug=introduction", desc: "Welcome to my blog!" },
   ],
 };
 
@@ -1770,13 +1759,16 @@ function renderInterests() {
       <div class="key">"${interest.key}"</div>
       <div class="value">
         <div class="field">
-          <div class="label">why_it_matters</div>
-          <div class="text">${escapeHTML(interest.why)}</div>
+          <div class="label">${interest.label || 'why_it_matters'}</div>
+          ${interest.items
+            ? `<div>${interest.why ? `<div class="text chips-intro">${interest.why}</div>` : ''}<div class="chips">${interest.items.map((text) => `<span class="chip${text === 'serif fonts' ? ' serif' : ''}">${escapeHTML(text)}</span>`).join('')}</div></div>`
+            : `<div class="text">${interest.why}</div>`}
         </div>
+        ${interest.current ? `
         <div class="field">
           <div class="label">current_focus</div>
           <div class="text">${escapeHTML(interest.current)}</div>
-        </div>
+        </div>` : ''}
       </div>
     `;
     dict.appendChild(row);
@@ -1851,83 +1843,40 @@ function renderExperience(detailed) {
   return wrap;
 }
 
-// ----- Garden -----
-function flowerSVG(kind) {
-  const normalized = (
-    kind === 'seed' || kind === 'draft'
-  ) ? 'seed' : (
-    kind === 'leaf' || kind === 'pad' || kind === 'pad-small'
-  ) ? 'leaf' : 'flower';
-
-  if (normalized === 'seed') {
-    return `<svg viewBox="0 0 40 40" aria-hidden="true">
-      <path d="M23 8 C31 16 28 30 18 34 C10 25 13 13 23 8 Z" fill="var(--accent)"/>
-      <path d="M20 14 C18 20 18 27 20 32" fill="none" stroke="currentColor" stroke-opacity="0.28" stroke-width="1.1" stroke-linecap="round"/>
-    </svg>`;
-  }
-  if (normalized === 'leaf') {
-    return `<svg viewBox="0 0 40 40" aria-hidden="true">
-      <path d="M25 6 C33 14 31 28 19 35 C9 26 10 13 25 6 Z" fill="var(--ok)"/>
-      <path d="M19 34 C19 24 22 15 26 8" fill="none" stroke="currentColor" stroke-opacity="0.34" stroke-width="1.2" stroke-linecap="round"/>
-    </svg>`;
-  }
-  const colors = kind === 'bloom-rare'
-    ? ['#d9b8df', 'var(--paper)', '#d9b8df']
-    : ['#f4c8d3', 'var(--paper)', '#f4c8d3'];
-  return `<svg viewBox="0 0 40 40" aria-hidden="true">
-    <path d="M21 23 C25 21 30 24 32 30 C26 32 22 29 20 24 Z" fill="var(--ok)"/>
-    <g transform="translate(20,20)">
-      ${[0,45,90,135,180,225,270,315].map(a => `<path d="M0 0 C-4 -5 -4 -11 0 -15 C4 -11 4 -5 0 0 Z" fill="${colors[0]}" transform="rotate(${a})"/>`).join('')}
-      <circle r="4.4" fill="var(--warn)"/>
-    </g>
-  </svg>`;
+// ----- Blog -----
+function latestPostLine() {
+  const p = DATA.blog[0];
+  if (!p) return '';
+  return `<div class="latest-post"><strong>Latest on the blog</strong>: <a href="${p.href || 'blog.html'}">${escapeHTML(p.title)}</a> &middot; ${escapeHTML(p.date)}</div>`;
 }
-function renderGarden() {
+
+function renderBlog() {
   const wrap = document.createElement('div');
   const head = document.createElement('div');
   head.className = 'plot-head';
-  head.textContent = '<Garden of thoughts>  writing preview';
+  head.textContent = '<srija.blog>  latest posts';
   wrap.appendChild(head);
 
-  const note = document.createElement('p');
-  note.className = 'paper-list-note';
-  note.textContent = 'Recent writing from the garden. The full page keeps the branch view.';
-  wrap.appendChild(note);
-
-  const preview = document.createElement('div');
-  preview.className = 'garden-preview';
-  const blooms = DATA.garden.slice(0, 3);
+  let color = 0;
   const list = document.createElement('div');
-  list.className = 'garden-preview-list';
-  blooms.forEach(g => {
-    const el = document.createElement('a');
-    el.className = 'garden-preview-card';
-    el.href = g.href || 'garden.html';
-    el.innerHTML = `
-      <div class="tab-head">
-        <div class="tab-mark">
-          ${flowerSVG(g.kind).replace('<svg ', '<svg class="mini-flower" ')}
-          <div class="date">${escapeHTML(g.date)}</div>
-        </div>
-        <div class="kind">${escapeHTML(g.type || 'Post')}</div>
-      </div>
-      <div class="meta">
-        <p class="title">${escapeHTML(g.title)}</p>
-        <p class="desc">${escapeHTML(g.desc || 'garden post')}</p>
-      </div>
-    `;
-    list.appendChild(el);
-  });
-  preview.appendChild(list);
+  list.className = 'blog-preview';
+  list.innerHTML = DATA.blog.slice(0, 3).map((p) => {
+    const kind = ['research', 'reflection', 'misc'].includes(p.kind) ? p.kind : 'reflection';
+    const title = window.tokenTitleSpan
+      ? window.tokenTitleSpan(p.title, color)
+      : { html: escapeHTML(p.title), count: 0 };
+    color += title.count;
+    return `<a class="blog-row" href="${p.href || 'blog.html'}"><span class="kind-tok ${kind}">&lt;|${kind}|&gt;</span><span class="date">${escapeHTML(p.date)}</span>${title.html}<span class="eol">&#8629;</span><span class="desc">${escapeHTML(p.desc || '')}</span></a>`;
+  }).join('');
+  wrap.appendChild(list);
 
   const footer = document.createElement('div');
-  footer.className = 'garden-preview-footer';
+  footer.className = 'blog-preview-footer';
   footer.innerHTML = `
-    <span class="seedling">${DATA.garden.length} piece${DATA.garden.length === 1 ? '' : 's'} in the garden</span>
-    <a class="garden-preview-link" href="garden.html">open garden &rarr;</a>
+    <span>${DATA.blog.length} post${DATA.blog.length === 1 ? '' : 's'} on the blog</span>
+    <a href="blog.html">open blog &rarr;</a>
   `;
-  preview.appendChild(footer);
-  wrap.appendChild(preview);
+  wrap.appendChild(footer);
   return wrap;
 }
 
@@ -1967,13 +1916,12 @@ function renderHelp() {
   detailed=True / False              &nbsp;→ switch between concise and expanded experience
 
 <span style="color:var(--kw)">Writing + blog</span>
-  srija.blogs()                      &nbsp;→ open the garden branch preview
-  srija.garden()                     &nbsp;→ same as <span style="color:var(--fn)">srija.blogs()</span>
+  srija.blogs()                      &nbsp;→ latest blog posts
 
 <span style="color:var(--kw)">Ask mode</span>
   srija.questions()                  &nbsp;→ example prompts
   srija.ask(<span style="color:var(--str)">"who are you?"</span>)           &nbsp;→ notebook Q&amp;A
-  srija.ask(<span style="color:var(--str)">"show me your blogs"</span>)     &nbsp;→ open the writing branch
+  srija.ask(<span style="color:var(--str)">"show me your blogs"</span>)     &nbsp;→ open the blog
 
 <span style="color:var(--kw)">Notebook actions</span>
   Shift+Enter                        &nbsp;→ run selected cell
@@ -1990,9 +1938,12 @@ function renderQuestions() {
   wrap.className = 'out-text';
   wrap.innerHTML = `<span style="color:var(--kw)">Try asking the notebook:</span>
 
+  • "what are you working on right now?"
+  • "what are you reading?"
+  • "what are you listening to?"
+  • "what do you do for fun?"
   • "who are you?"
   • "what do you work on?"
-  • "what are you working on right now?"
   • "what will you do?"
   • "are you looking for a job?"
   • "what are your views on ai safety?"
@@ -2006,7 +1957,6 @@ function renderQuestions() {
   • "what did you do at Google?"
   • "what are your research interests?"
   • "how can i contact you?"
-  • "tell me about your garden"
   • "show me your blogs"
   • "show me everything"
 
@@ -2016,29 +1966,51 @@ function renderQuestions() {
 }
 
 // ----- Agent (streaming) -----
+// Current things come from the same data as the sidebar and interest cards.
+function nowText(id) {
+  const item = (window.SRIJA_NOW || []).find((n) => n.id === id);
+  return item ? item.items.map((line) => line.replace(/<[^>]+>/g, '')).join(' and ') : '';
+}
+function likesText() {
+  const items = (DATA.interests.find((i) => i.items) || { items: [] }).items;
+  return items.length > 1 ? items.slice(0, -1).join(', ') + ', and ' + items[items.length - 1] : items.join('');
+}
+
 const AGENT_RESPONSES = [
   { prompts: ["what can i ask?", "what can you answer?", "questions"], text:
-    "A good way to use this cell is to ask for one concrete thing: current projects, experience, SPAR, Google, Enterpret, thesis work, AI safety, opportunities, contact, or the writing branch.",
+    "Ask me about what I am doing right now: my research, what I am reading or listening to, the blog, or what I do for fun. You can also ask about my past work, like SPAR, Google, Enterpret, or my thesis.",
     tools: ["srija.questions()"],
-    suggestions: ["what are you working on right now?", "are you looking for a job?", "what did you do at Google?"] },
+    suggestions: ["what are you working on right now?", "what are you reading?", "what do you do for fun?"] },
   { prompts: ["who are you?", "tell me about yourself"], text:
-    "I'm an Anthropic/MATS Fellow working on reward hacking in RL with LLM judges. Before this, I finished my Dual Degree (B.Tech + MS) at IIIT Hyderabad, and I interned at Google across three consecutive summers. I am interested in AI safety, evaluations, and reinforcement learning.",
+    "I'm an Anthropic/MATS Safety Fellow working on reward hacking in RL with LLM judges. Before this, I finished my Dual Degree (B.Tech + MS) at IIIT Hyderabad, and I interned at Google across three consecutive summers. I am broadly interested in AI safety and alignment, especially reward hacking, scalable oversight, evals, and generalization.",
     tools: ["srija.about()"],
     suggestions: ["what do you work on?", "tell me about your experience", "what are you working on right now?"] },
   { prompts: ["what do you work on?"], text:
-    "Right now I mostly think about reward hacking and overoptimization: when a model is trained against an LLM judge, does it learn the task, or does it learn to fool the judge? I care a lot about evaluations and reinforcement learning, with broader interest in AI safety and security.",
+    "Right now I mostly think about reward hacking and overoptimization: when a model is trained against an LLM judge, does it learn the task, or does it learn to fool the judge? More broadly, I care about scalable oversight, evals, and how models generalize.",
     tools: ["srija.interests()", "srija.papers(selected=True)"],
     suggestions: ["what are your research interests?", "what are you working on right now?", "tell me about your papers"] },
   { prompts: ["what are you working on right now?", "what are you working on now?"], text:
-    "Right now I'm in the middle of the Anthropic/MATS fellowship, studying when RL policies learn to exploit their judges. A lot of my time goes into building RL environments, from chess and Go to creative writing, and watching where the hacks appear.",
+    `Right now I'm in the middle of the Anthropic/MATS fellowship, working on ${nowText('working').replace(/^./, (c) => c.toLowerCase())}. A lot of my time goes into building RL environments, from chess and Go to creative writing, and watching where the hacks appear. On the side, I do weird little projects, like making LLMs play The Traitors.`,
     tools: ["srija.about()", "srija.interests()"],
     suggestions: ["what are you doing at MATS?", "what are your views on ai safety?", "tell me about your experience"] },
+  { prompts: ["what are you reading?", "what are you reading right now?", "what are you currently reading?", "what book are you reading?", "any book recommendations?"], text:
+    `Right now I am reading: ${nowText('reading')}. I also spend a lot of time going down rabbit holes reading people's blogs.`,
+    tools: ["srija.interests()"],
+    suggestions: ["what are you listening to?", "what do you do for fun?", "show me your blog"] },
+  { prompts: ["what are you listening to?", "what are you listening to right now?", "what music do you like?", "any music recommendations?"], text:
+    `Lately I have been listening to: ${nowText('listening')}.`,
+    tools: ["srija.interests()"],
+    suggestions: ["what are you reading?", "what do you do for fun?", "what are you working on right now?"] },
+  { prompts: ["what do you do for fun?", "what are your hobbies?", "what do you like?", "what do you do outside of work?"], text:
+    `A few things I like: ${likesText()}.`,
+    tools: ["srija.interests()"],
+    suggestions: ["what are you reading?", "what are you listening to?", "show me your blog"] },
   { prompts: ["what will you do?", "what do you want to do next?"], text:
-    "I want to keep doing research on agents, evaluation, and safety, ideally in places where I can work on both rigorous understanding and useful systems.",
+    "I want to keep working on alignment, especially reward hacking, scalable oversight, evals, and generalization, ideally somewhere I can do both careful research and build useful things.",
     tools: ["srija.interests()", "srija.contact()"],
     suggestions: ["are you looking for a job?", "what are your views on ai safety?", "how can i contact you?"] },
   { prompts: ["are you looking for a job?", "are you looking for work?", "are you open to opportunities?", "are you looking for opportunities?", "are you job hunting?"], text:
-    "I'm currently doing the Anthropic/MATS fellowship and thinking about what comes after it. I would love to hear about exciting opportunities, especially around safety, evaluations, reinforcement learning, research, or building useful systems.",
+    "I'm currently doing the Anthropic/MATS fellowship and thinking about what comes after it. I would love to hear about exciting opportunities in safety and alignment research, especially around reward hacking, scalable oversight, evals, or generalization.",
     tools: ["srija.contact()"],
     suggestions: ["how can i contact you?", "what will you do?", "who are you?"] },
   { prompts: ["what are your views on ai safety?", "what do you think about ai safety?"], text:
@@ -2046,7 +2018,7 @@ const AGENT_RESPONSES = [
     tools: ["srija.interests()"],
     suggestions: ["what do you work on?", "what are you doing at MATS?", "tell me about your papers"] },
   { prompts: ["tell me about your papers"], text:
-    "A good place to start is my selected papers. They cover multimodal evaluation, privacy in personalized systems, and broader questions around reliable benchmarking.",
+    "A good place to start is my selected papers. They cover whether models notice when they are about to do something they cannot undo (RUBICON), privacy in personalized assistants (PrivacyBench), and how reliably models reason over charts and maps.",
     tools: ["srija.papers(selected=True)"],
     suggestions: ["what multimodal work have you done?", "what are your research interests?", "how can i contact you?"] },
   { prompts: ["what multimodal work have you done?", "tell me about your multimodal work", "what is your mllm work?"], text:
@@ -2078,19 +2050,19 @@ const AGENT_RESPONSES = [
     tools: ["srija.experience(detailed=True)"],
     suggestions: ["tell me about your experience", "what did you do at Enterpret?", "how can i contact you?"] },
   { prompts: ["what are your research interests?", "what are you interested in?"], text:
-    "The short version is: scalable oversight, automated alignment, reward hacking, and evals. I keep coming back to questions about safety, reliability, and robustness.",
+    "The short version is: AI safety and alignment broadly, and especially reward hacking, scalable oversight, evals and benchmarks, and generalization. I also just like understanding why models behave the way they do.",
     tools: ["srija.interests()"],
     suggestions: ["what do you work on?", "what are your views on ai safety?", "tell me about your papers"] },
   { prompts: ["how can i contact you?", "how do i reach you?"], text:
     "The fastest path is email or Twitter. I'm always happy to chat about research, evaluations, safety, or possible collaborations and opportunities.",
     tools: ["srija.contact()"],
-    suggestions: ["who are you?", "what will you do?", "tell me about your garden"] },
-  { prompts: ["tell me about your garden", "what is your garden?", "show me your blogs", "show me your blog", "tell me about your blogs"], text:
-    "I am hoping to maintain a blog where I share my thoughts and ideas about various topics. I like calling that blog my garden where I give life to my ideas.",
+    suggestions: ["who are you?", "what will you do?", "show me your blog"] },
+  { prompts: ["show me your blogs", "show me your blog", "tell me about your blogs", "tell me about your blog", "what is your blog?"], text:
+    "My blog is a gateway to my mind, and what I am thinking and doing. Posts are research updates, reflections, or misc things, and every title gets run through a real tokenizer, just for fun.",
     tools: ["srija.blogs()"],
     suggestions: ["who are you?", "what do you work on?", "how can i contact you?"] },
   { prompts: ["show me everything", "give me the full version", "show me the full version"], text:
-    "Here is the fuller version: background, current interests, selected papers, detailed experience, the writing branch, and ways to reach me.",
+    "Here is the fuller version: background, current interests, selected papers, detailed experience, the blog, and ways to reach me.",
     tools: ["srija.about()", "srija.interests()", "srija.papers(selected=True)", "srija.experience(detailed=True)", "srija.blogs()", "srija.contact()"],
     suggestions: ["are you looking for a job?", "what are you doing at SPAR?", "how can i contact you?"] },
 ];
@@ -2137,7 +2109,7 @@ function renderToolFromCall(toolCall) {
   if (/^srija\.about\(\s*\)$/.test(toolCall)) return renderAbout();
   if (/^srija\.interests\(\s*\)$/.test(toolCall)) return renderInterests();
   if (/^srija\.questions\(\s*\)$/.test(toolCall)) return renderQuestions();
-  if (/^srija\.(garden|blogs)\(\s*\)$/.test(toolCall)) return renderGarden();
+  if (/^srija\.blogs\(\s*\)$/.test(toolCall)) return renderBlog();
   if (/^srija\.contact\(\s*\)$/.test(toolCall)) return renderContact();
 
   const pm = toolCall.match(/^srija\.papers\s*\(\s*(?:selected\s*=\s*(True|False))?\s*\)$/);
@@ -2277,7 +2249,7 @@ function execCode(code, outEl, isCurrent) {
   const em = src.match(/srija\.experience\s*\(\s*(?:detailed\s*=\s*(True|False))?\s*\)/);
   if (em) { outEl.appendChild(renderExperience(em[1] === 'True')); return; }
 
-  if (/srija\.(garden|blogs)\(\s*\)/.test(src))  { outEl.appendChild(renderGarden()); return; }
+  if (/srija\.blogs\(\s*\)/.test(src))  { outEl.appendChild(renderBlog()); return; }
   if (/srija\.contact\(\s*\)/.test(src)) { outEl.appendChild(renderContact()); return; }
 
   outEl.appendChild(renderText(`NameError: object not defined\n→ try srija.help()`));
@@ -2408,11 +2380,12 @@ function buildInitial() {
   CELLS = [
     { ...makeCell({ type: 'md', sticky: true, content: `
       <h1>Srija Mukhopadhyay</h1>
-      <div class="sub"><em><a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>/<a href="https://www.matsprogram.org/" target="_blank" rel="noopener">MATS</a> Fellow</em></div>
+      <div class="sub"><em><a href="https://www.anthropic.com/" target="_blank" rel="noopener">Anthropic</a>/<a href="https://www.matsprogram.org/" target="_blank" rel="noopener">MATS</a> Safety Fellow</em></div>
       <div class="id-row">
         <div class="meta">
-          <div class="aff"><strong>Current interests</strong>: scalable oversight, automated alignment, reward hacking, and evals + benchmarks.</div>
+          <div class="aff"><strong>Current interests</strong>: broadly AI safety and alignment, especially reward hacking, scalable oversight, evals and benchmarks, generalization, and understanding AI behavior.</div>
           <div class="links-inline"><strong>Quick links</strong>:
+            <a href="blog.html">blog</a><span class="sep">·</span>
             <a href="https://twitter.com/srijatwt" target="_blank" rel="noopener">twitter</a><span class="sep">·</span>
             <a href="mailto:srijamukherjee113@gmail.com">email</a><span class="sep">·</span>
             <a href="https://scholar.google.com/citations?user=lcyAeBcAAAAJ" target="_blank" rel="noopener">scholar</a><span class="sep">·</span>
@@ -2420,6 +2393,7 @@ function buildInitial() {
             <a href="https://github.com/sri-ja" target="_blank" rel="noopener">github</a><span class="sep">·</span>
             <a href="assets/Srija_Mukhopadhyay_CV.pdf" target="_blank" rel="noopener">cv</a>
           </div>
+          ${latestPostLine()}
         </div>
       </div>
       <p>Hello and welcome! Feel free to explore around or use <code>srija.help()</code> to see all the fun things you can do.</p>
@@ -2427,14 +2401,14 @@ function buildInitial() {
     makeCell({ type: 'code', content: 'import srija\nsrija.about()' }),
     { ...makeCell({ type: 'md', content: `## Research interests` }), editable: false },
     makeCell({ type: 'code', content: 'srija.interests()' }),
+    { ...makeCell({ type: 'md', content: `## Blog\n\na gateway to my mind, and what I am thinking and doing.` }), editable: false },
+    makeCell({ type: 'code', content: 'srija.blogs()' }),
     { ...makeCell({ type: 'md', content: `## Selected publications` }), editable: false },
     makeCell({ type: 'code', content: '# set selected=False to see all publications\nsrija.papers(selected=True)' }),
     { ...makeCell({ type: 'md', content: `## Experience` }), editable: false },
     makeCell({ type: 'code', content: '# set detailed=True for the full version\nsrija.experience(detailed=False)' }),
-    { ...makeCell({ type: 'md', content: `## Garden of thoughts\n\nThis is where blog posts, notes, and half-formed ideas live on a small writing branch.` }), editable: false },
-    makeCell({ type: 'code', content: 'srija.blogs()' }),
-    { ...makeCell({ type: 'md', content: `## Ask the notebook\n\nThis is a small fun Q&A section. For more personal questions, feel free to reach out.` }), editable: false },
-    makeCell({ type: 'code', content: 'srija.ask("who are you?")' }),
+    { ...makeCell({ type: 'md', content: `## Ask the notebook\n\nA small Q&A about what I am up to right now. Try srija.ask("what are you reading?"), or reach out for anything more personal.` }), editable: false },
+    makeCell({ type: 'code', content: 'srija.ask("what are you working on right now?")' }),
     { ...makeCell({ type: 'md', content: `## Contact` }), editable: false },
     makeCell({ type: 'code', content: 'srija.contact()' }),
   ];
@@ -2873,8 +2847,8 @@ document.addEventListener('visibilitychange', () => {
 
 // boot
 const restoredNotebook = loadNotebookState();
-GARDEN_PREVIEW_PROMISE.then((preview) => {
-  if (preview && preview.length) DATA.garden = preview;
+BLOG_PREVIEW_PROMISE.then((preview) => {
+  if (preview && preview.length) DATA.blog = preview;
 }).catch(() => {});
 if (restoredNotebook) {
   CELLS = restoredNotebook.cells;
@@ -2889,8 +2863,8 @@ if (restoredNotebook) {
   (async () => {
     KERNEL_IMPORTED = true;
     try {
-      const preview = await GARDEN_PREVIEW_PROMISE;
-      if (preview && preview.length) DATA.garden = preview;
+      const preview = await BLOG_PREVIEW_PROMISE;
+      if (preview && preview.length) DATA.blog = preview;
     } catch (_) {}
     buildInitial();
     renderAll();
