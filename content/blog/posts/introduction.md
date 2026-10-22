@@ -12,7 +12,7 @@ I have been meaning to start a blog and write more for a while now, but procrast
 
 There are a few major reasons why I think it'll be cool for me to start blogging:
 
-1. As a researcher, a lot of what people see of me is only through my papers, while I am a lot more than that. I hope this blog helps me show more of my personality and what I like doing apart from research. But also expect lots of research takes and small experiments mixed in as well!
+1. As a researcher, a lot of what people see of me is only through my papers, while I am a lot more than that. I hope this blog helps me show more of my personality: how I think, what I think about, and what I like doing apart from research. But also expect lots of research takes and small experiments mixed in as well!
 
 2. Of late, I have also really enjoyed reading blogs by people in general, and I think it helps me understand how people think and learn more about them. I'd love for my blog to do the same for anyone reading it.
 
